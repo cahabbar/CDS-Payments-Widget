@@ -38,6 +38,18 @@ const initialState = {
         image: 'https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/credit_card.png'
       }
     ],
+    cardInfo: [
+      {
+        label:'Card Number'
+      },
+      {
+        label:'Expiration Date'
+      },
+      {
+        label:'CVV'
+      }
+
+    ],
     billMe: false,
     credit: true,
     yourWallet: false,
