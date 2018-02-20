@@ -1,21 +1,70 @@
-{{#ui-layout class="container" as |posts filter filterWith|}}
-  <table class="table table-border">
-    <tbody>
-      {{#if filter}}
-        <tr>
-          <td class="active-filter">Showing posts for => {{filter}}</td>
-        </tr>
-      {{/if}}
-      {{#each-in posts as |key post|}}
+{{#ui-layout class="container" as |configs filter filterWith|}}
+<!-- The drawer is always open in large screens. The header is always shown, even in small screens. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Configuration</span>
+  </div>
+  <main style="margin-left:50px" class="mdl-layout__content">
+    <div class="page-content">
+      <div style="margin-left: 20%;margin-top: 50px; width: 80%;" class="demo-card-wide mdl-card mdl-shadow--16dp">
+        <ul class="demo-list-item mdl-list">
+          <li class="mdl-list__item">
+            <div style="width:100%; margin:0%" class="demo-card-wide mdl-card mdl-shadow--0dp">
+              <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text">Your Wallet:</h2>
+              </div>
+              <div class="mdl-card__supporting-text">
+                (you will be prompted to sign in to complete the payment process)
+              </div>
+            </div>
+          </li>
+          <li class="mdl-list__item">
+            <div style="width:100%; margin:0%" class="demo-card-wide mdl-card mdl-shadow--0dp">
+              <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text"></h2>
+              </div>
+              <div class="mdl-card__supporting-text">
+                {{#each-in configs.cards as |key card|}}
+                <button class="mdl-button mdl-js-button mdl-button--raised">
+                  {{card.niceType}}
+                </button>
+                {{/each-in}}
+                <form action="#">
+                {{#each-in configs.cards as |key card|}}
+                  <div class="mdl-textfield mdl-js-textfield">
+                    <input class="mdl-textfield__input" type="text" id="sample1">
+                    <label class="mdl-textfield__label" for="sample1">Text...</label>
+                  </div>
+                {{/each-in}}
+                </form>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <table class="table table-border">
+        <tbody>
+          {{#if filter}}
+          <!--
+      <tr>
+        <td class="active-filter">Showing configs for => {{filter}}</td>
+      </tr>
+      -->
+          {{/if}} {{#each-in configs as |key post|}}
+          <!--
       <tr>
         <td>
           <div class="title">{{post.title}}</div>
           <span class="author">{{post.author}}</span>
-          <button onclick={{action filterWith post.author}}
-            class="pull-right filter {{unless (is-equal post.author filter) "inactive"}}"></button>
+          <button onclick={{action filterWith post.author}} class="pull-right filter {{unless (is-equal post.author filter) " inactive
+            "}}"></button>
         </td>
       </tr>
-      {{/each-in}}
-    </tbody>
-  </table>
+      -->
+          {{/each-in}}
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
 {{/ui-layout}}

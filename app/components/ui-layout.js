@@ -2,10 +2,14 @@ import { connect } from 'ember-redux';
 import { filterPosts } from '../reducers/posts';
 
 const stateToComputed = state => {
-  return {
+  const retState = {
     posts: filterPosts(state),
-    filter: state.posts.filter
+    configs: filterPosts(state),
+    filter: state.posts.filter,
   }
+  console.log(state)
+  console.log(retState)
+  return retState;
 }
 
 const dispatchToActions = dispatch => {
