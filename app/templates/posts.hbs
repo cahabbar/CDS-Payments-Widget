@@ -8,11 +8,10 @@
     <div class="page-content">
       <div style="margin-left: 20%;margin-top: 50px; width: 80%;" class="demo-card-wide mdl-card mdl-shadow--16dp">
         <ul class="demo-list-item mdl-list">
+          <!--
           <li class="mdl-list__item">
             {{log 'Name is:' configs}}
-            <!--
             <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--fab"> 1 </button>
-            -->
             <div style="width:100%; margin:0%" class="demo-card-wide mdl-card mdl-shadow--0dp">
               <div class="mdl-card__title">
                 <h2 class="mdl-card__title-text">Your Wallet:</h2>
@@ -22,6 +21,7 @@
               </div>
             </div>
           </li>
+            -->
           <li class="mdl-list__item">
             <div style="width:100%; margin:0%" class="demo-card-wide mdl-card mdl-shadow--0dp">
               <div class="mdl-card__title">
@@ -32,12 +32,20 @@
                 <button class="mdl-button mdl-js-button mdl-button--raised">
                   {{card.niceType}}
                 </button>
-                {{/each-in}} {{#each-in configs.cardInfo as |key info|}}
-                <div style="width:100%" class="mdl-textfield mdl-js-textfield">
-                  {{input class="mdl-textfield__input" type="text" placeholder=info.label}}
-                </div>
                 {{/each-in}}
-                {{credit-card}}
+
+               <br/> <br/> <br/>
+
+                {{#credit-card form="#my-form"}}
+                <form id='my-form' class='payment-info'>
+                  {{#each-in configs.cardInfo as |key info|}}
+                  <div style="width:100%" class="mdl-textfield mdl-js-textfield">
+                    {{log 'this thing:' info}}
+                    {{input class="mdl-textfield__input" type="text" placeholder=info.placeholder  name=info.name}}
+                  </div>
+                  {{/each-in}}
+                </form>
+                {{/credit-card}}
               </div>
             </div>
           </li>

@@ -40,13 +40,22 @@ const initialState = {
     ],
     cardInfo: [
       {
-        label:'Card Number'
+        placeholder: 'Card Number',
+        value: 'creditCard.number',
+        name: 'number'
       },
       {
-        label:'Expiration Date'
+        placeholder: 'Name on Credit Card',
+        value: 'creditCard.name',
+        name: 'name'
       },
       {
-        label:'CVV'
+        placeholder: 'Expiration Date (MM/YY)',
+        value: 'creditCard.expiration',
+        name: 'expiry'
+      },
+      {
+        label: 'CVV'
       }
 
     ],
@@ -64,15 +73,15 @@ const initialState = {
 export default function posts(state, action) {
   switch (action.type) {
     case 'POSTS:FETCH_API': {
-    //  const children = action.payload.data.children.map(child => child.data);
-    //  const all = _.keyBy(children, post => post.id);
-    //  const retState = Object.assign(
-    //    state,
-    //  )
-    //  console.log('POSTS:FETCH_API')
-    //  console.log({ state })
-     //   console.log({ retState });
-    logme('POSTS:FETCH_API')
+      //  const children = action.payload.data.children.map(child => child.data);
+      //  const all = _.keyBy(children, post => post.id);
+      //  const retState = Object.assign(
+      //    state,
+      //  )
+      //  console.log('POSTS:FETCH_API')
+      //  console.log({ state })
+      //   console.log({ retState });
+      logme('POSTS:FETCH_API')
       //return retState;
       return state;
     }
