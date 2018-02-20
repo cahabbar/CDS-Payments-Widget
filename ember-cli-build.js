@@ -26,7 +26,6 @@ module.exports = function(defaults) {
   // along with the exports of each module as its value.
 
   app.import('vendor/bootstrap.min.css');
-  app.import('node_modules/card-validator/index.js');
 
   return app.toTree();
 };

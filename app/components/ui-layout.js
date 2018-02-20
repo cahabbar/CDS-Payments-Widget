@@ -1,7 +1,7 @@
 import { connect } from 'ember-redux';
 import { filterPosts } from '../reducers/posts';
-//import { valid } from 'card-validator';
-import creditCardValidator from 'credit-card-validator';
+import { valid } from 'card-validator';
+//import creditCardValidator from 'credit-card-validator';
 
 
 
