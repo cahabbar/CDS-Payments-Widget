@@ -39,25 +39,24 @@ const initialState = {
         image: 'https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/credit_card.png'
       }
     ],
-    cardInfo: [
-      {
+    cardInfo: {
+      number: {
         placeholder: 'Card Number',
         name: 'number',
       },
-      {
+      name: {
         placeholder: 'Name on Credit Card',
         name: 'name'
       },
-      {
+      expiry: {
         placeholder: 'Expiration Date (MM/YY)',
         name: 'expiry'
       },
-      {
-        placeholder: 'CVV',
-        name: 'expiry'
+      cvc: {
+        placeholder: 'CVC',
+        name: 'cvc'
       }
-
-    ],
+    },
     billMe: false,
     credit: true,
     yourWallet: false,
@@ -98,10 +97,12 @@ export default function posts(state, action) {
       }
     }
     case 'myAction': {
-      logme('myAction');
-      //logme({ state });
-      //logme({ action });
-      return state;
+      logme('case myAction')
+      console.log('\n\n\naction:', action)
+      console.log('state:', state)
+      const stateToRet = Object.assign({}, state, ...{configs: { cardInfo: { [action.m[0]]: action.m[1] } } });
+      console.log('\n\n\n stateToRet', stateToRet)
+      return stateToRet;
     }
 
     default: {

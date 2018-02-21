@@ -1,6 +1,4 @@
 {{#ui-layout class="container" as |configs filter filterWith myAction|}}
-<br/> {{log 'configs : ' configs}}
-<br/> {{log 'myAction : ' myAction}}
 <!-- The drawer is always open in large screens. The header is always shown, even in small screens. -->
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
   <div class="mdl-layout__drawer">
@@ -24,9 +22,6 @@
             </div>
           </li>
             -->
-          <li class="mdl-list__item" {{action myAction 'test'}}>
-            Hi Mom!!!
-          </li>
           <li class="mdl-list__item">
             <div style="width:100%; margin:0%" class="demo-card-wide mdl-card mdl-shadow--0dp">
               <div class="mdl-card__title">
@@ -43,11 +38,21 @@
                 <br/>
                 <br/> {{#credit-card form="#my-form"}}
                 <form id='my-form' class='payment-info'>
-                  {{#each-in configs.cardInfo as |key info|}}
                   <div style="width:100%" class="mdl-textfield mdl-js-textfield">
-                    {{input type="text"  placeholder=info.placeholder value=info.value keyUp=(action myAction info.value info.name)}}
+                    {{log 'look here: ' configs}}
+                   <br />
+                    {{input class="mdl-textfield__input" type="text" placeholder=configs.cardInfo.number.placeholder
+                    name=configs.cardInfo.number.name value=configs.cardInfo.number.value keyUp=(action myAction configs.cardInfo.number.name
+                    configs.cardInfo.number.value )}}
+
+                  </div>
+                  <!--
+                   {{#each-in configs.cardInfo as |key info|}}
+                  <div style="width:100%" class="mdl-textfield mdl-js-textfield">
+                    {{input class="mdl-textfield__input" type="text"  placeholder=info.placeholder name=info.name value=info.value keyUp=(action myAction info.value info.name)}}
                   </div>
                   {{/each-in}}
+                  -->
                 </form>
                 {{/credit-card}}
               </div>
