@@ -42,21 +42,19 @@ const initialState = {
     cardInfo: [
       {
         placeholder: 'Card Number',
-        value: 'creditCard.number',
         name: 'number',
       },
-      Ember.Object.create({
+      {
         placeholder: 'Name on Credit Card',
-        value: 'creditCard.name',
         name: 'name'
-      }),
+      },
       {
         placeholder: 'Expiration Date (MM/YY)',
-        value: 'creditCard.expiration',
         name: 'expiry'
       },
       {
-        label: 'CVV'
+        placeholder: 'CVV',
+        name: 'expiry'
       }
 
     ],

@@ -45,7 +45,7 @@
                 <form id='my-form' class='payment-info'>
                   {{#each-in configs.cardInfo as |key info|}}
                   <div style="width:100%" class="mdl-textfield mdl-js-textfield">
-                    {{input type="text" name="number" placeholder='Credit Card Number' value=info.value keyUp=(action myAction info.value info.name)}}
+                    {{input type="text"  placeholder=info.placeholder value=info.value keyUp=(action myAction info.value info.name)}}
                   </div>
                   {{/each-in}}
                 </form>
