@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import reselect from 'reselect';
+import Ember from 'ember';
 
 const { createSelector } = reselect;
 
@@ -42,13 +43,13 @@ const initialState = {
       {
         placeholder: 'Card Number',
         value: 'creditCard.number',
-        name: 'number'
+        name: 'number',
       },
-      {
+      Ember.Object.create({
         placeholder: 'Name on Credit Card',
         value: 'creditCard.name',
         name: 'name'
-      },
+      }),
       {
         placeholder: 'Expiration Date (MM/YY)',
         value: 'creditCard.expiration',
@@ -97,6 +98,12 @@ export default function posts(state, action) {
         ...state,
         filter: action.author
       }
+    }
+    case 'myAction': {
+      logme('myAction');
+      //logme({ state });
+      //logme({ action });
+      return state;
     }
 
     default: {

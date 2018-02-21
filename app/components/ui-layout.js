@@ -19,7 +19,11 @@ const stateToComputed = state => {
 
 const dispatchToActions = dispatch => {
   return {
-    filterWith: (author) => dispatch({ type: 'POSTS:FILTER_POSTS', author })
+    filterWith: (author) => dispatch({ type: 'POSTS:FILTER_POSTS', author }),
+    myAction: (...m) => {
+      console.log('myAction','\n\n\n', {m})
+      dispatch({ type: 'myAction', m})
+    }
   }
 }
 
