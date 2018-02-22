@@ -1,8 +1,8 @@
 {
-  "name": "reddit",
+  "name": "cds-payments-widget",
   "version": "0.0.0",
   "private": true,
-  "description": "Small description for reddit goes here",
+  "description": "Small description for cds-payments-widget goes here",
   "license": "MIT",
   "author": "",
   "directories": {

@@ -3,7 +3,7 @@
 
 module.exports = function(environment) {
   let ENV = {
-    modulePrefix: 'reddit',
+    modulePrefix: 'cds-payments-widget',
     environment,
     rootURL: '/',
     locationType: 'auto',
