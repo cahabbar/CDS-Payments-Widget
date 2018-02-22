@@ -22,9 +22,9 @@ const stateToComputed = state => {
     CVC: getConfig('CVC'),
     nameOnCard: getConfig('nameOnCard'),
     wallet: getConfig('wallet'),
-    billMeToggle: getConfig('billMeToggle'),
-    billMe: getConfig('billMe'),
     payWith: getConfig('payWith'),
+    billMeToggle: getConfig('billMeToggle'),
+    billMe: state.posts.billMe,
     savedConfigs: state.posts.savedConfigs,
     selectedConfig: selectedConfig,
   }

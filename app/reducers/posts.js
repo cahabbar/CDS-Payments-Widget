@@ -7,15 +7,6 @@ const { createSelector } = reselect;
 const initialState = {
   filter: undefined,
   all: undefined,
-  Visa: true,
-  MasterCard: true,
-  AmericanExpress: true,
-  DiscoverCard: true,
-  DinnersClub: true,
-  JCB: true,
-  CVC: true,
-  nameOnCard: true,
-  billMeToggle: true,
   billMe: false,
   credit: true,
   wallet: true,
@@ -43,7 +34,7 @@ const initialState = {
       payWith: true,
     },
     {
-      name: "False",
+      name: "Minimum",
       Visa: false,
       MasterCard: false,
       AmericanExpress: false,
@@ -59,7 +50,7 @@ const initialState = {
       payWith: false,
     },
     {
-      name: "True",
+      name: "All",
       Visa: true,
       MasterCard: true,
       AmericanExpress: true,
