@@ -7,29 +7,42 @@ const filteredPostsBool = state => filterPosts(state);
 
 const stateToComputed = state => {
 
-  const { selectedConfig, savedConfigs } = state.posts;
-  //const getConfig = (attr) => selectedConfig ? savedConfigs.filter(config => config.name === selectedConfig)[0][attr] : state.posts[attr];//savedConfigs[0][attr];
-  const getConfig = (attr) =>  selectedConfig ?state.posts[attr] :state.posts[attr];//savedConfigs[0][attr];
-  const retState = {
+  const {
+    AmericanExpress,
+    CVC,
+    DinnersClub,
+    DiscoverCard,
+    JCB,
+    MasterCard,
+    Visa,
+    billMe,
+    billMeToggle,
+    nameOnCard,
+    payWith,
+    savedConfigs,
+    selectedConfig,
+    wallet,
+   } = state.posts;
+
+  return {
     configs: {
       ...filteredPostsBool(state),
     },
-    Visa:  getConfig('Visa'),
-    MasterCard: getConfig('MasterCard'),
-    AmericanExpress: getConfig('AmericanExpress'),
-    DiscoverCard: getConfig('DiscoverCard'),
-    DinnersClub: getConfig('DinnersClub'),
-    JCB: getConfig('JCB'),
-    CVC: getConfig('CVC'),
-    nameOnCard: getConfig('nameOnCard'),
-    wallet: getConfig('wallet'),
-    payWith: getConfig('payWith'),
-    billMeToggle: getConfig('billMeToggle'),
-    billMe: state.posts.billMe,
-    savedConfigs: state.posts.savedConfigs,
-    selectedConfig: selectedConfig,
+    Visa,
+    MasterCard,
+    AmericanExpress,
+    DiscoverCard,
+    DinnersClub,
+    JCB,
+    CVC,
+    nameOnCard,
+    wallet,
+    payWith,
+    billMeToggle,
+    billMe,
+    savedConfigs,
+    selectedConfig,
   }
-  return retState;
 }
 
 const dispatchToActions = dispatch => {
