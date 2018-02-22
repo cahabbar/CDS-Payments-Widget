@@ -6,18 +6,27 @@ import { filterPosts } from '../reducers/posts';
 const filteredPostsBool = state => filterPosts(state);
 
 const stateToComputed = state => {
+
+  const { selectedConfig, savedConfigs } = state.posts;
+  const getConfig = (attr) => selectedConfig ? savedConfigs.filter(config => config.name === selectedConfig)[0][attr] : savedConfigs[0][attr];
   const retState = {
     configs: {
       ...filteredPostsBool(state),
     },
-    Visa: state.posts.Visa,
-    MasterCard: state.posts.MasterCard,
-    AmericanExpress: state.posts.AmericanExpress,
-    DiscoverCard: state.posts.DiscoverCard,
-    DinnersClub: state.posts.DinnersClub,
-    JCB: state.posts.JCB,
-    CVC: state.posts.CVC,
-    nameOnCard: state.posts.nameOnCard,
+    Visa: getConfig('Visa'),
+    MasterCard: getConfig('MasterCard'),
+    AmericanExpress: getConfig('AmericanExpress'),
+    DiscoverCard: getConfig('DiscoverCard'),
+    DinnersClub: getConfig('DinnersClub'),
+    JCB: getConfig('JCB'),
+    CVC: getConfig('CVC'),
+    nameOnCard: getConfig('nameOnCard'),
+    wallet: getConfig('wallet'),
+    billMeToggle: getConfig('billMeToggle'),
+    billMe: getConfig('billMe'),
+    payWith: getConfig('payWith'),
+    savedConfigs: state.posts.savedConfigs,
+    selectedConfig: selectedConfig,
   }
   return retState;
 }
@@ -32,6 +41,10 @@ const dispatchToActions = dispatch => {
     toggle: (...m) => {
       console.log('\n\nlogged toggle: ', m)
       dispatch({ type: 'toggle', m })
+    },
+    setSelectedConfig: (...m) => {
+      console.log('\n\nlogged selectConfig: ', m)
+      dispatch({ type: 'selectConfig', m })
     }
   }
 }

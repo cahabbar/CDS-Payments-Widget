@@ -15,14 +15,66 @@ const initialState = {
   JCB: true,
   CVC: true,
   nameOnCard: true,
+  billMeToggle: true,
   billMe: false,
   credit: true,
   wallet: true,
-  payWith: false,
+  payWith: true,
   ccNumber: '',
   demo: false,
   responseCode: '',
   CVVValidationMessage: '',
+  selectedConfig: '',
+  savedConfigs: [
+    {
+      name: "Default",
+      Visa: true,
+      MasterCard: true,
+      AmericanExpress: true,
+      DiscoverCard: true,
+      DinnersClub: true,
+      JCB: true,
+      CVC: true,
+      nameOnCard: true,
+      billMeToggle: true,
+      billMe: false,
+      credit: true,
+      wallet: true,
+      payWith: true,
+    },
+    {
+      name: "False",
+      Visa: false,
+      MasterCard: false,
+      AmericanExpress: false,
+      DiscoverCard: false,
+      DinnersClub: false,
+      JCB: false,
+      CVC: false,
+      nameOnCard: false,
+      billMeToggle: false,
+      billMe: false,
+      credit: false,
+      wallet: false,
+      payWith: false,
+    },
+    {
+      name: "True",
+      Visa: true,
+      MasterCard: true,
+      AmericanExpress: true,
+      DiscoverCard: true,
+      DinnersClub: true,
+      JCB: true,
+      CVC: true,
+      nameOnCard: true,
+      billMeToggle: true,
+      billMe: true,
+      credit: true,
+      wallet: true,
+      payWith: true,
+    }
+  ],
   configs: {
     cards: {
       Visa: {
@@ -117,6 +169,15 @@ export default function posts(state, action) {
       return stateToRet;
     }
 
+    case 'selectConfig': {
+      logme('case setSelectedConfig', action, state)
+      logme('action.m[0]', action.m[0])
+      logme('action.m[1]', action.m[1])
+      logme('!action.m[1]', !action.m[1])
+      const stateToRet = Object.assign({}, state, { 'selectedConfig': action.m[0]});
+      logme('case toggle stateToRet', stateToRet)
+      return stateToRet;
+    }
     default: {
       logme('default')
       return state || initialState;

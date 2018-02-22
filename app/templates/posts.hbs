@@ -1,16 +1,48 @@
-{{#ui-layout class="container" as | configs Visa MasterCard AmericanExpress DiscoverCard DinnersClub JCB CVC nameOnCard filter
-    billMe
-    credit
-    wallet
-    payWith
-filterWith myAction toggle|}}
+{{#ui-layout class="container" as | configs Visa MasterCard AmericanExpress DiscoverCard DinnersClub JCB CVC nameOnCard wallet
+billMeToggle billMe payWith savedConfigs selectedConfig filter filterWith myAction toggle setSelectedConfig|}}
 <!-- The drawer is always open in large screens. The header is always shown, even in small screens. -->
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
   <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">Configuration</span>
+    <select onchange={{action setSelectedConfig value="target.value" }}>
+      {{#each savedConfigs as |config|}}
+      <option value={{config.name}} selected={{eq config.name selectedConfig}}>{{config.name}}</option>
+      {{/each}}
+    </select>
     <ul class="demo-list-item mdl-list">
       <span class="mdl-layout-title">Sections</span>
-
+      <li class="mdl-list__item">
+        <span class="mdl-list__item-primary-content">
+          Your Wallet
+        </span>
+        <span class="mdl-list__item-secondary-action" action>
+          <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
+            {{input type="checkbox" class="mdl-switch__input" checked=wallet click=(action toggle 'wallet' wallet)}} {{log 'wallet' wallet}}
+          </label>
+        </span>
+      </li>
+      <li class="mdl-list__item">
+        <span class="mdl-list__item-primary-content">
+          Pay With
+        </span>
+        <span class="mdl-list__item-secondary-action" action>
+          <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
+            {{input type="checkbox" class="mdl-switch__input" checked=payWith click=(action toggle 'payWith' payWith)}} {{log 'payWith'
+            payWith}}
+          </label>
+        </span>
+      </li>
+      <li class="mdl-list__item">
+        <span class="mdl-list__item-primary-content">
+          Bill Me
+        </span>
+        <span class="mdl-list__item-secondary-action" action>
+          <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
+            {{input type="checkbox" class="mdl-switch__input" checked=billMeToggle click=(action toggle 'billMeToggle' billMeToggle)}}
+            {{log 'billMeToggle' billMeToggle}} {{log 'billMeToggle' billMeToggle}}
+          </label>
+        </span>
+      </li>
       <span class="mdl-layout-title">Allowed Cards</span>
       <li class="mdl-list__item">
         <span class="mdl-list__item-primary-content">
@@ -19,6 +51,7 @@ filterWith myAction toggle|}}
         <span class="mdl-list__item-secondary-action" action>
           <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
             {{input type="checkbox" class="mdl-switch__input" checked=Visa click=(action toggle 'Visa' Visa)}}
+            {{log '\n\n\n Visa' Visa}}
           </label>
         </span>
       </li>
@@ -101,19 +134,41 @@ filterWith myAction toggle|}}
         <ul class="demo-list-item mdl-list">
           {{#if wallet}}
           <li class="mdl-list__item">
-            <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--fab"> 1 </button>
+            <!--<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--fab"> 1 </button>-->
             <div style="width:100%; margin:0%" class="demo-card-wide mdl-card mdl-shadow--0dp">
               <div class="mdl-card__title">
                 <h2 class="mdl-card__title-text">Your Wallet:</h2>
               </div>
+            </div>
+          </li>
+          <hr/> {{/if}} {{#if payWith}}
+          <li class="mdl-list__item">
+            <div style="width:100%; margin:0%" class="demo-card-wide mdl-card mdl-shadow--0dp">
+              <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text">Pay Width:</h2>
+              </div>
               <div class="mdl-card__supporting-text">
-                (you will be prompted to sign in to complete the payment process)
+                <button class=" mdl-button mdl-js-button">
+                  <img height="100%" src="https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/apple-pay.png" /> Apple Pay
+                </button>
+                <button class="mdl-button mdl-js-button">
+                  <img height="100%" src="https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/amazon-pay.png" /> Pay Pal
+                </button>
+                <button style="" class="mdl-button mdl-js-button">
+                  <img height="100%" src="https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/amazon-pay.png" /> Amazon Pay
+                </button>
+                <br/>
+                <br/>
+                <br/>
+                <div>
+                  (you will be prompted to sign in to complete the payment process)
+                </div>
               </div>
             </div>
           </li>
-          {{/if}}
+          <hr/> {{/if}}
           <li class="mdl-list__item">
-            <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--fab"> 2 </button>
+            <!-- <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--fab"> 2 </button>-->
             <div style="width:100%; margin:0%" class="demo-card-wide mdl-card mdl-shadow--0dp">
               <div class="mdl-card__title">
                 <h2 class="mdl-card__title-text"></h2>
@@ -177,6 +232,18 @@ filterWith myAction toggle|}}
               </div>
             </div>
           </li>
+          <hr/> {{#if billMeToggle}}
+          <li style="width:30%" class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+              <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
+                {{input type="checkbox" class="mdl-switch__input" checked=billMe click=(action toggle 'billMe' billMe)}} {{log 'billMe' billMe}}
+              </label>
+            </span>
+            <span class="mdl-list__item-secondary-action" action>
+              Bill Me Later
+            </span>
+          </li>
+          {{/if}}
         </ul>
       </div>
     </div>
