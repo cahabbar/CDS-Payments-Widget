@@ -8,12 +8,13 @@ const filteredPostsBool = state => filterPosts(state);
 const stateToComputed = state => {
 
   const { selectedConfig, savedConfigs } = state.posts;
-  const getConfig = (attr) => selectedConfig ? savedConfigs.filter(config => config.name === selectedConfig)[0][attr] : savedConfigs[0][attr];
+  //const getConfig = (attr) => selectedConfig ? savedConfigs.filter(config => config.name === selectedConfig)[0][attr] : state.posts[attr];//savedConfigs[0][attr];
+  const getConfig = (attr) =>  selectedConfig ?state.posts[attr] :state.posts[attr];//savedConfigs[0][attr];
   const retState = {
     configs: {
       ...filteredPostsBool(state),
     },
-    Visa: getConfig('Visa'),
+    Visa:  getConfig('Visa'),
     MasterCard: getConfig('MasterCard'),
     AmericanExpress: getConfig('AmericanExpress'),
     DiscoverCard: getConfig('DiscoverCard'),
@@ -40,6 +41,7 @@ const dispatchToActions = dispatch => {
     },
     toggle: (...m) => {
       console.log('\n\nlogged toggle: ', m)
+      //dispatch({ type: 'toggle', m })
       dispatch({ type: 'toggle', m })
     },
     setSelectedConfig: (...m) => {

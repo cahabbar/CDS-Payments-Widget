@@ -5,9 +5,9 @@ billMeToggle billMe payWith savedConfigs selectedConfig filter filterWith myActi
   <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">Configuration</span>
     <select style="width:90%; margin: 5%" onchange={{action setSelectedConfig value="target.value" }}>
-      {{#each savedConfigs as |config|}}
+                {{#each-in savedConfigs as |key config|}}
       <option value={{config.name}} selected={{eq config.name selectedConfig}}>{{config.name}}</option>
-      {{/each}}
+      {{/each-in}}
     </select>
     <ul class="demo-list-item mdl-list">
       <span class="mdl-layout-title">Sections</span>

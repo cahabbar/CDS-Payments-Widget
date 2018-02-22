@@ -10,8 +10,9 @@ const initialState = {
   demo: false,
   responseCode: '',
   CVVValidationMessage: '',
-  savedConfigs: [
-    {
+  Visa: true,
+  savedConfigs: {
+    Default: {
       name: "Default",
       Visa: true,
       MasterCard: true,
@@ -27,7 +28,7 @@ const initialState = {
       wallet: true,
       payWith: true,
     },
-    {
+    Minimum: {
       name: "Minimum",
       Visa: false,
       MasterCard: false,
@@ -43,7 +44,7 @@ const initialState = {
       wallet: false,
       payWith: false,
     },
-    {
+    All: {
       name: "All",
       Visa: true,
       MasterCard: true,
@@ -59,7 +60,7 @@ const initialState = {
       wallet: true,
       payWith: true,
     }
-  ],
+  },
   configs: {
     cards: {
       Visa: {
@@ -153,7 +154,12 @@ export default function posts(state, action) {
 
     case 'selectConfig': {
       logme('case setSelectedConfig', action, state)
-      const stateToRet = Object.assign({}, state, { 'selectedConfig': action.m[0]});
+      const stateToRet = Object.assign({},
+        state,
+        { 'selectedConfig': action.m[0] },
+        { Visa: state.savedConfigs[action.m[0]]['Visa']},
+        { 'flippy': 'whippy' }
+      );
       logme('case toggle stateToRet', stateToRet)
       return stateToRet;
     }
