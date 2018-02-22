@@ -7,14 +7,20 @@ const { createSelector } = reselect;
 const initialState = {
   filter: undefined,
   all: undefined,
+  Visa: true,
+  MasterCard: true,
+  AmericanExpress: true,
+  DiscoverCard: true,
+  DinnersClub: true,
+  JCB: true,
   configs: {
-    allowedCards: ['Visa', 'MasterCard'],
+    allowedCards: {
+    },
     cards: [
       {
         niceType: "Visa",
         type: 'vi',
         image: "https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/visa.png",
-
       },
       {
         niceType: "MasterCard",
@@ -98,10 +104,16 @@ export default function posts(state, action) {
     }
     case 'myAction': {
       logme('case myAction')
-      console.log('\n\n\naction:', action)
-      console.log('state:', state)
-      const stateToRet = Object.assign({}, state, ...{configs: { cardInfo: { [action.m[0]]: action.m[1] } } });
-      console.log('\n\n\n stateToRet', stateToRet)
+      const stateToRet = Object.assign({}, state, ...{ configs: { cardInfo: { [action.m[0]]: action.m[1] } } });
+      return stateToRet;
+    }
+    case 'toggle': {
+      logme('case toggle', action, state)
+      logme('action.m[0]', action.m[0])
+      logme('action.m[1]', action.m[1])
+      logme('!action.m[1]', !action.m[1])
+      const stateToRet = Object.assign({}, state, { [action.m[0]]: !action.m[1] });
+      logme('case toggle stateToRet', stateToRet)
       return stateToRet;
     }
 
@@ -125,4 +137,4 @@ export const filterPosts = createSelector(
   }
 );
 
-const logme = m => console.log(m);
+const logme = (...m) => console.log(...m);

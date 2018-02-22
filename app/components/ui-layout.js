@@ -7,11 +7,15 @@ const filteredPostsBool = state => filterPosts(state);
 
 const stateToComputed = state => {
   const retState = {
-    posts: filterPosts(state),
     configs: {
       ...filteredPostsBool(state),
-      cards: filteredPostsBool(state).cards.filter(card => filteredPostsBool(state).allowedCards.indexOf(card.niceType) >= 0),
     },
+    Visa: state.posts.Visa,
+    MasterCard: state.posts.MasterCard,
+    AmericanExpress: state.posts.AmericanExpress,
+    DiscoverCard: state.posts.DiscoverCard,
+    DinnersClub: state.posts.DinnersClub,
+    JCB: state.posts.JCB,
     filter: state.posts.filter,
   }
   return retState;
@@ -21,8 +25,12 @@ const dispatchToActions = dispatch => {
   return {
     filterWith: (author) => dispatch({ type: 'POSTS:FILTER_POSTS', author }),
     myAction: (...m) => {
-      console.log('myAction','\n\n\n', {m})
-      dispatch({ type: 'myAction', m})
+      console.log('\n\nlogged myAction: ', m)
+      dispatch({ type: 'myAction', m })
+    },
+    toggle: (...m) => {
+      console.log('\n\nlogged toggle: ', m)
+      dispatch({ type: 'toggle', m })
     }
   }
 }
