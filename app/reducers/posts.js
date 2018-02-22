@@ -13,38 +13,46 @@ const initialState = {
   DiscoverCard: true,
   DinnersClub: true,
   JCB: true,
+  CVC: true,
+  nameOnCard: true,
+  billMe: false,
+  credit: true,
+  wallet: true,
+  payWith: false,
+  ccNumber: '',
+  demo: false,
+  responseCode: '',
+  CVVValidationMessage: '',
   configs: {
-    allowedCards: {
-    },
-    cards: [
-      {
+    cards: {
+      Visa: {
         niceType: "Visa",
         type: 'vi',
         image: "https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/visa.png",
       },
-      {
+      MasterCard: {
         niceType: "MasterCard",
         type: 'mc',
         image: "https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/mastercard.png",
       },
-      {
+      AmericanExpress: {
         niceType: "AmericanExpress",
         type: '',
         image: 'https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/americanexpress.png'
       },
-      {
+      DiscoverCard: {
         niceType: "DiscoverCard",
         image: 'https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/discover.png'
       },
-      {
+      DinnersClub: {
         niceType: "DinnersClub",
         image: 'https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/dinersclub.png'
       },
-      {
+      JCB: {
         niceType: "JCB",
         image: 'https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/credit_card.png'
       }
-    ],
+    },
     cardInfo: {
       number: {
         placeholder: 'Card Number',
@@ -63,14 +71,6 @@ const initialState = {
         name: 'cvc'
       }
     },
-    billMe: false,
-    credit: true,
-    yourWallet: false,
-    payWith: false,
-    ccNumber: '',
-    demo: false,
-    responseCode: '',
-    CVVValidationMessage: ''
   }
 };
 

@@ -16,7 +16,8 @@ const stateToComputed = state => {
     DiscoverCard: state.posts.DiscoverCard,
     DinnersClub: state.posts.DinnersClub,
     JCB: state.posts.JCB,
-    filter: state.posts.filter,
+    CVC: state.posts.CVC,
+    nameOnCard: state.posts.nameOnCard,
   }
   return retState;
 }

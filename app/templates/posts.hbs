@@ -1,20 +1,20 @@
-{{#ui-layout class="container" as |
-configs
-Visa
-MasterCard
-AmericanExpress
-DiscoverCard
-DinnersClub
-JCB
-filter filterWith myAction toggle|}}
+{{#ui-layout class="container" as | configs Visa MasterCard AmericanExpress DiscoverCard DinnersClub JCB CVC nameOnCard filter
+    billMe
+    credit
+    wallet
+    payWith
+filterWith myAction toggle|}}
 <!-- The drawer is always open in large screens. The header is always shown, even in small screens. -->
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
   <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">Configuration</span>
     <ul class="demo-list-item mdl-list">
-      <li class="mdl-list__item" >
+      <span class="mdl-layout-title">Sections</span>
+
+      <span class="mdl-layout-title">Allowed Cards</span>
+      <li class="mdl-list__item">
         <span class="mdl-list__item-primary-content">
-         Visa
+          Visa
         </span>
         <span class="mdl-list__item-secondary-action" action>
           <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
@@ -22,9 +22,9 @@ filter filterWith myAction toggle|}}
           </label>
         </span>
       </li>
-      <li class="mdl-list__item" >
+      <li class="mdl-list__item">
         <span class="mdl-list__item-primary-content">
-         MasterCard
+          MasterCard
         </span>
         <span class="mdl-list__item-secondary-action" action>
           <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
@@ -32,9 +32,9 @@ filter filterWith myAction toggle|}}
           </label>
         </span>
       </li>
-      <li class="mdl-list__item" >
+      <li class="mdl-list__item">
         <span class="mdl-list__item-primary-content">
-         AmericanExpress
+          AmericanExpress
         </span>
         <span class="mdl-list__item-secondary-action" action>
           <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
@@ -42,9 +42,9 @@ filter filterWith myAction toggle|}}
           </label>
         </span>
       </li>
-      <li class="mdl-list__item" >
+      <li class="mdl-list__item">
         <span class="mdl-list__item-primary-content">
-         DiscoverCard
+          DiscoverCard
         </span>
         <span class="mdl-list__item-secondary-action" action>
           <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
@@ -52,9 +52,9 @@ filter filterWith myAction toggle|}}
           </label>
         </span>
       </li>
-      <li class="mdl-list__item" >
+      <li class="mdl-list__item">
         <span class="mdl-list__item-primary-content">
-         DinnersClub
+          DinnersClub
         </span>
         <span class="mdl-list__item-secondary-action" action>
           <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
@@ -62,13 +62,34 @@ filter filterWith myAction toggle|}}
           </label>
         </span>
       </li>
-      <li class="mdl-list__item" >
+      <li class="mdl-list__item">
         <span class="mdl-list__item-primary-content">
-         JCB
+          JCB
         </span>
         <span class="mdl-list__item-secondary-action" action>
           <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
             {{input type="checkbox" class="mdl-switch__input" checked=JCB click=(action toggle 'JCB' JCB)}}
+          </label>
+        </span>
+      </li>
+      <span class="mdl-layout-title">Card Info</span>
+      <li class="mdl-list__item">
+        <span class="mdl-list__item-primary-content">
+          CVV
+        </span>
+        <span class="mdl-list__item-secondary-action" action>
+          <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
+            {{input type="checkbox" class="mdl-switch__input" checked=CVC click=(action toggle 'CVC' CVC)}}
+          </label>
+        </span>
+      </li>
+      <li class="mdl-list__item">
+        <span class="mdl-list__item-primary-content">
+          Name
+        </span>
+        <span class="mdl-list__item-secondary-action" action>
+          <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
+            {{input type="checkbox" class="mdl-switch__input" checked=nameOnCard click=(action toggle 'nameOnCard' nameOnCard)}}
           </label>
         </span>
       </li>
@@ -78,7 +99,7 @@ filter filterWith myAction toggle|}}
     <div class="page-content">
       <div style="margin-left: 20%;margin-top: 50px; width: 80%;" class="demo-card-wide mdl-card mdl-shadow--16dp">
         <ul class="demo-list-item mdl-list">
-          <!--
+          {{#if wallet}}
           <li class="mdl-list__item">
             <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--fab"> 1 </button>
             <div style="width:100%; margin:0%" class="demo-card-wide mdl-card mdl-shadow--0dp">
@@ -90,18 +111,46 @@ filter filterWith myAction toggle|}}
               </div>
             </div>
           </li>
-            -->
+          {{/if}}
           <li class="mdl-list__item">
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--fab"> 2 </button>
             <div style="width:100%; margin:0%" class="demo-card-wide mdl-card mdl-shadow--0dp">
               <div class="mdl-card__title">
                 <h2 class="mdl-card__title-text"></h2>
               </div>
               <div class="mdl-card__supporting-text">
+                <!--
                 {{#each-in configs.cards as |key card|}}
                 <button class="mdl-button mdl-js-button mdl-button--raised">
                   {{card.niceType}}
                 </button>
                 {{/each-in}}
+                -->
+                {{#if Visa}}
+                <button class="mdl-button mdl-js-button">
+                  <img src={{configs.cards.Visa.image}}/>
+                </button>
+                {{/if}} {{#if MasterCard}}
+                <button class="mdl-button mdl-js-button">
+                  <img src={{configs.cards.MasterCard.image}}/>
+                </button>
+                {{/if}} {{#if AmericanExpress}}
+                <button class="mdl-button mdl-js-button">
+                  <img src={{configs.cards.AmericanExpress.image}}/>
+                </button>
+                {{/if}} {{#if DiscoverCard}}
+                <button class="mdl-button mdl-js-button">
+                  <img src={{configs.cards.DiscoverCard.image}}/>
+                </button>
+                {{/if}} {{#if DinnersClub}}
+                <button class="mdl-button mdl-js-button ">
+                  <img src={{configs.cards.DinnersClub.image}}/>
+                </button>
+                {{/if}} {{#if JCB}}
+                <button class="mdl-button mdl-js-button">
+                  <img src={{configs.cards.JCB.image}}/>
+                </button>
+                {{/if}}
                 <br/>
                 <br/>
                 <br/> {{#credit-card form="#my-form"}}
@@ -111,17 +160,17 @@ filter filterWith myAction toggle|}}
                     value=configs.cardInfo.number.value keyUp=(action myAction configs.cardInfo.number.name configs.cardInfo.number.value)
                     }}
                     <div></div>
-                    {{input class="mdl-textfield__input" type="text" placeholder=configs.cardInfo.name.placeholder name=configs.cardInfo.name.name
+                    {{#if nameOnCard}} {{input class="mdl-textfield__input" type="text" placeholder=configs.cardInfo.name.placeholder name=configs.cardInfo.name.name
                     value=configs.cardInfo.name.value keyUp=(action myAction configs.cardInfo.name.name configs.cardInfo.name.value)
-                    }}
+                    }} {{/if }}
                     <div></div>
                     {{input class="mdl-textfield__input" type="text" placeholder=configs.cardInfo.expiry.placeholder name=configs.cardInfo.expiry.name
                     value=configs.cardInfo.expiry.value keyUp=(action myAction configs.cardInfo.expiry.name configs.cardInfo.expiry.value)
                     }}
                     <div></div>
-                    {{input class="mdl-textfield__input" type="text" placeholder=configs.cardInfo.cvc.placeholder name=configs.cardInfo.cvc.name
+                    {{#if CVC}} {{input class="mdl-textfield__input" type="text" placeholder=configs.cardInfo.cvc.placeholder name=configs.cardInfo.cvc.name
                     value=configs.cardInfo.cvc.value keyUp=(action myAction configs.cardInfo.cvc.name configs.cardInfo.cvc.value)
-                    }}
+                    }} {{/if}}
                   </div>
                 </form>
                 {{/credit-card}}
