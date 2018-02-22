@@ -1,21 +1,15 @@
 import _ from 'lodash';
 import reselect from 'reselect';
-import Ember from 'ember';
 
 const { createSelector } = reselect;
 
 const initialState = {
   filter: undefined,
   all: undefined,
-  billMe: false,
-  credit: true,
-  wallet: true,
-  payWith: true,
   ccNumber: '',
   demo: false,
   responseCode: '',
   CVVValidationMessage: '',
-  selectedConfig: '',
   savedConfigs: [
     {
       name: "Default",
@@ -152,9 +146,6 @@ export default function posts(state, action) {
     }
     case 'toggle': {
       logme('case toggle', action, state)
-      logme('action.m[0]', action.m[0])
-      logme('action.m[1]', action.m[1])
-      logme('!action.m[1]', !action.m[1])
       const stateToRet = Object.assign({}, state, { [action.m[0]]: !action.m[1] });
       logme('case toggle stateToRet', stateToRet)
       return stateToRet;
@@ -162,9 +153,6 @@ export default function posts(state, action) {
 
     case 'selectConfig': {
       logme('case setSelectedConfig', action, state)
-      logme('action.m[0]', action.m[0])
-      logme('action.m[1]', action.m[1])
-      logme('!action.m[1]', !action.m[1])
       const stateToRet = Object.assign({}, state, { 'selectedConfig': action.m[0]});
       logme('case toggle stateToRet', stateToRet)
       return stateToRet;
