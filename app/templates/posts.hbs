@@ -193,9 +193,9 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
         <ul class="demo-list-item mdl-list">
 
           {{#if wallet}}
-          <li class="mdl-list__item" style="height: 150px;">
+          <li class="mdl-list__item" style="padding:1%">
             <!--<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--fab"> 1 </button>-->
-            <div style="width:100%;  margin: 0" class="demo-card-wide mdl-card mdl-shadow--0dp">
+            <div style="width:100%;  margin: 0" class="demo-card-wide mdl-card mdl-shadow--4dp">
               <div class="mdl-card__title">
                 <h2 style="width:50%;  margin:5% 0 0 0" class="mdl-card__title-text">Your Wallet:</h2>
               </div>
@@ -208,10 +208,10 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
               </select>
             </div>
           </li>
-          <hr/> {{/if}} {{#if AlternativePayments}}
-          <li class="mdl-list__item">
-            <div style="width:100%; height: 100px; margin:0%" class="demo-card-wide mdl-card mdl-shadow--0dp">
-              <div style=" margin:5% "class="mdl-card__supporting-text">
+          {{/if}} {{#if AlternativePayments}}
+          <li class="mdl-list__item" style="padding:1%">
+            <div style="width:100%; height: 100px; margin:0%" class="demo-card-wide mdl-card mdl-shadow--4dp">
+              <div style=" margin:5% " class="mdl-card__supporting-text">
                 <button class=" mdl-button mdl-js-button">
                   <img height="100%" src="https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/apple-pay.png" /> Apple Pay
                 </button>
@@ -233,10 +233,9 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
           {{/if}}
           <div></div>
           {{#if cardToggle}}
-          <hr/>
-          <li class="mdl-list__item">
+          <li class="mdl-list__item" style="padding:1%">
             <!-- <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--fab"> 2 </button>-->
-            <div style="width:100%; margin:0%" class="demo-card-wide mdl-card mdl-shadow--0dp">
+            <div style="width:100%; margin:0%" class="demo-card-wide mdl-card mdl-shadow--4dp">
               <div class="mdl-card__title">
                 <h2 class="mdl-card__title-text"></h2>
               </div>
@@ -278,25 +277,12 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
                 <br/> {{#credit-card form="#my-form"}}
                 <form id='my-form' class='payment-info'>
                   <div style="width:100%" class="mdl-textfield mdl-js-textfield">
-                    {{input
-                    class="mdl-textfield__input"
-                    type="text"
-                    id="cc-number"
-                    className="cc-number"
-                    data-cds="ccNumber"
-                    placeholder=configs.cardInfo.number.placeholder
-                    name=configs.cardInfo.number.name
-                    value=configs.cardInfo.number.value
-                    keyUp=(action myAction configs.cardInfo.number.name configs.cardInfo.number.value) }}
+                    {{input class="mdl-textfield__input" type="text" id="cc-number" className="cc-number" data-cds="ccNumber" placeholder=configs.cardInfo.number.placeholder
+                    name=configs.cardInfo.number.name value=configs.cardInfo.number.value keyUp=(action myAction configs.cardInfo.number.name
+                    configs.cardInfo.number.value) }}
                     <div></div>
-                    {{#if nameOnCard}}
-                    {{input
-                    class="mdl-textfield__input"
-                    type="text"
-                    placeholder=configs.cardInfo.name.placeholder
-                    name=configs.cardInfo.name.name
-                    value=configs.cardInfo.name.value
-                    keyUp=(action myAction configs.cardInfo.name.name configs.cardInfo.name.value)
+                    {{#if nameOnCard}} {{input class="mdl-textfield__input" type="text" placeholder=configs.cardInfo.name.placeholder name=configs.cardInfo.name.name
+                    value=configs.cardInfo.name.value keyUp=(action myAction configs.cardInfo.name.name configs.cardInfo.name.value)
                     }} {{/if }}
                     <div></div>
                     {{input class="mdl-textfield__input" type="text" placeholder=configs.cardInfo.expiry.placeholder name=configs.cardInfo.expiry.name
@@ -312,16 +298,18 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
               </div>
             </div>
           </li>
-          <hr/> {{/if}} {{#if billMeToggle}}
-          <li style="width:80%; margin : 0 0 0 2%" class="mdl-list__item">
-            <span class="mdl-list__item-primary-content">
-              <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
-                {{input type="checkbox" class="mdl-switch__input" checked=billMe click=(action toggle 'billMe' billMe)}} {{log 'billMe' billMe}}
-                <span style="margin:0 5%">
-                  Bill Me Later
-                </span>
-              </label>
-            </span>
+          {{/if}} {{#if billMeToggle}}
+          <li style="width:100%;  margin:0%; padding:1%" class="mdl-list__item">
+            <div style="width:100%; " class="demo-card-wide mdl-card mdl-shadow--4dp">
+              <span style="width:100%; margin:5%; padding:4%" class="mdl-list__item-primary-content">
+                <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
+                  {{input type="checkbox" class="mdl-switch__input" checked=billMe click=(action toggle 'billMe' billMe)}} {{log 'billMe' billMe}}
+                  <span style="margin:0 5%">
+                    Bill Me Later
+                  </span>
+                </label>
+              </span>
+            </div>
           </li>
           {{/if}}
         </ul>
