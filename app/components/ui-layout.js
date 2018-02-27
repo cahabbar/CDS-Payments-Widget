@@ -25,6 +25,9 @@ const stateToComputed = state => {
     newConfigName
   } = state.posts;
 
+  const cardToggle = AmericanExpress || DinnersClub || DiscoverCard || JCB || MasterCard || Visa;
+  const widgetToggle = wallet || payWith || cardToggle;
+
   return {
     configs: {
       ...filteredPostsBool(state),
@@ -36,6 +39,7 @@ const stateToComputed = state => {
     DinnersClub,
     JCB,
     CVC,
+    cardToggle,
     nameOnCard,
     wallet,
     payWith,
@@ -43,7 +47,8 @@ const stateToComputed = state => {
     billMe,
     savedConfigs,
     selectedConfig,
-    newConfigName
+    newConfigName,
+    widgetToggle
   }
 }
 

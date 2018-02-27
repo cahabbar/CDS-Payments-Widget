@@ -1,6 +1,6 @@
-{{#ui-layout class="container" as | configs Visa MasterCard AmericanExpress DiscoverCard DinnersClub JCB CVC nameOnCard wallet
-billMeToggle billMe payWith savedConfigs selectedConfig newConfigName filter filterWith myAction toggle setSelectedConfig
-saveNewConfig saveNewConfigName|}}
+{{#ui-layout class="container" as | configs Visa MasterCard AmericanExpress DiscoverCard DinnersClub JCB cardToggle CVC nameOnCard
+wallet billMeToggle billMe payWith savedConfigs selectedConfig newConfigName widgetToggle filter filterWith myAction toggle
+setSelectedConfig saveNewConfig saveNewConfigName|}}
 <!-- The drawer is always open in large screens. The header is always shown, even in small screens. -->
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
   <div class="mdl-layout__drawer">
@@ -40,11 +40,20 @@ saveNewConfig saveNewConfigName|}}
         <span class="mdl-list__item-secondary-action" action>
           <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
             {{input type="checkbox" class="mdl-switch__input" checked=billMeToggle click=(action toggle 'billMeToggle' billMeToggle)}}
-            {{log 'billMeToggle' billMeToggle}} {{log 'billMeToggle' billMeToggle}}
           </label>
         </span>
       </li>
+      {{#unless widgetToggle }}
+        <div style="color:red; margin:0 5%">Warning!!: </div>
+        <div style="color:red; margin:0 5%">When Bill Me is the only option the widget will not display.</div>
+      {{/unless }}
+
       <span class="mdl-layout-title">Allowed Cards</span>
+      {{#unless cardToggle}}
+      <div style="color:red; margin:0 5%">Warning!!: </div>
+      <div style="color:red; margin:0 5%">You need at least one card to be allowed to see the Card section.</div>
+      {{/unless}}
+
       <li class="mdl-list__item">
         <span class="mdl-list__item-primary-content">
           Visa
@@ -128,8 +137,8 @@ saveNewConfig saveNewConfigName|}}
       </li>
       <li class="mdl-list__item">
         <span class="mdl-list__item-primary-content">
-          {{input class="mdl-textfield__input" type="text" name=newConfigName.value placeholder=newConfigName.value  value=newConfigName.value
-             key-up=(action saveNewConfigName newConfigName.name)}} 
+          {{input class="mdl-textfield__input" type="text" name=newConfigName.value placeholder=newConfigName.value value=newConfigName.value
+          key-up=(action saveNewConfigName newConfigName.name)}}
         </span>
         <span class="mdl-list__item-secondary-action" action>
           <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
@@ -178,8 +187,10 @@ saveNewConfig saveNewConfigName|}}
   </div>
   <main style="width:100%; height:1500px; margin-left:50px" class="mdl-layout__content">
     <div class="page-content">
+      {{#if widgetToggle }}
       <div style="margin-left: 20%;margin-top: 50px; width: 70%;" class="demo-card-wide mdl-card mdl-shadow--16dp">
         <ul class="demo-list-item mdl-list">
+
           {{#if wallet}}
           <li class="mdl-list__item">
             <!--<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--fab"> 1 </button>-->
@@ -221,6 +232,8 @@ saveNewConfig saveNewConfigName|}}
             </div>
           </li>
           <hr/> {{/if}}
+          <div></div>
+          {{#if cardToggle}}
           <li class="mdl-list__item">
             <!-- <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--fab"> 2 </button>-->
             <div style="width:100%; margin:0%" class="demo-card-wide mdl-card mdl-shadow--0dp">
@@ -286,7 +299,7 @@ saveNewConfig saveNewConfigName|}}
               </div>
             </div>
           </li>
-          <hr/> {{#if billMeToggle}}
+          <hr/> {{/if}} {{#if billMeToggle}}
           <li style="width:30%" class="mdl-list__item">
             <span class="mdl-list__item-primary-content">
               <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
@@ -300,6 +313,7 @@ saveNewConfig saveNewConfigName|}}
           {{/if}}
         </ul>
       </div>
+      {{/if}}
     </div>
   </main>
 </div>
