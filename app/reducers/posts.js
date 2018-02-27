@@ -100,7 +100,7 @@ const initialState = {
       },
       DinersClub: {
         niceType: "DinersClub",
-        image: 'https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/Dinersclub.png'
+        image: 'https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/dinersclub.png'
       },
       JCB: {
         niceType: "JCB",
