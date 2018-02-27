@@ -1,5 +1,5 @@
-{{yield configs
-
+{{yield 
+    configs
     Visa
     MasterCard
     AmericanExpress
@@ -14,10 +14,13 @@
     payWith
     savedConfigs
     selectedConfig
+    newConfigName
 
-filter
-(action "filterWith" )
-(action "myAction")
-(action "toggle")
-(action "setSelectedConfig")
+    filter
+    (action "filterWith" )
+    (action "myAction")
+    (action "toggle")
+    (action "setSelectedConfig")
+    (action "saveNewConfig")
+
 }}

@@ -22,7 +22,8 @@ const stateToComputed = state => {
     savedConfigs,
     selectedConfig,
     wallet,
-   } = state.posts;
+    newConfigName
+  } = state.posts;
 
   return {
     configs: {
@@ -42,6 +43,7 @@ const stateToComputed = state => {
     billMe,
     savedConfigs,
     selectedConfig,
+    newConfigName
   }
 }
 
@@ -60,6 +62,10 @@ const dispatchToActions = dispatch => {
     setSelectedConfig: (...m) => {
       console.log('\n\nlogged selectConfig: ', m)
       dispatch({ type: 'selectConfig', m })
+    },
+    saveNewConfig: (...m) => {
+      console.log('\n\nlogged saveNewConfig: ', m)
+      dispatch({ type: 'saveNewConfig', m })
     }
   }
 }

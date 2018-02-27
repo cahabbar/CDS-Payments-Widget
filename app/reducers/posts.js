@@ -23,6 +23,7 @@ const initialState = {
   credit: true,
   wallet: true,
   payWith: true,
+  newConfigName: 'NewConfigName',
   savedConfigs: {
     Default: {
       name: "Default",
@@ -184,6 +185,53 @@ export default function posts(state, action) {
         { payWith: state.savedConfigs[action.m[0]]['payWith'] },
         { 'flippy': 'whippy' }
       );
+      logme('case toggle stateToRet', stateToRet)
+      return stateToRet;
+    }
+    case 'saveNewConfig': {
+      logme('case saveNewConfig', action, state)
+      const { savedConfigs,
+        Visa,
+        MasterCard,
+        AmericanExpress,
+        DiscoverCard,
+        DinnersClub,
+        JCB,
+        CVC,
+        nameOnCard,
+        billMeToggle,
+        billMe,
+        credit,
+        wallet,
+        payWith,
+      } = state;
+      const stateToRet = ({
+        ...state,
+        ...{
+          savedConfigs: {
+            ...savedConfigs,
+            ...{
+              [action.m[0]]: {
+                name: action.m[0],
+                Visa,
+                MasterCard,
+                AmericanExpress,
+                DiscoverCard,
+                DinnersClub,
+                JCB,
+                CVC,
+                nameOnCard,
+                billMeToggle,
+                billMe,
+                credit,
+                wallet,
+                payWith,
+
+              }
+            }
+          }
+        }
+      });
       logme('case toggle stateToRet', stateToRet)
       return stateToRet;
     }

@@ -1,5 +1,5 @@
 {{#ui-layout class="container" as | configs Visa MasterCard AmericanExpress DiscoverCard DinnersClub JCB CVC nameOnCard wallet
-billMeToggle billMe payWith savedConfigs selectedConfig filter filterWith myAction toggle setSelectedConfig|}}
+billMeToggle billMe payWith savedConfigs selectedConfig newConfigName filter filterWith myAction toggle setSelectedConfig saveNewConfig|}}
 <!-- The drawer is always open in large screens. The header is always shown, even in small screens. -->
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
   <div class="mdl-layout__drawer">
@@ -125,6 +125,17 @@ billMeToggle billMe payWith savedConfigs selectedConfig filter filterWith myActi
           </label>
         </span>
       </li>
+      <li class="mdl-list__item">
+        <span class="mdl-list__item-primary-content">
+          {{newConfigName}}
+        </span>
+        <span class="mdl-list__item-secondary-action" action>
+          <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
+            {{input type="checkbox" class="mdl-switch__input" checked=nameOnCard click=(action toggle 'saveNewConfig' newConfigName)}}
+            <button onclick={{action saveNewConfig newConfigName}}>Save</button>
+          </label>
+        </span>
+      </li>
     </ul>
     <h4>CDS Encryption </h4>
     <table>
@@ -150,8 +161,7 @@ billMeToggle billMe payWith savedConfigs selectedConfig filter filterWith myActi
             <label htmlFor="cardType">Card Type</label>
           </td>
           <td>
-            <input style=" border: none " id="cardType" type="input" placeholder="Card Type" data-cds="cardType" readOnly disabled
-            />
+            <input style=" border: none " id="cardType" type="input" placeholder="Card Type" data-cds="cardType" readOnly disabled />
           </td>
         </tr>
         <tr>
@@ -188,7 +198,7 @@ billMeToggle billMe payWith savedConfigs selectedConfig filter filterWith myActi
           <li class="mdl-list__item">
             <div style="width:100%; margin:0%" class="demo-card-wide mdl-card mdl-shadow--0dp">
               <div class="mdl-card__title">
-                <h2 class="mdl-card__title-text">Pay Width:</h2>
+                <h2 class="mdl-card__title-text">Pay With:</h2>
               </div>
               <div class="mdl-card__supporting-text">
                 <button class=" mdl-button mdl-js-button">
@@ -254,9 +264,9 @@ billMeToggle billMe payWith savedConfigs selectedConfig filter filterWith myActi
                 <br/> {{#credit-card form="#my-form"}}
                 <form id='my-form' class='payment-info'>
                   <div style="width:100%" class="mdl-textfield mdl-js-textfield">
-                    {{input class="mdl-textfield__input" type="text" placeholder=configs.cardInfo.number.placeholder name=configs.cardInfo.number.name
-                    value=configs.cardInfo.number.value keyUp=(action myAction configs.cardInfo.number.name configs.cardInfo.number.value)
-                    }}
+                    {{input class="mdl-textfield__input" type="text" name="ccNumber" id="cc-number" className="cc-number" data-cds="ccNumber"
+                    placeholder=configs.cardInfo.number.placeholder name=configs.cardInfo.number.name value=configs.cardInfo.number.value
+                    keyUp=(action myAction configs.cardInfo.number.name configs.cardInfo.number.value) }}
                     <div></div>
                     {{#if nameOnCard}} {{input class="mdl-textfield__input" type="text" placeholder=configs.cardInfo.name.placeholder name=configs.cardInfo.name.name
                     value=configs.cardInfo.name.value keyUp=(action myAction configs.cardInfo.name.name configs.cardInfo.name.value)
