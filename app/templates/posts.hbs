@@ -301,14 +301,14 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
             </div>
           </li>
           <hr/> {{/if}} {{#if billMeToggle}}
-          <li style="width:30%; margin : 0 0 0 2%" class="mdl-list__item">
+          <li style="width:80%; margin : 0 0 0 2%" class="mdl-list__item">
             <span class="mdl-list__item-primary-content">
               <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
                 {{input type="checkbox" class="mdl-switch__input" checked=billMe click=(action toggle 'billMe' billMe)}} {{log 'billMe' billMe}}
+                <span style="margin:0 5%">
+                  Bill Me Later
+                </span>
               </label>
-            </span>
-            <span class="mdl-list__item-secondary-action" action>
-              Bill Me Later
             </span>
           </li>
           {{/if}}
