@@ -14,7 +14,7 @@ const initialState = {
   MasterCard: true,
   AmericanExpress: true,
   DiscoverCard: true,
-  DinnersClub: true,
+  DinersClub: true,
   JCB: true,
   CVC: true,
   nameOnCard: true,
@@ -34,7 +34,7 @@ const initialState = {
       MasterCard: true,
       AmericanExpress: true,
       DiscoverCard: true,
-      DinnersClub: true,
+      DinersClub: true,
       JCB: true,
       CVC: true,
       nameOnCard: true,
@@ -50,7 +50,7 @@ const initialState = {
       MasterCard: false,
       AmericanExpress: false,
       DiscoverCard: false,
-      DinnersClub: false,
+      DinersClub: false,
       JCB: false,
       CVC: false,
       nameOnCard: false,
@@ -66,7 +66,7 @@ const initialState = {
       MasterCard: true,
       AmericanExpress: true,
       DiscoverCard: true,
-      DinnersClub: true,
+      DinersClub: true,
       JCB: true,
       CVC: true,
       nameOnCard: true,
@@ -98,9 +98,9 @@ const initialState = {
         niceType: "DiscoverCard",
         image: 'https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/discover.png'
       },
-      DinnersClub: {
-        niceType: "DinnersClub",
-        image: 'https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/dinersclub.png'
+      DinersClub: {
+        niceType: "DinersClub",
+        image: 'https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/Dinersclub.png'
       },
       JCB: {
         niceType: "JCB",
@@ -177,7 +177,7 @@ export default function posts(state, action) {
         { MasterCard: state.savedConfigs[action.m[0]]['MasterCard'] },
         { AmericanExpress: state.savedConfigs[action.m[0]]['AmericanExpress'] },
         { DiscoverCard: state.savedConfigs[action.m[0]]['DiscoverCard'] },
-        { DinnersClub: state.savedConfigs[action.m[0]]['DinnersClub'] },
+        { DinersClub: state.savedConfigs[action.m[0]]['DinersClub'] },
         { JCB: state.savedConfigs[action.m[0]]['JCB'] },
         { CVC: state.savedConfigs[action.m[0]]['CVC'] },
         { nameOnCard: state.savedConfigs[action.m[0]]['nameOnCard'] },
@@ -214,7 +214,7 @@ export default function posts(state, action) {
     }
     case 'saveNewConfig': {
       logme('case saveNewConfig', action, state)
-      const { savedConfigs, Visa, MasterCard, AmericanExpress, DiscoverCard, DinnersClub, JCB, CVC, nameOnCard, billMeToggle,
+      const { savedConfigs, Visa, MasterCard, AmericanExpress, DiscoverCard, DinersClub, JCB, CVC, nameOnCard, billMeToggle,
         billMe, credit, wallet, payWith, } = state;
       const stateToRet = ({
         ...state,
@@ -223,7 +223,7 @@ export default function posts(state, action) {
             ...savedConfigs,
             ...{
               [action.m[0]]: {
-                name: action.m[0], Visa, MasterCard, AmericanExpress, DiscoverCard, DinnersClub,
+                name: action.m[0], Visa, MasterCard, AmericanExpress, DiscoverCard, DinersClub,
                 JCB, CVC, nameOnCard, billMeToggle, billMe, credit, wallet, payWith,
               }
             }

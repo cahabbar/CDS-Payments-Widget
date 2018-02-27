@@ -10,7 +10,7 @@ const stateToComputed = state => {
   const {
     AmericanExpress,
     CVC,
-    DinnersClub,
+    DinersClub,
     DiscoverCard,
     JCB,
     MasterCard,
@@ -25,7 +25,7 @@ const stateToComputed = state => {
     newConfigName
   } = state.posts;
 
-  const cardToggle = AmericanExpress || DinnersClub || DiscoverCard || JCB || MasterCard || Visa;
+  const cardToggle = AmericanExpress || DinersClub || DiscoverCard || JCB || MasterCard || Visa;
   const widgetToggle = wallet || payWith || cardToggle;
 
   return {
@@ -36,7 +36,7 @@ const stateToComputed = state => {
     MasterCard,
     AmericanExpress,
     DiscoverCard,
-    DinnersClub,
+    DinersClub,
     JCB,
     CVC,
     cardToggle,

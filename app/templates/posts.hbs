@@ -1,4 +1,4 @@
-{{#ui-layout class="container" as | configs Visa MasterCard AmericanExpress DiscoverCard DinnersClub JCB cardToggle CVC nameOnCard
+{{#ui-layout class="container" as | configs Visa MasterCard AmericanExpress DiscoverCard DinersClub JCB cardToggle CVC nameOnCard
 wallet billMeToggle billMe payWith savedConfigs selectedConfig newConfigName widgetToggle filter filterWith myAction toggle
 setSelectedConfig saveNewConfig saveNewConfigName|}}
 <!-- The drawer is always open in large screens. The header is always shown, even in small screens. -->
@@ -66,7 +66,7 @@ setSelectedConfig saveNewConfig saveNewConfigName|}}
       </li>
       <li class="mdl-list__item">
         <span class="mdl-list__item-primary-content">
-          MasterCard
+          Master Card
         </span>
         <span class="mdl-list__item-secondary-action" action>
           <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
@@ -76,7 +76,7 @@ setSelectedConfig saveNewConfig saveNewConfigName|}}
       </li>
       <li class="mdl-list__item">
         <span class="mdl-list__item-primary-content">
-          AmericanExpress
+          American Express
         </span>
         <span class="mdl-list__item-secondary-action" action>
           <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
@@ -86,7 +86,7 @@ setSelectedConfig saveNewConfig saveNewConfigName|}}
       </li>
       <li class="mdl-list__item">
         <span class="mdl-list__item-primary-content">
-          DiscoverCard
+          Discover Card
         </span>
         <span class="mdl-list__item-secondary-action" action>
           <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
@@ -96,11 +96,11 @@ setSelectedConfig saveNewConfig saveNewConfigName|}}
       </li>
       <li class="mdl-list__item">
         <span class="mdl-list__item-primary-content">
-          DinnersClub
+          Diners Club
         </span>
         <span class="mdl-list__item-secondary-action" action>
           <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
-            {{input type="checkbox" class="mdl-switch__input" checked=DinnersClub click=(action toggle 'DinnersClub' DinnersClub)}}
+            {{input type="checkbox" class="mdl-switch__input" checked=DinersClub click=(action toggle 'DinersClub' DinersClub)}}
           </label>
         </span>
       </li>
@@ -264,9 +264,9 @@ setSelectedConfig saveNewConfig saveNewConfigName|}}
                 <button class="mdl-button mdl-js-button">
                   <img src={{configs.cards.DiscoverCard.image}}/>
                 </button>
-                {{/if}} {{#if DinnersClub}}
+                {{/if}} {{#if DinersClub}}
                 <button class="mdl-button mdl-js-button ">
-                  <img src={{configs.cards.DinnersClub.image}}/>
+                  <img src={{configs.cards.DinersClub.image}}/>
                 </button>
                 {{/if}} {{#if JCB}}
                 <button class="mdl-button mdl-js-button">
