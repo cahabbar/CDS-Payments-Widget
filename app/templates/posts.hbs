@@ -1,6 +1,6 @@
 {{#ui-layout class="container" as | configs Visa MasterCard AmericanExpress DiscoverCard DinersClub JCB cardToggle CVC nameOnCard
-wallet billMeToggle billMe AlternativePayments savedConfigs selectedConfig newConfigName widgetToggle filter filterWith myAction toggle
-setSelectedConfig saveNewConfig saveNewConfigName|}}
+wallet billMeToggle billMe AlternativePayments savedConfigs selectedConfig newConfigName widgetToggle filter filterWith myAction
+toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
 <!-- The drawer is always open in large screens. The header is always shown, even in small screens. -->
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
   <div class="mdl-layout__drawer">
@@ -28,8 +28,8 @@ setSelectedConfig saveNewConfig saveNewConfigName|}}
         </span>
         <span class="mdl-list__item-secondary-action" action>
           <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
-            {{input type="checkbox" class="mdl-switch__input" checked=AlternativePayments click=(action toggle 'AlternativePayments' AlternativePayments)}} {{log 'AlternativePayments'
-            AlternativePayments}}
+            {{input type="checkbox" class="mdl-switch__input" checked=AlternativePayments click=(action toggle 'AlternativePayments'
+            AlternativePayments)}} {{log 'AlternativePayments' AlternativePayments}}
           </label>
         </span>
       </li>
@@ -44,8 +44,8 @@ setSelectedConfig saveNewConfig saveNewConfigName|}}
         </span>
       </li>
       {{#unless widgetToggle }}
-        <div style="color:red; margin:0 5%">Warning!!: </div>
-        <div style="color:red; margin:0 5%">When Bill Me is the only option the widget will not display.</div>
+      <div style="color:red; margin:0 5%">Warning!!: </div>
+      <div style="color:red; margin:0 5%">When Bill Me is the only option the widget will not display.</div>
       {{/unless }}
 
       <span class="mdl-layout-title">Allowed Cards</span>
@@ -301,7 +301,7 @@ setSelectedConfig saveNewConfig saveNewConfigName|}}
             </div>
           </li>
           <hr/> {{/if}} {{#if billMeToggle}}
-          <li style="width:30%" class="mdl-list__item">
+          <li style="width:30%; margin : 0 0 0 2%" class="mdl-list__item">
             <span class="mdl-list__item-primary-content">
               <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
                 {{input type="checkbox" class="mdl-switch__input" checked=billMe click=(action toggle 'billMe' billMe)}} {{log 'billMe' billMe}}
