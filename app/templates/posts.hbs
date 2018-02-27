@@ -232,10 +232,10 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
               </div>
             </div>
           </li>
-           {{/if}}
+          {{/if}}
           <div></div>
           {{#if cardToggle}}
-<hr/>
+          <hr/>
           <li class="mdl-list__item">
             <!-- <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--fab"> 2 </button>-->
             <div style="width:100%; margin:0%" class="demo-card-wide mdl-card mdl-shadow--0dp">
@@ -280,12 +280,25 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
                 <br/> {{#credit-card form="#my-form"}}
                 <form id='my-form' class='payment-info'>
                   <div style="width:100%" class="mdl-textfield mdl-js-textfield">
-                    {{input class="mdl-textfield__input" type="text" name="ccNumber" id="cc-number" className="cc-number" data-cds="ccNumber"
-                    placeholder=configs.cardInfo.number.placeholder name=configs.cardInfo.number.name value=configs.cardInfo.number.value
+                    {{input
+                    class="mdl-textfield__input"
+                    type="text"
+                    id="cc-number"
+                    className="cc-number"
+                    data-cds="ccNumber"
+                    placeholder=configs.cardInfo.number.placeholder
+                    name=configs.cardInfo.number.name
+                    value=configs.cardInfo.number.value
                     keyUp=(action myAction configs.cardInfo.number.name configs.cardInfo.number.value) }}
                     <div></div>
-                    {{#if nameOnCard}} {{input class="mdl-textfield__input" type="text" placeholder=configs.cardInfo.name.placeholder name=configs.cardInfo.name.name
-                    value=configs.cardInfo.name.value keyUp=(action myAction configs.cardInfo.name.name configs.cardInfo.name.value)
+                    {{#if nameOnCard}}
+                    {{input
+                    class="mdl-textfield__input"
+                    type="text"
+                    placeholder=configs.cardInfo.name.placeholder
+                    name=configs.cardInfo.name.name
+                    value=configs.cardInfo.name.value
+                    keyUp=(action myAction configs.cardInfo.name.name configs.cardInfo.name.value)
                     }} {{/if }}
                     <div></div>
                     {{input class="mdl-textfield__input" type="text" placeholder=configs.cardInfo.expiry.placeholder name=configs.cardInfo.expiry.name
