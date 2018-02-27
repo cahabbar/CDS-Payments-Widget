@@ -63,6 +63,10 @@ const dispatchToActions = dispatch => {
       console.log('\n\nlogged selectConfig: ', m)
       dispatch({ type: 'selectConfig', m })
     },
+    saveNewConfigName: (...m) => {
+      console.log('\n\nlogged saveNewConfigName: ', m)
+      dispatch({ type: 'saveNewConfigName', m })
+    },
     saveNewConfig: (...m) => {
       console.log('\n\nlogged saveNewConfig: ', m)
       dispatch({ type: 'saveNewConfig', m })

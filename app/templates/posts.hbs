@@ -1,5 +1,6 @@
 {{#ui-layout class="container" as | configs Visa MasterCard AmericanExpress DiscoverCard DinnersClub JCB CVC nameOnCard wallet
-billMeToggle billMe payWith savedConfigs selectedConfig newConfigName filter filterWith myAction toggle setSelectedConfig saveNewConfig|}}
+billMeToggle billMe payWith savedConfigs selectedConfig newConfigName filter filterWith myAction toggle setSelectedConfig
+saveNewConfig saveNewConfigName|}}
 <!-- The drawer is always open in large screens. The header is always shown, even in small screens. -->
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
   <div class="mdl-layout__drawer">
@@ -127,12 +128,12 @@ billMeToggle billMe payWith savedConfigs selectedConfig newConfigName filter fil
       </li>
       <li class="mdl-list__item">
         <span class="mdl-list__item-primary-content">
-          {{newConfigName}}
+          {{input class="mdl-textfield__input" type="text" name=newConfigName.value placeholder=newConfigName.value  value=newConfigName.value
+             key-up=(action saveNewConfigName newConfigName.name)}} 
         </span>
         <span class="mdl-list__item-secondary-action" action>
           <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
-            {{input type="checkbox" class="mdl-switch__input" checked=nameOnCard click=(action toggle 'saveNewConfig' newConfigName)}}
-            <button onclick={{action saveNewConfig newConfigName}}>Save</button>
+            <button onclick={{action saveNewConfig newConfigName.value}}>Save</button>
           </label>
         </span>
       </li>

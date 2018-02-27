@@ -23,7 +23,10 @@ const initialState = {
   credit: true,
   wallet: true,
   payWith: true,
-  newConfigName: 'NewConfigName',
+  newConfigName: {
+    name: 'newConfigName',
+    value: 'Default Config'
+  },
   savedConfigs: {
     Default: {
       name: "Default",
@@ -183,28 +186,36 @@ export default function posts(state, action) {
         { credit: state.savedConfigs[action.m[0]]['credit'] },
         { wallet: state.savedConfigs[action.m[0]]['wallet'] },
         { payWith: state.savedConfigs[action.m[0]]['payWith'] },
-        { 'flippy': 'whippy' }
+        { 'flippy': 'whippy' },
+        {
+          newConfigName: {
+            name: action.m[0],
+            value: action.m[0],
+          }
+        }
       );
+      logme('case toggle stateToRet', stateToRet)
+      return stateToRet;
+    }
+    case 'saveNewConfigName': {
+      const { newConfigName } = state;
+      logme('case saveNewConfigName', action, state, newConfigName)
+      const stateToRet = ({
+        ...state,
+        ...{
+          [newConfigName.name]: {
+            name: newConfigName.name,
+            value: newConfigName.value
+          }
+        }
+      });
       logme('case toggle stateToRet', stateToRet)
       return stateToRet;
     }
     case 'saveNewConfig': {
       logme('case saveNewConfig', action, state)
-      const { savedConfigs,
-        Visa,
-        MasterCard,
-        AmericanExpress,
-        DiscoverCard,
-        DinnersClub,
-        JCB,
-        CVC,
-        nameOnCard,
-        billMeToggle,
-        billMe,
-        credit,
-        wallet,
-        payWith,
-      } = state;
+      const { savedConfigs, Visa, MasterCard, AmericanExpress, DiscoverCard, DinnersClub, JCB, CVC, nameOnCard, billMeToggle,
+        billMe, credit, wallet, payWith, } = state;
       const stateToRet = ({
         ...state,
         ...{
@@ -212,21 +223,8 @@ export default function posts(state, action) {
             ...savedConfigs,
             ...{
               [action.m[0]]: {
-                name: action.m[0],
-                Visa,
-                MasterCard,
-                AmericanExpress,
-                DiscoverCard,
-                DinnersClub,
-                JCB,
-                CVC,
-                nameOnCard,
-                billMeToggle,
-                billMe,
-                credit,
-                wallet,
-                payWith,
-
+                name: action.m[0], Visa, MasterCard, AmericanExpress, DiscoverCard, DinnersClub,
+                JCB, CVC, nameOnCard, billMeToggle, billMe, credit, wallet, payWith,
               }
             }
           }
