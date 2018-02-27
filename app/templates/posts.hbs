@@ -16,7 +16,7 @@ setSelectedConfig saveNewConfig saveNewConfigName|}}
         <span class="mdl-list__item-primary-content">
           Your Wallet
         </span>
-        <span class="mdl-list__item-secondary-action" action>
+        <span class="mdl-list__item-secondary-action action">
           <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
             {{input type="checkbox" class="mdl-switch__input" checked=wallet click=(action toggle 'wallet' wallet)}} {{log 'wallet' wallet}}
           </label>
@@ -192,16 +192,15 @@ setSelectedConfig saveNewConfig saveNewConfigName|}}
         <ul class="demo-list-item mdl-list">
 
           {{#if wallet}}
-          <li class="mdl-list__item">
+          <li class="mdl-list__item" style="height: 150px;">
             <!--<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--fab"> 1 </button>-->
-            <div style="width:80%; margin:0%" class="demo-card-wide mdl-card mdl-shadow--0dp">
+            <div style="width:80%;  margin: 0" class="demo-card-wide mdl-card mdl-shadow--0dp">
               <div class="mdl-card__title">
-                <h2 class="mdl-card__title-text">Your Wallet:</h2>
+                <h2 style="width:80%;  margin:5% 0" class="mdl-card__title-text">Your Wallet:</h2>
               </div>
               <br/>
               <br/>
-              <br/>
-              <select style="margin:15px">
+              <select style="margin:0 15px">
                 <option value='Visa'>Visa</option>
               </select>
             </div>
