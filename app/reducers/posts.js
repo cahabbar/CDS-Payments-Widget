@@ -22,7 +22,7 @@ const initialState = {
   billMe: false,
   credit: true,
   wallet: true,
-  payWith: true,
+  AlternativePayments: true,
   newConfigName: {
     name: 'newConfigName',
     value: 'Default Config'
@@ -42,7 +42,7 @@ const initialState = {
       billMe: false,
       credit: true,
       wallet: true,
-      payWith: true,
+      AlternativePayments: true,
     },
     Minimum: {
       name: "Minimum",
@@ -58,7 +58,7 @@ const initialState = {
       billMe: false,
       credit: false,
       wallet: false,
-      payWith: false,
+      AlternativePayments: false,
     },
     All: {
       name: "All",
@@ -74,7 +74,7 @@ const initialState = {
       billMe: true,
       credit: true,
       wallet: true,
-      payWith: true,
+      AlternativePayments: true,
     }
   },
   configs: {
@@ -185,7 +185,7 @@ export default function posts(state, action) {
         { billMe: state.savedConfigs[action.m[0]]['billMe'] },
         { credit: state.savedConfigs[action.m[0]]['credit'] },
         { wallet: state.savedConfigs[action.m[0]]['wallet'] },
-        { payWith: state.savedConfigs[action.m[0]]['payWith'] },
+        { AlternativePayments: state.savedConfigs[action.m[0]]['AlternativePayments'] },
         { 'flippy': 'whippy' },
         {
           newConfigName: {
@@ -215,7 +215,7 @@ export default function posts(state, action) {
     case 'saveNewConfig': {
       logme('case saveNewConfig', action, state)
       const { savedConfigs, Visa, MasterCard, AmericanExpress, DiscoverCard, DinersClub, JCB, CVC, nameOnCard, billMeToggle,
-        billMe, credit, wallet, payWith, } = state;
+        billMe, credit, wallet, AlternativePayments, } = state;
       const stateToRet = ({
         ...state,
         ...{
@@ -224,7 +224,7 @@ export default function posts(state, action) {
             ...{
               [action.m[0]]: {
                 name: action.m[0], Visa, MasterCard, AmericanExpress, DiscoverCard, DinersClub,
-                JCB, CVC, nameOnCard, billMeToggle, billMe, credit, wallet, payWith,
+                JCB, CVC, nameOnCard, billMeToggle, billMe, credit, wallet, AlternativePayments,
               }
             }
           }

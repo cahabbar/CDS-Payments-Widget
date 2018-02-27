@@ -18,7 +18,7 @@ const stateToComputed = state => {
     billMe,
     billMeToggle,
     nameOnCard,
-    payWith,
+    AlternativePayments,
     savedConfigs,
     selectedConfig,
     wallet,
@@ -26,7 +26,7 @@ const stateToComputed = state => {
   } = state.posts;
 
   const cardToggle = AmericanExpress || DinersClub || DiscoverCard || JCB || MasterCard || Visa;
-  const widgetToggle = wallet || payWith || cardToggle;
+  const widgetToggle = wallet || AlternativePayments || cardToggle;
 
   return {
     configs: {
@@ -42,7 +42,7 @@ const stateToComputed = state => {
     cardToggle,
     nameOnCard,
     wallet,
-    payWith,
+    AlternativePayments,
     billMeToggle,
     billMe,
     savedConfigs,

@@ -1,5 +1,5 @@
 {{#ui-layout class="container" as | configs Visa MasterCard AmericanExpress DiscoverCard DinersClub JCB cardToggle CVC nameOnCard
-wallet billMeToggle billMe payWith savedConfigs selectedConfig newConfigName widgetToggle filter filterWith myAction toggle
+wallet billMeToggle billMe AlternativePayments savedConfigs selectedConfig newConfigName widgetToggle filter filterWith myAction toggle
 setSelectedConfig saveNewConfig saveNewConfigName|}}
 <!-- The drawer is always open in large screens. The header is always shown, even in small screens. -->
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
@@ -24,12 +24,12 @@ setSelectedConfig saveNewConfig saveNewConfigName|}}
       </li>
       <li class="mdl-list__item">
         <span class="mdl-list__item-primary-content">
-          Pay With
+          Alternative Payments
         </span>
         <span class="mdl-list__item-secondary-action" action>
           <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
-            {{input type="checkbox" class="mdl-switch__input" checked=payWith click=(action toggle 'payWith' payWith)}} {{log 'payWith'
-            payWith}}
+            {{input type="checkbox" class="mdl-switch__input" checked=AlternativePayments click=(action toggle 'AlternativePayments' AlternativePayments)}} {{log 'AlternativePayments'
+            AlternativePayments}}
           </label>
         </span>
       </li>
@@ -206,11 +206,11 @@ setSelectedConfig saveNewConfig saveNewConfigName|}}
               </select>
             </div>
           </li>
-          <hr/> {{/if}} {{#if payWith}}
+          <hr/> {{/if}} {{#if AlternativePayments}}
           <li class="mdl-list__item">
             <div style="width:100%; margin:0%" class="demo-card-wide mdl-card mdl-shadow--0dp">
               <div class="mdl-card__title">
-                <h2 class="mdl-card__title-text">Pay With:</h2>
+                <h2 class="mdl-card__title-text">Alternative Payments:</h2>
               </div>
               <div class="mdl-card__supporting-text">
                 <button class=" mdl-button mdl-js-button">
