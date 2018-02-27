@@ -194,14 +194,16 @@ setSelectedConfig saveNewConfig saveNewConfigName|}}
           {{#if wallet}}
           <li class="mdl-list__item" style="height: 150px;">
             <!--<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--fab"> 1 </button>-->
-            <div style="width:80%;  margin: 0" class="demo-card-wide mdl-card mdl-shadow--0dp">
+            <div style="width:100%;  margin: 0" class="demo-card-wide mdl-card mdl-shadow--0dp">
               <div class="mdl-card__title">
-                <h2 style="width:80%;  margin:5% 0" class="mdl-card__title-text">Your Wallet:</h2>
+                <h2 style="width:50%;  margin:5% 0 0 0" class="mdl-card__title-text">Your Wallet:</h2>
               </div>
               <br/>
               <br/>
-              <select style="margin:0 15px">
-                <option value='Visa'>Visa</option>
+              <select style="width:50%; margin:0 25%">
+                <option value='Visa'>Visa ending in 4433</option>
+                <option value='Visa'>Master Card ending in 3323</option>
+                <option value='Visa'>Add a new payment method...</option>
               </select>
             </div>
           </li>
