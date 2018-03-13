@@ -241,6 +241,14 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
                 <h2 class="mdl-card__title-text"></h2>
               </div>
               <div class="mdl-card__supporting-text">
+                    Type is:
+
+                    <!-- LOGO -->
+                    <span class="logo {{cc-number-to-type configs.cardInfo.number.value allowedTypes='visa|mastercard|amex|discover'}}"></span>
+
+                    <!-- TEXT -->
+                    {{cc-number-to-type configs.cardInfo.number.value allowedTypes='visa|mastercard|amex|discover'}}
+
                 <!--
                 {{#each-in configs.cards as |key card|}}
                 <button class="mdl-button mdl-js-button mdl-button--raised">
@@ -279,18 +287,18 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
                 <form id='my-form' class='payment-info'>
                   <div style="width:100%" class="mdl-textfield mdl-js-textfield">
 
-                          {{log "configs.cardInfo" configs.cardInfo numNoSpaces}}
-                  <!--
-                      <input
-                        id="cc-number" type="text" class="cc-number" data-cds="ccNumber"
-                        value="4012888888881881"
-                        value=configs.cardInfo.number.value
-                    >
-                    <input
+                    {{log "\n\n\n\n\nconfigs.cardInfo" numNoSpaces }}
 
-                        value="4012888888881881"
-                    >
-                   -->
+                    <!--
+                    {{input
+                    type="number"
+                    value=configs.cardInfo.number.value
+                    }}
+                    -->
+                    <br/>
+
+
+                <!-- #region //configs.cardInfo.number.value-->
                     {{input
                       id="cc-number"  data-cds="ccNumber"
                       class="mdl-textfield__input"

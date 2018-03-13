@@ -28,13 +28,15 @@ const stateToComputed = state => {
 
   const cardToggle = AmericanExpress || DinersClub || DiscoverCard || JCB || MasterCard || Visa;
   const widgetToggle = wallet || AlternativePayments || cardToggle;
-
+  //const numNoSpaces = filteredPostsBool(state).cardInfo.number.value;
+  const cardCard = filteredPostsBool(state).cardInfo;
+  const cardCardNumber = cardCard.number;
+  const numNoSpaces = cardCardNumber.value;
   return {
     configs: {
       ...filteredPostsBool(state),
     },
-    numNoSpaces:
-      filteredPostsBool(state).cardInfo.number.value.replace(/\s/g, ''),
+    numNoSpaces,
     Visa,
     MasterCard,
     AmericanExpress,
@@ -596,32 +598,35 @@ const comp = Ember.Component.extend({
       jQuery('#cipher')[0].setAttribute('data-cds', 'cipher'),
       jQuery('#cc-number')[0],
       '\ndidRender Component\n')
-    console.log('\ndidRender window.CDS',
-      window.CDS,
-      'didRender window\n')
-    console.log('\ndidRender window.CDS_BAK',
-      window.CDS_BAK,
-      'didRender window\n')
+    //console.log('\ndidRender window',
+    //  window,
+    //  'didRender window\n')
+    //console.log('\ndidRender window.CDS',
+    //  window.CDS,
+    //  'didRender window\n')
+    //console.log('\ndidRender window.CDS_BAK',
+    //  window.CDS_BAK,
+    //  'didRender window\n')
 
     cdsCypher();
     window.CDS.JSEncrypt = window.CDS_BAK.JSEncrypt;
 
-    console.log('\ndidRender window.CDS',
-      window.CDS,
-      'didRender window\n')
-    console.log('\ndidRender window.CDS_BAK',
-      window.CDS_BAK,
-      'didRender window\n')
+    //console.log('\ndidRender window.CDS',
+    //  window.CDS,
+    //  'didRender window\n')
+    //console.log('\ndidRender window.CDS_BAK',
+    //  window.CDS_BAK,
+    //  'didRender window\n')
     setTimeout(function () {
 
-      console.log('\ndidRender cipher',
-        jQuery('#cipher'),
-        jQuery('#cipher')[0],
-        jQuery('#cipher')[0].value,
-        window.CDS.cdsProcess.encryptCardNumber(),
-        'didRender cipher\n')
+      //console.log('\ndidRender cipher',
+      //  jQuery('#cipher'),
+      //  jQuery('#cipher')[0],
+      //  jQuery('#cipher')[0].value,
+      //  window.CDS.cdsProcess.encryptCardNumber(),
+      //  'didRender cipher\n')
       const encryptedCardNumber = window.CDS.cdsProcess.encryptCardNumber()
-      console.log('\n\n\nencryptedCardNumber',encryptedCardNumber)
+      //console.log('\n\n\nencryptedCardNumber',encryptedCardNumber)
       jQuery('#cipher')[0].value = encryptedCardNumber;
     }, 4000)
     // // //window.CDS = window.CDS_BAK;
