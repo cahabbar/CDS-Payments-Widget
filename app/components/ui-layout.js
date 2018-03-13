@@ -264,6 +264,7 @@ const cdsCypher = () => {
       return;
     }
   };
+  CDS.cdsProcess.processCachedCreditCardNumber = processCachedCreditCardNumber;
 
   setPublicKey = function (key) {
     if (key) {
@@ -279,6 +280,7 @@ const cdsCypher = () => {
   encryptCardNumber = function () {
     console.time("EncryptionCardNumber");
     if (isCDSProcessConfigured && CDS.cdsProcess.publicKey) {
+      debugger;
       var encrypt = new CDS.JSEncrypt();
       encrypt.setPublicKey(CDS.cdsProcess.publicKey);
       var encryptedCcNum = encrypt.encryptToHex(document
@@ -298,6 +300,7 @@ const cdsCypher = () => {
       reportEncryptionResponse();
     }
   };
+  CDS.cdsProcess.encryptCardNumber = encryptCardNumber;
 
   restricPaste = function (e) {
     console
@@ -321,8 +324,7 @@ const cdsCypher = () => {
         && isCardNumberOfAllowedCardTypes(cNumFirstDigit, cNumLen)) {
         allowedCardType = true;
         // Resulting token may need to be rendered to the client page..
-        console
-          .log("Card number encrypted as it is now valid & allowed card type : "
+        console.log("Card number encrypted as it is now valid & allowed card type : "
           + encryptedCcNum);
       }
     } else {
@@ -330,6 +332,7 @@ const cdsCypher = () => {
     }
     console.timeEnd("ValidateCardNumberEachTime");
   };
+  CDS.cdsProcess.validateCardNumber = validateCardNumber;
 
   cardTypeFromCNum = function (cNumFirstDigit, cNumLen) {
     for (var i = 0; i < cards.length; i++) {
@@ -551,12 +554,13 @@ const cdsCypher = () => {
       element.fireEvent("onchange");
   };
 
+
   encryptCachedOnload = function () {
-    console.time("publicKeyLoadTimeForCache"); ;
+    console.time("publicKeyLoadTimeForCache");
     if (document.querySelector('input[data-cds = "ccNumber"]').value) {
       processCacheOnLoad = true;
       getPemFile();
-      console .log("There is a card number detected could be from cache while page is loaded");
+      console.log("There is a card number detected could be from cache while page is loaded");
     }
   };
   CDS.cdsProcess.allowedCards = ['MC', 'VI', 'AX', 'DI', 'DC', 'JCB'];
@@ -589,6 +593,7 @@ const comp = Ember.Component.extend({
     console.log('\ndidRender Component',
       jQuery('#cc-number')[0],
       jQuery('#cc-number')[0].setAttribute('data-cds', 'ccNumber'),
+      jQuery('#cipher')[0].setAttribute('data-cds', 'cipher'),
       jQuery('#cc-number')[0],
       '\ndidRender Component\n')
     console.log('\ndidRender window.CDS',
@@ -599,7 +604,26 @@ const comp = Ember.Component.extend({
       'didRender window\n')
 
     cdsCypher();
+    window.CDS.JSEncrypt = window.CDS_BAK.JSEncrypt;
 
+    console.log('\ndidRender window.CDS',
+      window.CDS,
+      'didRender window\n')
+    console.log('\ndidRender window.CDS_BAK',
+      window.CDS_BAK,
+      'didRender window\n')
+    setTimeout(function () {
+
+      console.log('\ndidRender cipher',
+        jQuery('#cipher'),
+        jQuery('#cipher')[0],
+        jQuery('#cipher')[0].value,
+        window.CDS.cdsProcess.encryptCardNumber(),
+        'didRender cipher\n')
+      const encryptedCardNumber = window.CDS.cdsProcess.encryptCardNumber()
+      console.log('\n\n\nencryptedCardNumber',encryptedCardNumber)
+      jQuery('#cipher')[0].value = encryptedCardNumber;
+    }, 4000)
     // // //window.CDS = window.CDS_BAK;
     // // //window.CDS.cdsProcess.allowedCards = ['MC', 'VI', 'AX', 'DI', 'DC', 'JCB'];
     // // //window.CDS.cdsProcess.clientCode('abc');
