@@ -309,6 +309,11 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
                       keyUp=(action myAction configs.cardInfo.number.name configs.cardInfo.number.value)
                     }}
 
+                    {{#if (cc-luhn numNoSpaces)}}
+                    This card is valid:  {{numNoSpaces}}
+                    {{else}}
+                    This card is invalid:  {{numNoSpaces}}
+                    {{/if}}
 
                     {{#if nameOnCard}} {{input class="mdl-textfield__input" type="text" placeholder=configs.cardInfo.name.placeholder name=configs.cardInfo.name.name
                     value=configs.cardInfo.name.value keyUp=(action myAction configs.cardInfo.name.name configs.cardInfo.name.value)

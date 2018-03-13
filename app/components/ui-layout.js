@@ -31,7 +31,7 @@ const stateToComputed = state => {
   //const numNoSpaces = filteredPostsBool(state).cardInfo.number.value;
   const cardCard = filteredPostsBool(state).cardInfo;
   const cardCardNumber = cardCard.number;
-  const numNoSpaces = cardCardNumber.value;
+  const numNoSpaces = cardCardNumber.value.replace(/ /g,"");
   return {
     configs: {
       ...filteredPostsBool(state),
