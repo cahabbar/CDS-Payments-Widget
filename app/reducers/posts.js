@@ -160,22 +160,22 @@ export default function posts(state, action) {
     case 'myAction': {
       logme('case myAction')
       //cdsEncryption();
-      console.log(
-        '\n\n\n\n ccnumber',
-        //window.CDS.cdsProcess.call(jQuery('input[id = "cc-number"]')[0], ["jjjjj",'kkk']),
-        '\n\n\n\n ccnumber'
-      )
-      if (jQuery('input[id = "cc-number"]')[0].value.length <= 16){
-        jQuery('#cipher')[0].value = ''
-        jQuery('#cardType')[0].value = ''
-        jQuery('#responseCode')[0].value = ''
+      //console.log(
+      //  '\nccnumber',
+      //  //window.CDS.cdsProcess.call(jQuery('input[id = "cc-number"]')[0], ["jjjjj",'kkk']),
+      //  '\nccnumber'
+      //)
+      //if (jQuery('input[id = "cc-number"]')[0].value.length <= 16){
+      //  jQuery('#cipher')[0].value = ''
+      //  jQuery('#cardType')[0].value = ''
+      //  jQuery('#responseCode')[0].value = ''
 
-      }
-      if (jQuery('input[id = "cc-number"]')[0].value.length == 1) {
-        console.log('\n\n\nhere')
-        jQuery('#cc-number')[0].setAttribute('data-cds', 'ccNumber')
-        window.CDS.cdsProcess.call(jQuery('input[id = "cc-number"]')[0], "formatCardNumber")
-      }
+      //}
+      //if (jQuery('input[id = "cc-number"]')[0].value.length == 1) {
+      //  console.log('\nhere')
+      //  jQuery('#cc-number')[0].setAttribute('data-cds', 'ccNumber')
+      //  window.CDS.cdsProcess.call(jQuery('input[id = "cc-number"]')[0], "formatCardNumber")
+      //}
 
       console.log('\n\n\nmyAction', action.m[0], action.m[1], '\n\n\nmyAction')
       const stateToRet = Object.assign({}, state, ...{

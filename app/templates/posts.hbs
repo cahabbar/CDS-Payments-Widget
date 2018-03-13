@@ -283,11 +283,16 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
                           <!--
                     <input
                       id="cc-number" type="text" class="cc-number" data-cds="ccNumber"
-                      value={{configs.cardInfo.number.value}}
+                      value="4012888888881881"
+                      value=configs.cardInfo.number.value
                    >
                    -->
+                   <input
+
+                      value="4012888888881881"
+                   >
                     {{input
-                      id="cc-number" type="text" class="cc-number" data-cds="ccNumber"
+                      id="cc-number"  data-cds="ccNumber"
                       class="mdl-textfield__input"
                       type="text"
                       placeholder=configs.cardInfo.number.placeholder
