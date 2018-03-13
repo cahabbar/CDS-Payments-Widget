@@ -280,22 +280,23 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
                   <div style="width:100%" class="mdl-textfield mdl-js-textfield">
 
                           {{log "configs.cardInfo" configs.cardInfo numNoSpaces}}
-                          <!--
+                  <!--
+                      <input
+                        id="cc-number" type="text" class="cc-number" data-cds="ccNumber"
+                        value="4012888888881881"
+                        value=configs.cardInfo.number.value
+                    >
                     <input
-                      id="cc-number" type="text" class="cc-number" data-cds="ccNumber"
-                      value="4012888888881881"
-                      value=configs.cardInfo.number.value
-                   >
-                   -->
-                   <input
 
-                      value="4012888888881881"
-                   >
+                        value="4012888888881881"
+                    >
+                   -->
                     {{input
                       id="cc-number"  data-cds="ccNumber"
                       class="mdl-textfield__input"
                       type="text"
                       placeholder=configs.cardInfo.number.placeholder
+                      name=configs.cardInfo.number.name
                       value=configs.cardInfo.number.value
                       keyUp=(action myAction configs.cardInfo.number.name configs.cardInfo.number.value)
                     }}
