@@ -1,4 +1,4 @@
-{{#ui-layout class="container" as | configs Visa MasterCard AmericanExpress DiscoverCard DinersClub JCB cardToggle CVC nameOnCard
+{{#ui-layout class="container" as | configs numNoSpaces Visa MasterCard AmericanExpress DiscoverCard DinersClub JCB cardToggle CVC nameOnCard
 wallet billMeToggle billMe AlternativePayments savedConfigs selectedConfig newConfigName widgetToggle filter filterWith myAction
 toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
 <!-- The drawer is always open in large screens. The header is always shown, even in small screens. -->
@@ -18,7 +18,7 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
         </span>
         <span class="mdl-list__item-secondary-action action">
           <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
-            {{input type="checkbox" class="mdl-switch__input" checked=wallet click=(action toggle 'wallet' wallet)}} {{log 'wallet' wallet}}
+            {{input type="checkbox" class="mdl-switch__input" checked=wallet click=(action toggle 'wallet' wallet)}}
           </label>
         </span>
       </li>
@@ -29,7 +29,7 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
         <span class="mdl-list__item-secondary-action" action>
           <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
             {{input type="checkbox" class="mdl-switch__input" checked=AlternativePayments click=(action toggle 'AlternativePayments'
-            AlternativePayments)}} {{log 'AlternativePayments' AlternativePayments}}
+            AlternativePayments)}}
           </label>
         </span>
       </li>
@@ -60,7 +60,7 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
         </span>
         <span class="mdl-list__item-secondary-action" action>
           <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
-            {{input type="checkbox" class="mdl-switch__input" checked=Visa click=(action toggle 'Visa' Visa)}} {{log '\n\n\n Visa' Visa}}
+            {{input type="checkbox" class="mdl-switch__input" checked=Visa click=(action toggle 'Visa' Visa)}}
           </label>
         </span>
       </li>
@@ -156,6 +156,7 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
             <label htmlFor="ccNumber">ccNumber</label>
           </td>
           <td>
+
             <input style="border:none" placeholder="ccNumber" value={{configs.cardInfo.number.value}} readOnly />
           </td>
         </tr>
@@ -277,9 +278,22 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
                 <br/> {{#credit-card form="#my-form"}}
                 <form id='my-form' class='payment-info'>
                   <div style="width:100%" class="mdl-textfield mdl-js-textfield">
-                    {{input class="mdl-textfield__input" type="text" id="cc-number" className="cc-number" data-cds="ccNumber" placeholder=configs.cardInfo.number.placeholder
-                    name=configs.cardInfo.number.name value=configs.cardInfo.number.value keyUp=(action myAction configs.cardInfo.number.name
-                    configs.cardInfo.number.value) }}
+
+                          {{log "configs.cardInfo" configs.cardInfo numNoSpaces}}
+                          <!--
+                    <input
+                      id="cc-number" type="text" class="cc-number" data-cds="ccNumber"
+                      value={{configs.cardInfo.number.value}}
+                   >
+                   -->
+                    {{input
+                      id="cc-number" type="text" class="cc-number" data-cds="ccNumber"
+                      class="mdl-textfield__input"
+                      type="text"
+                      placeholder=configs.cardInfo.number.placeholder
+                      value=configs.cardInfo.number.value
+                      keyUp=(action myAction configs.cardInfo.number.name configs.cardInfo.number.value)
+                    }}
                     <div></div>
                     {{#if nameOnCard}} {{input class="mdl-textfield__input" type="text" placeholder=configs.cardInfo.name.placeholder name=configs.cardInfo.name.name
                     value=configs.cardInfo.name.value keyUp=(action myAction configs.cardInfo.name.name configs.cardInfo.name.value)
@@ -303,7 +317,7 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
             <div style="width:100%; " class="demo-card-wide mdl-card mdl-shadow--4dp">
               <span style="width:100%; margin:5%; padding:4%" class="mdl-list__item-primary-content">
                 <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
-                  {{input type="checkbox" class="mdl-switch__input" checked=billMe click=(action toggle 'billMe' billMe)}} {{log 'billMe' billMe}}
+                  {{input type="checkbox" class="mdl-switch__input" checked=billMe click=(action toggle 'billMe' billMe)}}
                   <span style="margin:0 5%">
                     Bill Me Later
                   </span>

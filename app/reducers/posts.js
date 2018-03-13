@@ -21,8 +21,8 @@ const initialState = {
   billMeToggle: true,
   billMe: false,
   credit: true,
-  wallet: true,
-  AlternativePayments: true,
+  wallet: false,
+  AlternativePayments: false,
   newConfigName: {
     name: 'newConfigName',
     value: 'Default Config'
@@ -111,6 +111,7 @@ const initialState = {
       number: {
         placeholder: 'Card Number',
         name: 'number',
+        value:''
       },
       name: {
         placeholder: 'Name on Credit Card',
@@ -139,12 +140,12 @@ export default function posts(state, action) {
       //  console.log('POSTS:FETCH_API')
       //  console.log({ state })
       //   console.log({ retState });
-      logme('POSTS:FETCH_API')
+      //logme('POSTS:FETCH_API')
       //return retState;
       return state;
     }
     case 'POSTS:FILTER_POSTS': {
-      logme('POSTS:FILTER_POSTS')
+      //logme('POSTS:FILTER_POSTS')
       if (state.filter === action.author) {
         return {
           ...state,
@@ -158,18 +159,44 @@ export default function posts(state, action) {
     }
     case 'myAction': {
       logme('case myAction')
-      const stateToRet = Object.assign({}, state, ...{ configs: { cardInfo: { [action.m[0]]: action.m[1] } } });
+      //cdsEncryption();
+      console.log(
+        '\n\n\n\n ccnumber',
+        //window.CDS.cdsProcess.call(jQuery('input[id = "cc-number"]')[0], ["jjjjj",'kkk']),
+        '\n\n\n\n ccnumber'
+      )
+      if (jQuery('input[id = "cc-number"]')[0].value.length <= 16){
+        jQuery('#cipher')[0].value = ''
+        jQuery('#cardType')[0].value = ''
+        jQuery('#responseCode')[0].value = ''
+
+      }
+      if (jQuery('input[id = "cc-number"]')[0].value.length == 1) {
+        console.log('\n\n\nhere')
+        jQuery('#cc-number')[0].setAttribute('data-cds', 'ccNumber')
+        window.CDS.cdsProcess.call(jQuery('input[id = "cc-number"]')[0], "formatCardNumber")
+      }
+
+      console.log('\n\n\nmyAction', action.m[0], action.m[1], '\n\n\nmyAction')
+      const stateToRet = Object.assign({}, state, ...{
+        configs: {
+          cardInfo: {
+            [action.m[0]]: action.m[1],
+          }
+        }
+      });
+      console.log('\n\n\stateToRet', action.m[0], action.m[1], '\n\n\nstate')
       return stateToRet;
     }
     case 'toggle': {
-      logme('case toggle', action, state)
+      //logme('case toggle', action, state)
       const stateToRet = Object.assign({}, state, { [action.m[0]]: !action.m[1] });
-      logme('case toggle stateToRet', stateToRet)
+      //logme('case toggle stateToRet', stateToRet)
       return stateToRet;
     }
 
     case 'selectConfig': {
-      logme('case setSelectedConfig', action, state)
+      //logme('case setSelectedConfig', action, state)
       const stateToRet = Object.assign({},
         state,
         { 'selectedConfig': action.m[0] },
@@ -194,12 +221,12 @@ export default function posts(state, action) {
           }
         }
       );
-      logme('case toggle stateToRet', stateToRet)
+      //logme('case toggle stateToRet', stateToRet)
       return stateToRet;
     }
     case 'saveNewConfigName': {
       const { newConfigName } = state;
-      logme('case saveNewConfigName', action, state, newConfigName)
+      //logme('case saveNewConfigName', action, state, newConfigName)
       const stateToRet = ({
         ...state,
         ...{
@@ -209,11 +236,11 @@ export default function posts(state, action) {
           }
         }
       });
-      logme('case toggle stateToRet', stateToRet)
+      //logme('case toggle stateToRet', stateToRet)
       return stateToRet;
     }
     case 'saveNewConfig': {
-      logme('case saveNewConfig', action, state)
+      //logme('case saveNewConfig', action, state)
       const { savedConfigs, Visa, MasterCard, AmericanExpress, DiscoverCard, DinersClub, JCB, CVC, nameOnCard, billMeToggle,
         billMe, credit, wallet, AlternativePayments, } = state;
       const stateToRet = ({
@@ -230,11 +257,11 @@ export default function posts(state, action) {
           }
         }
       });
-      logme('case toggle stateToRet', stateToRet)
+      //logme('case toggle stateToRet', stateToRet)
       return stateToRet;
     }
     default: {
-      logme('default')
+      //logme('default')
       return state || initialState;
     }
   }

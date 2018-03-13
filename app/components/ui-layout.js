@@ -32,6 +32,8 @@ const stateToComputed = state => {
     configs: {
       ...filteredPostsBool(state),
     },
+    numNoSpaces:
+      filteredPostsBool(state).cardInfo.number.value.replace(/\s/g, ''),
     Visa,
     MasterCard,
     AmericanExpress,
