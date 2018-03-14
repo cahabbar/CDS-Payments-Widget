@@ -1,6 +1,6 @@
-{{#ui-layout class="container" as | configs numNoSpaces Visa MasterCard AmericanExpress DiscoverCard DinersClub JCB cardToggle CVC nameOnCard
-wallet billMeToggle billMe AlternativePayments savedConfigs selectedConfig newConfigName widgetToggle filter filterWith myAction
-toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
+{{#ui-layout class="container" as | configs numNoSpaces Visa MasterCard AmericanExpress DiscoverCard DinersClub JCB cardToggle
+CVC nameOnCard wallet billMeToggle billMe AlternativePayments savedConfigs selectedConfig newConfigName widgetToggle filter
+filterWith myAction toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
 <!-- The drawer is always open in large screens. The header is always shown, even in small screens. -->
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
   <div class="mdl-layout__drawer">
@@ -190,7 +190,7 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
   <main style="width:100%; height:1500px; margin-left:50px" class="mdl-layout__content">
     <div class="page-content">
       {{#if widgetToggle }}
-      <div style="margin-left: 20%;margin-top: 50px; width: 70%;" class="demo-card-wide mdl-card mdl-shadow--16dp">
+      <div style="margin-left: 20%;margin-top: 50px; width: 33%;" class="demo-card-wide mdl-card mdl-shadow--16dp">
         <ul class="demo-list-item mdl-list">
 
           {{#if wallet}}
@@ -241,14 +241,6 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
                 <h2 class="mdl-card__title-text"></h2>
               </div>
               <div class="mdl-card__supporting-text">
-                    Type is:
-
-                    <!-- LOGO -->
-                    <span class="logo {{cc-number-to-type configs.cardInfo.number.value allowedTypes='visa|mastercard|amex|discover'}}"></span>
-
-                    <!-- TEXT -->
-                    {{cc-number-to-type configs.cardInfo.number.value allowedTypes='visa|mastercard|amex|discover'}}
-
                 <!--
                 {{#each-in configs.cards as |key card|}}
                 <button class="mdl-button mdl-js-button mdl-button--raised">
@@ -283,41 +275,29 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
                 {{/if}}
                 <br/>
                 <br/>
-                <br/> {{#credit-card form="#my-form"}}
+                <br/> {{#credit-card form="#my-form" width=50_ }}
                 <form id='my-form' class='payment-info'>
                   <div style="width:100%" class="mdl-textfield mdl-js-textfield">
 
-                    {{log "\n\n\n\n\nconfigs.cardInfo" numNoSpaces }}
-
-                    <!--
-                    {{input
-                    type="number"
-                    value=configs.cardInfo.number.value
-                    }}
-                    -->
                     <br/>
+                    <div>
 
+                      Type :
 
-                <!-- #region //configs.cardInfo.number.value-->
-                    {{input
-                      id="cc-number"  data-cds="ccNumber"
-                      class="mdl-textfield__input"
-                      type="text"
-                      placeholder=configs.cardInfo.number.placeholder
-                      name=configs.cardInfo.number.name
-                      value=configs.cardInfo.number.value
-                      keyUp=(action myAction configs.cardInfo.number.name configs.cardInfo.number.value)
-                    }}
+                      <!-- LOGO -->
+                      <span class="logo {{cc-number-to-type configs.cardInfo.number.value allowedTypes='visa|mastercard|amex|discover'}}"></span>
 
-                    {{#if (cc-luhn numNoSpaces)}}
-                    This card is valid:  {{numNoSpaces}}
-                    {{else}}
-                    This card is invalid:  {{numNoSpaces}}
-                    {{/if}}
-
-                    {{#if nameOnCard}} {{input class="mdl-textfield__input" type="text" placeholder=configs.cardInfo.name.placeholder name=configs.cardInfo.name.name
-                    value=configs.cardInfo.name.value keyUp=(action myAction configs.cardInfo.name.name configs.cardInfo.name.value)
-                    }} {{/if }}
+                      <!-- TEXT -->
+                      {{cc-number-to-type configs.cardInfo.number.value allowedTypes='visa|mastercard|amex|discover'}}
+                      <br/> {{#if (cc-luhn numNoSpaces)}} Valid: True {{else}} Valid: False {{/if}}
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/> {{input id="cc-number" data-cds="ccNumber" class="mdl-textfield__input" type="text" placeholder=configs.cardInfo.number.placeholder
+                    name=configs.cardInfo.number.name value=configs.cardInfo.number.value keyUp=(action myAction configs.cardInfo.number.name
+                    configs.cardInfo.number.value) }} {{#if nameOnCard}} {{input class="mdl-textfield__input" type="text"
+                    placeholder=configs.cardInfo.name.placeholder name=configs.cardInfo.name.name value=configs.cardInfo.name.value
+                    keyUp=(action myAction configs.cardInfo.name.name configs.cardInfo.name.value) }} {{/if }}
                     <div></div>
                     {{input class="mdl-textfield__input" type="text" placeholder=configs.cardInfo.expiry.placeholder name=configs.cardInfo.expiry.name
                     value=configs.cardInfo.expiry.value keyUp=(action myAction configs.cardInfo.expiry.name configs.cardInfo.expiry.value)
