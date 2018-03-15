@@ -5,6 +5,9 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
+    fingerprint: {
+      prepend: 'https://cdn.rawgit.com/CDSPW/cds-payments-widget/master/dist/'
+    },
     babel: {
       plugins: [
         'transform-object-rest-spread',
