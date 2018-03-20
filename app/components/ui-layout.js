@@ -1,6 +1,14 @@
 import { connect } from 'ember-redux';
 import { filterPosts } from '../reducers/posts';
 import Ember from 'ember';
+import cardNumber from 'src/card-number';
+
+
+console.log(
+  '\n\n\n\n valid.number',
+  cardNumber('4111'),
+  'valid.number\n\n\n\n ',
+)
 
 
 
@@ -28,15 +36,22 @@ const stateToComputed = state => {
 
   const cardToggle = AmericanExpress || DinersClub || DiscoverCard || JCB || MasterCard || Visa;
   const widgetToggle = wallet || AlternativePayments || cardToggle;
-  //const numNoSpaces = filteredPostsBool(state).cardInfo.number.value;
-  const cardCard = filteredPostsBool(state).cardInfo;
+  const filteredPostsBoolRes=filteredPostsBool(state);
+  const cardCard = filteredPostsBoolRes.cardInfo;
   const cardCardNumber = cardCard.number;
-  const numNoSpaces = cardCardNumber.value.replace(/ /g,"");
-  return {
-    configs: {
-      ...filteredPostsBool(state),
-    },
+  const numNoSpaces = cardCardNumber.value.replace(/ /g, "");
+  const numberValidation = cardNumber(numNoSpaces);
+  const valid = {
     numNoSpaces,
+    numberValidation,
+    show: !!numberValidation.card && !numberValidation.isValid,
+    numberLengths: numberValidation.card ? numberValidation.card.lengths.toString() : '',
+    cvvLengths: numberValidation.card ? numberValidation.card.code.size: '',
+    emptyValidation: cardNumber('')
+  };
+  const configs = { ...filteredPostsBoolRes, valid };
+  return {
+    configs,
     Visa,
     MasterCard,
     AmericanExpress,
@@ -562,7 +577,7 @@ const cdsCypher = () => {
     if (document.querySelector('input[data-cds = "ccNumber"]').value) {
       processCacheOnLoad = true;
       getPemFile();
-      console.log("There is a card number detected could be from cache while page is loaded");
+      //console.log("There is a card number detected could be from cache while page is loaded");
     }
   };
   CDS.cdsProcess.allowedCards = ['MC', 'VI', 'AX', 'DI', 'DC', 'JCB'];
@@ -570,16 +585,14 @@ const cdsCypher = () => {
   // document.addEventListener("DOMContentLoaded",
   const eventListener = function () {
 
-    console.log('\n\n\nccNumber', document.querySelector('input[data-cds = "ccNumber"]'))
+    //console.log('\n\n\nccNumber', document.querySelector('input[data-cds = "ccNumber"]'))
     CDS.cdsProcess.call(document.querySelector('input[data-cds = "ccNumber"]'), 'formatCardNumber');
-    console.log('\n\n\n', { isCDSProcessConfigured })
+    //console.log('\n\n\n', { isCDSProcessConfigured })
     if (!isCDSProcessConfigured
       || !validateAllowedCardTypesConfiguration()) {
       overrideToErrorResponse = true;
-      ;
       reportEncryptionResponse();
     } else {
-      ;
       encryptCachedOnload();
     }
 

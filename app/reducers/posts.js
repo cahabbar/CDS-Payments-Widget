@@ -1,19 +1,5 @@
 import _ from 'lodash';
 import reselect from 'reselect';
-//import valid from 'card-validator'
-//import cardNumber from 'card-validator/src/';
-//var cardNumber = require('card-validator/src/card-number.js');
-import valid from 'card-validator';
-import cardNumber from 'src/card-number';
-
-
-console.log('\n\n\n\n valid',
-  { valid },
-  { cardNumber },
-  '\n\n\n\n valid.number',
-  cardNumber('4111'),
-  'valid.number\n\n\n\n ',
-)
 
 const { createSelector } = reselect;
 
@@ -125,7 +111,7 @@ const initialState = {
       number: {
         placeholder: 'Card Number',
         name: 'number',
-        value: '4012 8888 8888 1881'
+        value: '4012 8888 8888 188'
       },
       name: {
         placeholder: 'Name on Credit Card',
@@ -191,7 +177,7 @@ export default function posts(state, action) {
       //  window.CDS.cdsProcess.call(jQuery('input[id = "cc-number"]')[0], "formatCardNumber")
       //}
 
-      console.log('\n\n\nmyAction', action.m[0], action.m[1], '\n\n\nmyAction')
+      //console.log('\n\n\nmyAction', action.m[0], action.m[1], '\n\n\nmyAction')
       const stateToRet = Object.assign({}, state, ...{
         configs: {
           cardInfo: {
@@ -199,7 +185,7 @@ export default function posts(state, action) {
           }
         }
       });
-      console.log('\n\n\n stateToRet', action.m[0], action.m[1], '\n\n\nstate')
+      //console.log('\n\n\n stateToRet', action.m[0], action.m[1], '\n\n\nstate')
       return stateToRet;
     }
     case 'toggle': {
