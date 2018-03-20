@@ -8,11 +8,11 @@ import cardNumber from 'src/card-number';
 
 
 console.log('\n\n\n\n valid',
-{valid},
-{cardNumber},
-'\n\n\n\n valid.number',
-cardNumber('4111'),
-'valid.number\n\n\n\n ',
+  { valid },
+  { cardNumber },
+  '\n\n\n\n valid.number',
+  cardNumber('4111'),
+  'valid.number\n\n\n\n ',
 )
 
 const { createSelector } = reselect;
