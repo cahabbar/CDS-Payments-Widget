@@ -3,7 +3,7 @@
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
-module.exports = function(defaults) {
+module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
     fingerprint: {
       prepend: 'https://cdn.rawgit.com/CDSPW/cds-payments-widget/master/docs/'
@@ -29,6 +29,42 @@ module.exports = function(defaults) {
   // along with the exports of each module as its value.
 
   app.import('vendor/bootstrap.min.css');
+
+  app.import('node_modules/card-validator/index.js', {
+    using: [ { transformation: 'cjs', as: 'card-validator' } ]
+  });
+  app.import('node_modules/card-validator/src/card-number.js', {
+    using: [ { transformation: 'cjs', as: 'src/card-number' } ]
+  });
+  app.import('node_modules/card-validator/src/expiration-date.js', {
+    using: [ { transformation: 'cjs', as: 'src/expiration-date' } ]
+  });
+  app.import('node_modules/card-validator/src/parse-date.js', {
+    using: [ { transformation: 'cjs', as: 'src/parse-date' } ]
+  });
+  app.import('node_modules/card-validator/src/expiration-year.js', {
+    using: [ { transformation: 'cjs', as: 'src/expiration-year' } ]
+  });
+  app.import('node_modules/card-validator/src/lib/is-array.js', {
+    using: [ { transformation: 'cjs', as: 'src/lib/is-array' } ]
+  });
+  app.import('node_modules/card-validator/src/expiration-month.js', {
+    using: [ { transformation: 'cjs', as: 'src/expiration-month' } ]
+  });
+  app.import('node_modules/card-validator/src/cvv.js', {
+    using: [ { transformation: 'cjs', as: 'src/cvv' } ]
+  });
+  app.import('node_modules/card-validator/src/postal-code.js', {
+    using: [ { transformation: 'cjs', as: 'src/postal-code' } ]
+  });
+  app.import('node_modules/credit-card-type/index.js', {
+    using: [ { transformation: 'cjs', as: 'credit-card-type' } ]
+  });
+  app.import('node_modules/card-validator/src/luhn-10.js', {
+    using: [ { transformation: 'cjs', as: 'src/luhn-10' } ]
+  });
+
+
 
   return app.toTree();
 };
