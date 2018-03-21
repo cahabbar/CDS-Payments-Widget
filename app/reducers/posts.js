@@ -111,7 +111,7 @@ const initialState = {
       number: {
         placeholder: 'Card Number',
         name: 'number',
-        value: '4012 8888 8888 188'
+        value: '4012888888881881'
       },
       name: {
         placeholder: 'Name on Credit Card',
