@@ -7,8 +7,6 @@
   <title>CDS Payments Widget Admin</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!--VSCODE v. Handlebars-->
-  {{content-for "head"}}
   <link integrity="" rel="stylesheet" href="{{rootURL}}assets/vendor.css">
   <!--VSCODE v. Handlebars-->
   <script src="https://s3.amazonaws.com/cds-tzn-test/resources/cds-process.min.js"> </script>
@@ -17,6 +15,11 @@
   </script>
   <script src="{{rootURL}}assets/vendor.js"></script>
   <script src="{{rootURL}}assets/cds-payments-widget.js"></script>
+  <!--VSCODE v. Handlebars-->
+  {{content-for "head"}}
+  <!--VSCODE v. Handlebars-->
+  {{content-for "concat-css"}}
+  {{content-for "concat-js"}}
   <!--VSCODE v. Handlebars-->
   {{content-for "head-footer"}}
 </head>
