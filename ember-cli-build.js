@@ -6,7 +6,7 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
     fingerprint: {
-      prepend: 'https://cdn.rawgit.com/CDSPW/cds-payments-widget/master/docs/'
+      prepend: 'https://cdn.rawgit.com/CDSPW/CDS-Payments-Widget-Ember/master/docs/'
     },
     babel: {
       plugins: [
@@ -28,7 +28,8 @@ module.exports = function (defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
-  app.import('vendor/bootstrap.min.css');
+  app.import('vendor/material.min.css');-
+  //app.import('vendor/jquery-3.3.1.slim.min.js');-
 
   app.import('node_modules/card-validator/index.js', {
     using: [{ transformation: 'cjs', as: 'card-validator' }]

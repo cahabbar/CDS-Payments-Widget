@@ -6,13 +6,6 @@ import expirationDate from 'src/expiration-date';
 import validCvv from 'src/cvv';
 
 
-console.log(
-  '\n\n\n\n valid.number',
-  cardNumber('4111'),
-  'valid.number\n\n\n\n ',
-  '\n\n\n\n expirationDate',
-  expirationDate('10/19')
-)
 
 
 
@@ -66,7 +59,7 @@ const stateToComputed = state => {
     cvvWarning: numberValidation.card && !validCvv(cvv).isValid,
     billMeDisabled: !!numberValidation.card,
     notAcceptedCardsString: numberValidation.card && !(acceptedCards.indexOf(numberValidation.card.type) >= 0),
-    demo:"display:none"
+    demo:!"display:none"
   };
   const configs = { ...filteredPostsBoolRes, valid };
   return {
@@ -316,7 +309,7 @@ const cdsCypher = () => {
   encryptCardNumber = function () {
     console.time("EncryptionCardNumber");
     if (isCDSProcessConfigured && CDS.cdsProcess.publicKey) {
-      debugger;
+      //debugger;
       var encrypt = new CDS.JSEncrypt();
       encrypt.setPublicKey(CDS.cdsProcess.publicKey);
       var encryptedCcNum = encrypt.encryptToHex(document
