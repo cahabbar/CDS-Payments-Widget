@@ -58,6 +58,7 @@ const stateToComputed = state => {
     expirationDateWarning: numberValidation.card && !expirationDate(expiration).isValid,
     validExpiration: expirationDate(expiration),
     cvvWarning: numberValidation.card && !validCvv(cvv).isValid,
+    billMeDisabled:  !!numberValidation.card,
   };
   const configs = { ...filteredPostsBoolRes, valid };
   return {
@@ -74,7 +75,7 @@ const stateToComputed = state => {
     wallet,
     AlternativePayments,
     billMeToggle,
-    billMe,
+    billMe: billMe && !numberValidation.card,
     savedConfigs,
     selectedConfig,
     newConfigName,

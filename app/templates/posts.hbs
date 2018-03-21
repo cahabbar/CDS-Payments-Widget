@@ -348,7 +348,8 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
                     {{/if}}
                   </div>
                   <!-- VSCode v. Handlebars-->
-                  {{#if billMeToggle}} {{input type="checkbox" class="mdl-switch__input" checked=billMe click=(action toggle 'billMe' billMe)}}
+                  {{#if billMeToggle}}
+                  {{input type="checkbox" class="mdl-switch__input" checked=billMe click=(action toggle 'billMe' billMe) disabled=configs.valid.billMeDisabled}}
                   <span style="margin:0 5%">
                     Bill Me Later
                   </span>
