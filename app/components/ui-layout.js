@@ -2,12 +2,16 @@ import { connect } from 'ember-redux';
 import { filterPosts } from '../reducers/posts';
 import Ember from 'ember';
 import cardNumber from 'src/card-number';
+import expirationDate from 'src/expiration-date';
+import validCvv from 'src/cvv';
 
 
 console.log(
   '\n\n\n\n valid.number',
   cardNumber('4111'),
   'valid.number\n\n\n\n ',
+  '\n\n\n\n expirationDate',
+  expirationDate('10/19')
 )
 
 
@@ -41,13 +45,19 @@ const stateToComputed = state => {
   const cardCardNumber = cardCard.number;
   const numNoSpaces = cardCardNumber.value.replace(/ /g, "");
   const numberValidation = cardNumber(numNoSpaces);
+  const expiration = cardCard.expiry.value
+  const cvv = cardCard.cvc.value
+
   const valid = {
     numNoSpaces,
     numberValidation,
     show: !!numberValidation.card && !numberValidation.isValid,
     numberLengths: numberValidation.card ? numberValidation.card.lengths.toString() : '',
     cvvLengths: numberValidation.card ? numberValidation.card.code.size: '',
-    emptyValidation: cardNumber('')
+    nameWarning: numberValidation.card && !cardCard.name.value,
+    expirationDateWarning: numberValidation.card && !expirationDate(expiration).isValid,
+    validExpiration: expirationDate(expiration),
+    cvvWarning: numberValidation.card && !validCvv(cvv).isValid,
   };
   const configs = { ...filteredPostsBoolRes, valid };
   return {

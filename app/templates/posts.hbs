@@ -247,27 +247,27 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
                 -->
                 <div style="margin-bottom: 10px">
                   {{#if Visa}}
-                  <button class="mdl-button mdl-js-button">
+                  <button class="mdl-button mdl-js-button" disabled>
                     <img src={{configs.cards.Visa.image}}/>
                   </button>
                   {{/if}} {{#if MasterCard}}
-                  <button class="mdl-button mdl-js-button">
+                  <button class="mdl-button mdl-js-button" disabled>
                     <img src={{configs.cards.MasterCard.image}}/>
                   </button>
                   {{/if}} {{#if AmericanExpress}}
-                  <button class="mdl-button mdl-js-button">
+                  <button class="mdl-button mdl-js-button" disabled>
                     <img src={{configs.cards.AmericanExpress.image}}/>
                   </button>
                   {{/if}} {{#if DiscoverCard}}
-                  <button class="mdl-button mdl-js-button">
+                  <button class="mdl-button mdl-js-button" disabled>
                     <img src={{configs.cards.DiscoverCard.image}}/>
                   </button>
                   {{/if}} {{#if DinersClub}}
-                  <button class="mdl-button mdl-js-button ">
+                  <button class="mdl-button mdl-js-button " disabled>
                     <img src={{configs.cards.DinersClub.image}}/>
                   </button>
                   {{/if}} {{#if JCB}}
-                  <button class="mdl-button mdl-js-button">
+                  <button class="mdl-button mdl-js-button" disabled>
                     <img src={{configs.cards.JCB.image}}/>
                   </button>
                   {{/if}}
@@ -309,7 +309,7 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
                     value=configs.cardInfo.name.value keyUp=(action myAction configs.cardInfo.name.name configs.cardInfo.name.value)
                     }}
                     <!-- VSCode v. Handlebars-->
-                    {{#if configs.valid.show}}
+                    {{#if configs.valid.nameWarning}}
                     <div style="color:red; font-size: .8em">
                       This field is required.
                     </div>
@@ -321,9 +321,15 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
                     value=configs.cardInfo.expiry.value keyUp=(action myAction configs.cardInfo.expiry.name configs.cardInfo.expiry.value)
                     }}
                     <!-- VSCode v. Handlebars-->
-                    {{#if configs.valid.show}}
+                    {{#if configs.valid.expirationDateWarning}}
                     <div style="color:red; font-size: .8em">
                       This field is required.
+                    </div>
+                    {{/if }}
+                    <!-- VSCode v. Handlebars-->
+                    {{#if configs.valid.expirationDateWarning}}
+                    <div style="color:red; font-size: .8em">
+                      Valid expiration date required.
                     </div>
                     {{/if }}
                     <div></div>
@@ -333,7 +339,7 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
                     value=configs.cardInfo.cvc.value keyUp=(action myAction configs.cardInfo.cvc.name configs.cardInfo.cvc.value)
                     }}
                     <!-- VSCode v. Handlebars-->
-                    {{#if configs.valid.show}}
+                    {{#if configs.valid.cvvWarning}}
                     <div style="color:red; font-size: .8em">
                       {{configs.valid.numberValidation.card.niceType}} cards must be {{configs.valid.cvvLengths}} digits.
                     </div>

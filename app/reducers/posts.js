@@ -76,40 +76,55 @@ const initialState = {
       wallet: false,
       AlternativePayments: false,
     },
-
-
-    Minimum: {
-      name: "Minimum",
-      Visa: false,
-      MasterCard: false,
-      AmericanExpress: false,
-      DiscoverCard: false,
-      DinersClub: false,
-      JCB: false,
-      CVC: false,
-      nameOnCard: false,
-      billMeToggle: false,
-      billMe: false,
-      credit: false,
-      wallet: false,
-      AlternativePayments: false,
-    },
-    All: {
-      name: "All",
+    "VISA, MasterCard, American Express, Discover, Bill-me": {
+      name: "VISA, MasterCard, American Express, Discover, Bill-me",
       Visa: true,
       MasterCard: true,
       AmericanExpress: true,
       DiscoverCard: true,
-      DinersClub: true,
-      JCB: true,
+      DinersClub: false,
+      JCB: false,
       CVC: true,
       nameOnCard: true,
       billMeToggle: true,
-      billMe: true,
+      billMe: false,
       credit: true,
-      wallet: true,
-      AlternativePayments: true,
-    }
+      wallet: false,
+      AlternativePayments: false,
+    },
+    "VISA, MasterCard, American Express, Bill-me": {
+      name: "VISA, MasterCard, American Express, Bill-me",
+      Visa: true,
+      MasterCard: true,
+      AmericanExpress: true,
+      DiscoverCard: false,
+      DinersClub: false,
+      JCB: false,
+      CVC: true,
+      nameOnCard: true,
+      billMeToggle: true,
+      billMe: false,
+      credit: true,
+      wallet: false,
+      AlternativePayments: false,
+    },
+    "VISA, MasterCard, Discover, Bill-me": {
+      name: "VISA, MasterCard, Discover, Bill-me",
+      Visa: true,
+      MasterCard: true,
+      AmericanExpress: false,
+      DiscoverCard: true,
+      DinersClub: false,
+      JCB: false,
+      CVC: true,
+      nameOnCard: true,
+      billMeToggle: true,
+      billMe: false,
+      credit: true,
+      wallet: false,
+      AlternativePayments: false,
+    },
+
   },
   configs: {
     cards: {
@@ -149,15 +164,18 @@ const initialState = {
       },
       name: {
         placeholder: 'Name on Credit Card',
-        name: 'name'
+        name: 'name',
+        value: ''
       },
       expiry: {
         placeholder: 'Expiration Date (MM/YY)',
-        name: 'expiry'
+        name: 'expiry',
+        value: ''
       },
       cvc: {
         placeholder: 'CVC',
-        name: 'cvc'
+        name: 'cvc',
+        value: ''
       }
     },
   }
