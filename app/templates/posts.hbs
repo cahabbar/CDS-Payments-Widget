@@ -5,7 +5,7 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
   <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">Configuration</span>
-    <select style=" margin: 5%" onchange={{action setSelectedConfig value="target.value" }}>
+    <select style="width:90%; margin: 5%" onchange={{action setSelectedConfig value="target.value" }}>
       {{#each-in savedConfigs as |key config|}}
       <option value={{config.name}} selected={{eq config.name selectedConfig}}>{{config.name}}</option>
       {{/each-in}}
