@@ -40,25 +40,32 @@ const stateToComputed = state => {
 
   const cardToggle = AmericanExpress || DinersClub || DiscoverCard || JCB || MasterCard || Visa;
   const widgetToggle = wallet || AlternativePayments || cardToggle;
-  const filteredPostsBoolRes=filteredPostsBool(state);
+  const filteredPostsBoolRes = filteredPostsBool(state);
   const cardCard = filteredPostsBoolRes.cardInfo;
   const cardCardNumber = cardCard.number;
   const numNoSpaces = cardCardNumber.value.replace(/ /g, "");
   const numberValidation = cardNumber(numNoSpaces);
   const expiration = cardCard.expiry.value
   const cvv = cardCard.cvc.value
+  const acceptedCards = [
+    Visa && 'visa',
+    MasterCard && 'master-card',
+    AmericanExpress && 'american-express',
+    DiscoverCard && 'discover'
+  ].filter(c => !!c)
 
   const valid = {
     numNoSpaces,
     numberValidation,
-    show: !!numberValidation.card && !numberValidation.isValid,
+    show: (!!numberValidation.card && !numberValidation.isValid) || numberValidation.card && !(acceptedCards.indexOf(numberValidation.card.type) >= 0),
     numberLengths: numberValidation.card ? numberValidation.card.lengths.toString() : '',
-    cvvLengths: numberValidation.card ? numberValidation.card.code.size: '',
+    cvvLengths: numberValidation.card ? numberValidation.card.code.size : '',
     nameWarning: numberValidation.card && !cardCard.name.value,
     expirationDateWarning: numberValidation.card && !expirationDate(expiration).isValid,
     validExpiration: expirationDate(expiration),
     cvvWarning: numberValidation.card && !validCvv(cvv).isValid,
-    billMeDisabled:  !!numberValidation.card,
+    billMeDisabled: !!numberValidation.card,
+    notAcceptedCardsString: numberValidation.card && !(acceptedCards.indexOf(numberValidation.card.type) >= 0),
   };
   const configs = { ...filteredPostsBoolRes, valid };
   return {

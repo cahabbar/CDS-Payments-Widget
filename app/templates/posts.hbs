@@ -191,7 +191,7 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
     <div class="page-content">
       {{#if widgetToggle }}
       <div style="margin-left: 20%;margin-top: 50px; width:100%" class="demo-card-wide mdl-card mdl-shadow--0dp">
-        <ul class="demo-list-item mdl-list" style="width:70%">
+        <ul class="demo-list-item mdl-list" style="width:50%">
 
           {{#if wallet}}
           <li class="mdl-list__item" style="padding:1%">
@@ -300,6 +300,9 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
                     <div style="color:red; font-size: .8em">
                       This field is required.
                       <br/>{{configs.valid.numberValidation.card.niceType}} cards must be {{configs.valid.numberLengths}} long.
+                      {{#if configs.valid.notAcceptedCardsString }}
+                      <br/>{{configs.valid.numberValidation.card.niceType}} is not an accepted card.
+                      {{/if }}
                     </div>
                     {{/if }}
                     <!-- VSCode v. Handlebars-->

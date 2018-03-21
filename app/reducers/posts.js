@@ -14,8 +14,8 @@ const initialState = {
   MasterCard: true,
   AmericanExpress: true,
   DiscoverCard: true,
-  DinersClub: true,
-  JCB: true,
+  DinersClub: false,
+  JCB: false,
   CVC: true,
   nameOnCard: true,
   billMeToggle: false,
@@ -160,7 +160,7 @@ const initialState = {
       number: {
         placeholder: 'Card Number',
         name: 'number',
-        value: '4012888888881881'
+        value: ''
       },
       name: {
         placeholder: 'Name on Credit Card',
