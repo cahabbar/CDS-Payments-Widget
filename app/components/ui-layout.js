@@ -66,6 +66,7 @@ const stateToComputed = state => {
     cvvWarning: numberValidation.card && !validCvv(cvv).isValid,
     billMeDisabled: !!numberValidation.card,
     notAcceptedCardsString: numberValidation.card && !(acceptedCards.indexOf(numberValidation.card.type) >= 0),
+    demo:"display:none"
   };
   const configs = { ...filteredPostsBoolRes, valid };
   return {

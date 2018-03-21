@@ -3,7 +3,7 @@ wallet billMeToggle billMe AlternativePayments savedConfigs selectedConfig newCo
 toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
 <!-- The drawer is always open in large screens. The header is always shown, even in small screens. -->
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-  <div class="mdl-layout__drawer">
+  <div class="mdl-layout__drawer" style={{configs.valid.demo}}>
     <span class="mdl-layout-title">Configuration</span>
     <select style="width:90%; margin: 5%" onchange={{action setSelectedConfig value="target.value" }}>
       {{#each-in savedConfigs as |key config|}}
@@ -301,8 +301,7 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
                       This field is required.
                       <br/>{{configs.valid.numberValidation.card.niceType}} cards must be {{configs.valid.numberLengths}} long.
                       {{#if configs.valid.notAcceptedCardsString }}
-                      <br/>{{configs.valid.numberValidation.card.niceType}} is not an accepted card.
-                      {{/if }}
+                      <br/>{{configs.valid.numberValidation.card.niceType}} is not an accepted card. {{/if }}
                     </div>
                     {{/if }}
                     <!-- VSCode v. Handlebars-->
@@ -351,8 +350,8 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
                     {{/if}}
                   </div>
                   <!-- VSCode v. Handlebars-->
-                  {{#if billMeToggle}}
-                  {{input type="checkbox" class="mdl-switch__input" checked=billMe click=(action toggle 'billMe' billMe) disabled=configs.valid.billMeDisabled}}
+                  {{#if billMeToggle}} {{input type="checkbox" class="mdl-switch__input" checked=billMe click=(action toggle 'billMe' billMe)
+                  disabled=configs.valid.billMeDisabled}}
                   <span style="margin:0 5%">
                     Bill Me Later
                   </span>
