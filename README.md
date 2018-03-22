@@ -1,10 +1,33 @@
 # cds-payments-widget
 [demo.cds-payments.surge.sh](http://demo.cds-payments.surge.sh/) 
+[cdsglobal.github.io/CDS-Payments-Widget/](https://cdsglobal.github.io/CDS-Payments-Widget/) 
 
 
 [UI](https://getmdl.io/) 
 
+## Getting Started
+To use CDSGPW you need four things: 
+- A div with the id of "CDSGPW":
+```
+<div id="CDSGPW"></div>
+```
+- Link tag for CSS:
+```
+  <link rel="stylesheet" href="/app.css"> 
+```
+- Script tag for JS:
+```
+  <script src="/app.js"></script>
+```
+- Meta tag for containing configs:
+```
+<meta name="cds-payments-widget/config/environment" content="" />
+```
+Latest assets with finger prints can be found here: [github docs](https://github.com/CDSGlobal/CDS-Payments-Widget/tree/master/docs)
 
+See Example : [Payments REPL](https://repl.it/@joshmccall221/Payments)
+
+## Ember 
 This README outlines the details of collaborating on this Ember application.
 A short introduction of this app could easily go here.
 
