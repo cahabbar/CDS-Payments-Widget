@@ -20,11 +20,9 @@ To use CDSGPW you need four things:
 ```
 Latest assets with finger prints can be found here: [github docs](https://github.com/CDSGlobal/CDS-Payments-Widget/tree/master/docs)
 
-See Example : 
+See Example : [Payments REPL](https://repl.it/@joshmccall221/Payments)
 
-[Payments REPL](https://repl.it/@joshmccall221/Payments)
-
-## notes / libraries
+## Notes / Libraries
 [demo.cds-payments.surge.sh](http://demo.cds-payments.surge.sh/) 
 [cdsglobal.github.io/CDS-Payments-Widget/](https://cdsglobal.github.io/CDS-Payments-Widget/) 
 [UI: MDL](https://getmdl.io/) 
