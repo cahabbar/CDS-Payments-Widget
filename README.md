@@ -24,7 +24,9 @@ See Example : [Payments REPL](https://repl.it/@joshmccall221/Payments)
 
 ## Notes / Libraries
 [demo.cds-payments.surge.sh](http://demo.cds-payments.surge.sh/) 
+
 [cdsglobal.github.io/CDS-Payments-Widget/](https://cdsglobal.github.io/CDS-Payments-Widget/) 
+
 [UI: MDL](https://getmdl.io/) 
 
 ## Ember 
