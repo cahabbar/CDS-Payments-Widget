@@ -15,7 +15,7 @@ module.exports = function (defaults) {
       }
     },
     fingerprint: {
-      prepend: 'https://cdn.rawgit.com/CDSPW/CDS-Payments-Widget-Ember/master/docs/'
+      prepend: 'https://cdn.rawgit.com/CDSGlobal/CDS-Payments-Widget/master/docs/'
     },
     babel: {
       plugins: [
