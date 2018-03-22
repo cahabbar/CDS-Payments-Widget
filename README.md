@@ -1,9 +1,4 @@
 # cds-payments-widget
-[demo.cds-payments.surge.sh](http://demo.cds-payments.surge.sh/) 
-[cdsglobal.github.io/CDS-Payments-Widget/](https://cdsglobal.github.io/CDS-Payments-Widget/) 
-
-
-[UI](https://getmdl.io/) 
 
 ## Getting Started
 To use CDSGPW you need four things: 
@@ -25,7 +20,14 @@ To use CDSGPW you need four things:
 ```
 Latest assets with finger prints can be found here: [github docs](https://github.com/CDSGlobal/CDS-Payments-Widget/tree/master/docs)
 
-See Example : [Payments REPL](https://repl.it/@joshmccall221/Payments)
+See Example : 
+
+[Payments REPL](https://repl.it/@joshmccall221/Payments)
+
+## notes / libraries
+[demo.cds-payments.surge.sh](http://demo.cds-payments.surge.sh/) 
+[cdsglobal.github.io/CDS-Payments-Widget/](https://cdsglobal.github.io/CDS-Payments-Widget/) 
+[UI: MDL](https://getmdl.io/) 
 
 ## Ember 
 This README outlines the details of collaborating on this Ember application.
