@@ -15,6 +15,7 @@ npm i -g surge ember-cli
 rm -rf dist docs;
 ember build --environment=production;
 mv dist docs;
+cp ./vendor/cds-process.min.js ./docs
 git add docs -f;
 git commit -am "prod build";
 git push;
