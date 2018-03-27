@@ -4,6 +4,7 @@ import Ember from 'ember';
 import cardNumber from 'src/card-number';
 import expirationDate from 'src/expiration-date';
 import validCvv from 'src/cvv';
+//import getCardType from 'credit-card-type';
 
 
 // console.log(
@@ -66,7 +67,11 @@ const stateToComputed = state => {
     cvvWarning: numberValidation.card && !validCvv(cvv).isValid,
     billMeDisabled: !!numberValidation.card,
     notAcceptedCardsString: numberValidation.card && !(acceptedCards.indexOf(numberValidation.card.type) >= 0),
-    demo:"display:none"
+    demo:"display:none",
+    visaStyle: !numberValidation.card || (numberValidation.card && numberValidation.card.type === 'visa') ? 'padding:0;':'padding:0;opacity: 0.4; filter: alpha(opacity=40);',
+    masterStyle: !numberValidation.card || (numberValidation.card && numberValidation.card.type === 'master-card') ? 'padding:0;':'padding:0;opacity: 0.4; filter: alpha(opacity=40);',
+    americanStyle: !numberValidation.card || (numberValidation.card && numberValidation.card.type === 'american-express') ? 'padding:0;':'padding:0;opacity: 0.4; filter: alpha(opacity=40);',
+    discoverStyle: !numberValidation.card || (numberValidation.card && numberValidation.card.type === 'discover') ? 'padding:0;':'padding:0;opacity: 0.4; filter: alpha(opacity=40);',
   };
   const configs = { ...filteredPostsBoolRes, valid };
   return {

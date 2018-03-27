@@ -58,26 +58,36 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}} {{#if widgetToggle }
                 -->
           <div style="margin-bottom: 10px">
             {{#if Visa}}
-            <button class="mdl-button mdl-js-button" disabled style="padding:0">
+            <button class="mdl-button mdl-js-button" disabled style={{configs.valid.visaStyle}}>
               <img src={{configs.cards.Visa.image}}/>
             </button>
-            {{/if}} {{#if MasterCard}}
-            <button class="mdl-button mdl-js-button" disabled style="padding:0">
+            {{/if}} 
+            <!---->
+            {{#if MasterCard}}
+            <button class="mdl-button mdl-js-button" disabled style={{configs.valid.masterStyle}}>
               <img src={{configs.cards.MasterCard.image}}/>
             </button>
-            {{/if}} {{#if AmericanExpress}}
-            <button class="mdl-button mdl-js-button" disabled style="padding:0">
+            {{/if}} 
+            <!---->
+            {{#if AmericanExpress}}
+            <button class="mdl-button mdl-js-button" disabled style={{configs.valid.americanStyle}}>
               <img src={{configs.cards.AmericanExpress.image}}/>
             </button>
-            {{/if}} {{#if DiscoverCard}}
-            <button class="mdl-button mdl-js-button" disabled style="padding:0">
+            {{/if}} 
+            <!---->
+            {{#if DiscoverCard}}
+            <button class="mdl-button mdl-js-button" disabled style={{configs.valid.discoverStyle}}>
               <img src={{configs.cards.DiscoverCard.image}}/>
             </button>
-            {{/if}} {{#if DinersClub}}
+            {{/if}} 
+            <!---->
+            {{#if DinersClub}}
             <button class="mdl-button mdl-js-button " disabled style="padding:0">
               <img src={{configs.cards.DinersClub.image}}/>
             </button>
-            {{/if}} {{#if JCB}}
+            {{/if}} 
+            <!---->
+            {{#if JCB}}
             <button class="mdl-button mdl-js-button" disabled style="padding:0">
               <img src={{configs.cards.JCB.image}}/>
             </button>
