@@ -211,65 +211,36 @@ export default function posts(state, action) {
     }
     case 'myAction': {
       logme('case myAction')
-      //cdsEncryption();
-      //console.log(
-      //  '\nccnumber',
-      //  //window.CDS.cdsProcess.call(jQuery('input[id = "cc-number"]')[0], ["jjjjj",'kkk']),
-      //  '\nccnumber'
-      //)
-      //if (jQuery('input[id = "cc-number"]')[0].value.length <= 16){
-      //  jQuery('#cipher')[0].value = ''
-      //  jQuery('#cardType')[0].value = ''
-      //  jQuery('#responseCode')[0].value = ''
 
-      //}
-      //if (jQuery('input[id = "cc-number"]')[0].value.length == 1) {
-      //  console.log('\nhere')
-      //  jQuery('#cc-number')[0].setAttribute('data-cds', 'ccNumber')
-      //  window.CDS.cdsProcess.call(jQuery('input[id = "cc-number"]')[0], "formatCardNumber")
-      //}
-      // Ember.$.ajax('http://localhost:8001/', {
-      //   type: 'POST',
-      //   dataType: 'json',
-      //   data: JSON.stringify({
-      //     "user": {
-      //       "name": this.get('nameInput'),
-      //       "email": this.get('emailInput'), // you're getting this property from the controller now
-      //       "password": this.get('passwordInput'),
-      //       "password_confirmation": this.get('passwordConfirmationInput'),
-      //     },
-      //     "AZ":{
+      console.log('myAction', { state }, { action }, '\n\n\nmyAction')
+      const { configs } = state;
+      const { cardInfo } = configs;
+      const update = cardInfo[action.m[0]]
 
-
-      //     }
-      //   }),
-      //   // context: this,
-      //   success: function(data) {
-      //     // var artist = App.Artist.createRecord(data);
-      //     // this.modelFor('artists').pushObject(artist);
-      //     // this.get('controller').set('newName', '');
-      //     // this.transitionTo('artists.songs', artist);
-      //   },
-      //   error: function() {
-      //     alert('Failed to save artist');
-      //   }
-      // });
-      console.log("Value of CDS.cdsProcess.cdsResponse "
-      + CDS.cdsProcess.cdsResponse.respCode + " "
-      + CDS.cdsProcess.cdsResponse.cardType + " "
-      + CDS.cdsProcess.cdsResponse.cipher);
-
-
-
-      console.log('\n\n\nmyAction', action.m[0], action.m[1], '\n\n\nmyAction')
-      const stateToRet = Object.assign({}, state, ...{
-        configs: {
-          cardInfo: {
-            [action.m[0]]: action.m[1],
+      const stateToRet = {
+        ...state,
+        ...{
+          configs: {
+            ...configs,
+            cardInfo: {
+              ...cardInfo,
+              ...{
+                [action.m[0]]: {
+                  ...update,
+                  value: action.m[2].target.value,
+                  touched: true
+                }
+              }
+            }
           }
         }
-      });
-      //console.log('\n\n\n stateToRet', action.m[0], action.m[1], '\n\n\nstate')
+      }
+      console.log('\n\n\n stateToRet',
+        'action.m[0]', action.m[0],
+        'action.m[1]', action.m[1],
+        'action.m[2].target.value', action.m[2].target.value,
+        '\nstateToRet', { stateToRet },
+        '\nstate\n\n')
       return stateToRet;
     }
     case 'toggle': {

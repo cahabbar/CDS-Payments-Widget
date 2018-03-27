@@ -58,7 +58,7 @@ const stateToComputed = state => {
   const valid = {
     numNoSpaces,
     numberValidation,
-    show: (!!numberValidation.card && !numberValidation.isValid) || numberValidation.card && !(acceptedCards.indexOf(numberValidation.card.type) >= 0),
+    showNumberValidation: (!!numberValidation.card && !numberValidation.isValid) || numberValidation.card && !(acceptedCards.indexOf(numberValidation.card.type) >= 0),
     numberLengths: numberValidation.card ? numberValidation.card.lengths.toString() : '',
     cvvLengths: numberValidation.card ? numberValidation.card.code.size : '',
     nameWarning: numberValidation.card && !cardCard.name.value,

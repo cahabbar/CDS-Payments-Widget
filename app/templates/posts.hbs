@@ -61,31 +61,31 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}} {{#if widgetToggle }
             <button class="mdl-button mdl-js-button" disabled style={{configs.valid.visaStyle}}>
               <img src={{configs.cards.Visa.image}}/>
             </button>
-            {{/if}} 
+            {{/if}}
             <!---->
             {{#if MasterCard}}
             <button class="mdl-button mdl-js-button" disabled style={{configs.valid.masterStyle}}>
               <img src={{configs.cards.MasterCard.image}}/>
             </button>
-            {{/if}} 
+            {{/if}}
             <!---->
             {{#if AmericanExpress}}
             <button class="mdl-button mdl-js-button" disabled style={{configs.valid.americanStyle}}>
               <img src={{configs.cards.AmericanExpress.image}}/>
             </button>
-            {{/if}} 
+            {{/if}}
             <!---->
             {{#if DiscoverCard}}
             <button class="mdl-button mdl-js-button" disabled style={{configs.valid.discoverStyle}}>
               <img src={{configs.cards.DiscoverCard.image}}/>
             </button>
-            {{/if}} 
+            {{/if}}
             <!---->
             {{#if DinersClub}}
             <button class="mdl-button mdl-js-button " disabled style="padding:0">
               <img src={{configs.cards.DinersClub.image}}/>
             </button>
-            {{/if}} 
+            {{/if}}
             <!---->
             {{#if JCB}}
             <button class="mdl-button mdl-js-button" disabled style="padding:0">
@@ -106,17 +106,12 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}} {{#if widgetToggle }
                       <br/> {{#if (cc-luhn configs.valid.numNoSpaces)}} Valid: True {{else}} Valid: False {{/if}}
                       -->
               </div>
-              {{input id="cc-number" data-cds="ccNumber" class="mdl-textfield__input" type="text" placeholder=configs.cardInfo.number.placeholder
-              name=configs.cardInfo.number.name value=configs.cardInfo.number.value keyUp=(action myAction configs.cardInfo.number.name
-              configs.cardInfo.number.value) }}
-              <!-- VSCode v. Handlebars-->
-              {{log 'configs' configs}}
-              <!-- VSCode v. Handlebars-->
-              {{log 'valid object' configs.valid }}
-              <!-- VSCode v. Handlebars-->
-              {{log 'numNoSpace' configs.valid.numNoSpaces}}
-              <!-- VSCode v. Handlebars-->
-              {{#if configs.valid.show}}
+              <input id="cc-number" data-cds="ccNumber" class="mdl-textfield__input" type="text" placeholder={{configs.cardInfo.number.placeholder}}
+                name={{configs.cardInfo.number.name}} value={{configs.cardInfo.number.value}} 
+                onfocus={{action myAction configs.cardInfo.number.name configs.cardInfo.number.value}}
+                oninput={{action myAction configs.cardInfo.number.name configs.cardInfo.number.value}}
+                >
+              {{#if configs.valid.showNumberValidation}}
               <div style="color:red; font-size: .8em">
                 This field is required.
                 <br/>{{configs.valid.numberValidation.card.niceType}} cards must be {{configs.valid.numberLengths}} long. {{#if
@@ -127,9 +122,13 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}} {{#if widgetToggle }
               <!-- VSCode v. Handlebars-->
               {{#if nameOnCard}}
               <!-- VSCode v. Handlebars-->
-              {{input class="mdl-textfield__input" type="text" placeholder=configs.cardInfo.name.placeholder name=configs.cardInfo.name.name
-              value=configs.cardInfo.name.value keyUp=(action myAction configs.cardInfo.name.name configs.cardInfo.name.value)
-              }}
+              <input class="mdl-textfield__input" type="text" 
+                placeholder={{configs.cardInfo.name.placeholder }}
+                name={{configs.cardInfo.name.name}}
+                value={{configs.cardInfo.name.value}} 
+                onfocus={{action myAction configs.cardInfo.name.name configs.cardInfo.name.value}}
+                oninput={{action myAction configs.cardInfo.name.name configs.cardInfo.name.value}}
+              > 
               <!-- VSCode v. Handlebars-->
               {{#if configs.valid.nameWarning}}
               <div style="color:red; font-size: .8em">
@@ -139,9 +138,15 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}} {{#if widgetToggle }
               <!-- VSCode v. Handlebars-->
               {{/if }}
               <!-- VSCode v. Handlebars-->
-              {{input class="mdl-textfield__input" type="text" placeholder=configs.cardInfo.expiry.placeholder name=configs.cardInfo.expiry.name
-              value=configs.cardInfo.expiry.value keyUp=(action myAction configs.cardInfo.expiry.name configs.cardInfo.expiry.value)
-              }}
+              <input 
+                class="mdl-textfield__input" 
+                type="text" 
+                placeholder={{configs.cardInfo.expiry.placeholder}}
+                name={{configs.cardInfo.expiry.name}}
+                value={{configs.cardInfo.expiry.value}}
+                oninput={{action myAction configs.cardInfo.expiry.name configs.cardInfo.expiry.value}}
+                onfocus={{action myAction configs.cardInfo.expiry.name configs.cardInfo.expiry.value}}
+              > 
               <!-- VSCode v. Handlebars-->
               {{#if configs.valid.expirationDateWarning}}
               <div style="color:red; font-size: .8em">
@@ -157,9 +162,14 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}} {{#if widgetToggle }
               <div></div>
               {{#if CVC}}
               <!-- VSCode v. Handlebars-->
-              {{input class="mdl-textfield__input" type="text" placeholder=configs.cardInfo.cvc.placeholder name=configs.cardInfo.cvc.name
-              value=configs.cardInfo.cvc.value keyUp=(action myAction configs.cardInfo.cvc.name configs.cardInfo.cvc.value)
-              }}
+              <input 
+                class="mdl-textfield__input" type="text" 
+                placeholder={{configs.cardInfo.cvc.placeholder}} 
+                name={{configs.cardInfo.cvc.name}}
+                value={{configs.cardInfo.cvc.value}}
+                oninput={{action myAction configs.cardInfo.cvc.name configs.cardInfo.cvc.value}}
+                onfocus={{action myAction configs.cardInfo.cvc.name configs.cardInfo.cvc.value}}
+              > 
               <!-- VSCode v. Handlebars-->
               {{#if configs.valid.cvvWarning}}
               <div style="color:red; font-size: .8em">
@@ -369,7 +379,7 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}} {{#if widgetToggle }
           </td>
         </tr>
       </tbody>
-    </table> 
+    </table>
   </div>
   <main style="width:100%; height:1500px; margin-left:50px" class="mdl-layout__content">
     <div class="page-content">
