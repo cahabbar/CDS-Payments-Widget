@@ -161,7 +161,7 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}} {{#if widgetToggle }
               {{/if }}
               <div></div>
               {{#if CVC}}
-              <!-- VSCode v. Handlebars-->
+              <!-- VSCode v. Handlebars
               <input 
                 class="mdl-textfield__input" type="text" 
                 placeholder={{configs.cardInfo.cvc.placeholder}} 
@@ -170,11 +170,13 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}} {{#if widgetToggle }
                 oninput={{action myAction configs.cardInfo.cvc.name configs.cardInfo.cvc.value}}
                 onfocus={{action myAction configs.cardInfo.cvc.name configs.cardInfo.cvc.value}}
               > 
-              <!-- VSCode v. Handlebars-->
+              -->
+              <!-- VSCode v. Handlebars
               {{#if configs.valid.cvvWarning}}
               <div style="color:red; font-size: .8em">
                 {{configs.valid.numberValidation.card.niceType}} cards must be {{configs.valid.cvvLengths}} digits.
               </div>
+              -->
               {{/if }}
               <!-- VSCode v. Handlebars-->
               {{/if}}
