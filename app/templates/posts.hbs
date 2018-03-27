@@ -1,6 +1,182 @@
 {{#ui-layout class="container" as | configs Visa MasterCard AmericanExpress DiscoverCard DinersClub JCB cardToggle CVC nameOnCard
 wallet billMeToggle billMe AlternativePayments savedConfigs selectedConfig newConfigName widgetToggle filter filterWith myAction
 toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
+      {{#if widgetToggle }}
+      <div  class="demo-card-wide mdl-card mdl-shadow--0dp">
+        <ul class="demo-list-item mdl-list" style="width:350px">
+
+          {{#if wallet}}
+          <li class="mdl-list__item" style="padding:1%">
+            <!--<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--fab"> 1 </button>-->
+            <div style="width:100%;  margin: 0" class="demo-card-wide mdl-card mdl-shadow--4dp">
+              <div class="mdl-card__title">
+                <h2 style="width:50%;  margin:5% 0 0 0" class="mdl-card__title-text">Your Wallet:</h2>
+              </div>
+              <select style="width:50%; margin:0 25%">
+                <option value='Visa'>Visa ending in 4433</option>
+                <option value='Visa'>Master Card ending in 3323</option>
+                <option value='Visa'>Add a new payment method...</option>
+              </select>
+            </div>
+          </li>
+          {{/if}} {{#if AlternativePayments}}
+          <li class="mdl-list__item" style="padding:1%">
+            <div style="width:100%; height: 100px; margin:0%" class="demo-card-wide mdl-card mdl-shadow--4dp">
+              <div style=" margin:5% " class="mdl-card__supporting-text">
+                <button class=" mdl-button mdl-js-button">
+                  <img height="100%" src="https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/apple-pay.png" /> Apple Pay
+                </button>
+                <button class="mdl-button mdl-js-button">
+                  <img height="100%" src="https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/amazon-pay.png" /> Pay Pal
+                </button>
+                <button style="" class="mdl-button mdl-js-button">
+                  <img height="100%" src="https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/amazon-pay.png" /> Amazon Pay
+                </button>
+                <br/>
+                <br/>
+                <div>
+                  (you will be prompted to sign in to complete the payment process)
+                </div>
+              </div>
+            </div>
+          </li>
+          {{/if}}
+          <div></div>
+          {{#if cardToggle}}
+          <li class="mdl-list__item" style="padding:1%">
+            <!-- <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--fab"> 2 </button>-->
+            <div style="width:100%; margin:0%" class="demo-card-wide mdl-card mdl-shadow--4dp">
+              <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text"></h2>
+              </div>
+              <div class="mdl-card__supporting-text">
+                <!--
+                {{#each-in configs.cards as |key card|}}
+                <button class="mdl-button mdl-js-button mdl-button--raised">
+                  {{card.niceType}}
+                </button>
+                {{/each-in}}
+                -->
+                <div style="margin-bottom: 10px">
+                  {{#if Visa}}
+                  <button class="mdl-button mdl-js-button" disabled style="padding:0">
+                    <img src={{configs.cards.Visa.image}}/>
+                  </button>
+                  {{/if}} {{#if MasterCard}}
+                  <button class="mdl-button mdl-js-button" disabled style="padding:0">
+                    <img src={{configs.cards.MasterCard.image}}/>
+                  </button>
+                  {{/if}} {{#if AmericanExpress}}
+                  <button class="mdl-button mdl-js-button" disabled style="padding:0">
+                    <img src={{configs.cards.AmericanExpress.image}}/>
+                  </button>
+                  {{/if}} {{#if DiscoverCard}}
+                  <button class="mdl-button mdl-js-button" disabled style="padding:0">
+                    <img src={{configs.cards.DiscoverCard.image}}/>
+                  </button>
+                  {{/if}} {{#if DinersClub}}
+                  <button class="mdl-button mdl-js-button " disabled style="padding:0">
+                    <img src={{configs.cards.DinersClub.image}}/>
+                  </button>
+                  {{/if}} {{#if JCB}}
+                  <button class="mdl-button mdl-js-button" disabled style="padding:0">
+                    <img src={{configs.cards.JCB.image}}/>
+                  </button>
+                  {{/if}}
+                </div>
+                <!---->
+                {{#credit-card form="#my-form" width=200 formatting=true}}
+                <form id='my-form' class='payment-info'>
+                  <div style="width:100%; padding-top:0" class="mdl-textfield mdl-js-textfield">
+                    <div>
+                      <!-- Type : -->
+                      <!-- LOGO
+                      <span class="logo {{cc-number-to-type configs.cardInfo.number.value allowedTypes='visa|mastercard|amex|discover'}}"></span>
+                      -->
+                      <!-- TEXT
+                      {{cc-number-to-type configs.cardInfo.number.value allowedTypes='visa|mastercard|amex|discover'}}
+                      <br/> {{#if (cc-luhn configs.valid.numNoSpaces)}} Valid: True {{else}} Valid: False {{/if}}
+                      -->
+                    </div>
+                    {{input id="cc-number" data-cds="ccNumber" class="mdl-textfield__input" type="text" placeholder=configs.cardInfo.number.placeholder
+                    name=configs.cardInfo.number.name value=configs.cardInfo.number.value keyUp=(action myAction configs.cardInfo.number.name
+                    configs.cardInfo.number.value) }}
+                    <!-- VSCode v. Handlebars-->
+                    {{log 'configs' configs}}
+                    <!-- VSCode v. Handlebars-->
+                    {{log 'valid object' configs.valid }}
+                    <!-- VSCode v. Handlebars-->
+                    {{log 'numNoSpace' configs.valid.numNoSpaces}}
+                    <!-- VSCode v. Handlebars-->
+                    {{#if configs.valid.show}}
+                    <div style="color:red; font-size: .8em">
+                      This field is required.
+                      <br/>{{configs.valid.numberValidation.card.niceType}} cards must be {{configs.valid.numberLengths}} long.
+                      {{#if configs.valid.notAcceptedCardsString }}
+                      <br/>{{configs.valid.numberValidation.card.niceType}} is not an accepted card. {{/if }}
+                    </div>
+                    {{/if }}
+                    <!-- VSCode v. Handlebars-->
+                    {{#if nameOnCard}}
+                    <!-- VSCode v. Handlebars-->
+                    {{input class="mdl-textfield__input" type="text" placeholder=configs.cardInfo.name.placeholder name=configs.cardInfo.name.name
+                    value=configs.cardInfo.name.value keyUp=(action myAction configs.cardInfo.name.name configs.cardInfo.name.value)
+                    }}
+                    <!-- VSCode v. Handlebars-->
+                    {{#if configs.valid.nameWarning}}
+                    <div style="color:red; font-size: .8em">
+                      This field is required.
+                    </div>
+                    {{/if }}
+                    <!-- VSCode v. Handlebars-->
+                    {{/if }}
+                    <!-- VSCode v. Handlebars-->
+                    {{input class="mdl-textfield__input" type="text" placeholder=configs.cardInfo.expiry.placeholder name=configs.cardInfo.expiry.name
+                    value=configs.cardInfo.expiry.value keyUp=(action myAction configs.cardInfo.expiry.name configs.cardInfo.expiry.value)
+                    }}
+                    <!-- VSCode v. Handlebars-->
+                    {{#if configs.valid.expirationDateWarning}}
+                    <div style="color:red; font-size: .8em">
+                      This field is required.
+                    </div>
+                    {{/if }}
+                    <!-- VSCode v. Handlebars-->
+                    {{#if configs.valid.expirationDateWarning}}
+                    <div style="color:red; font-size: .8em">
+                      Valid expiration date required.
+                    </div>
+                    {{/if }}
+                    <div></div>
+                    {{#if CVC}}
+                    <!-- VSCode v. Handlebars-->
+                    {{input class="mdl-textfield__input" type="text" placeholder=configs.cardInfo.cvc.placeholder name=configs.cardInfo.cvc.name
+                    value=configs.cardInfo.cvc.value keyUp=(action myAction configs.cardInfo.cvc.name configs.cardInfo.cvc.value)
+                    }}
+                    <!-- VSCode v. Handlebars-->
+                    {{#if configs.valid.cvvWarning}}
+                    <div style="color:red; font-size: .8em">
+                      {{configs.valid.numberValidation.card.niceType}} cards must be {{configs.valid.cvvLengths}} digits.
+                    </div>
+                    {{/if }}
+                    <!-- VSCode v. Handlebars-->
+                    {{/if}}
+                  </div>
+                  <!-- VSCode v. Handlebars-->
+                  {{#if billMeToggle}} {{input type="checkbox" class="mdl-switch__input" checked=billMe click=(action toggle 'billMe' billMe)
+                  disabled=configs.valid.billMeDisabled}}
+                  <span style="margin:0 5%">
+                    Bill Me Later
+                  </span>
+                  {{/if}}
+                </form>
+                {{/credit-card}}
+              </div>
+            </div>
+          </li>
+          {{/if}}
+        </ul>
+      </div>
+      {{/if}}
 <!-- The drawer is always open in large screens. The header is always shown, even in small screens. -->
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
   <div class="mdl-layout__drawer" style={{configs.valid.demo}}>
@@ -190,6 +366,7 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
   </div>
   <main style="width:100%; height:1500px; margin-left:50px" class="mdl-layout__content">
     <div class="page-content">
+<<<<<<< HEAD
       {{#if widgetToggle }}
       <div style="margin-left: 20%;margin-top: 50px; width:100%" class="demo-card-wide mdl-card mdl-shadow--0dp">
         <ul class="demo-list-item mdl-list" style="width:50%">
@@ -404,6 +581,8 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}}
         </ul>
       </div>
       {{/if}}
+=======
+>>>>>>> 9041bf069e49eb7137c02ee2313e216d0703a76e
     </div>
   </main>
 </div>

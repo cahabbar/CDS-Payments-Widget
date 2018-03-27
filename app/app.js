@@ -4,6 +4,7 @@ import loadInitializers from 'ember-load-initializers';
 import config from './config/environment';
 
 const App = Ember.Application.extend({
+  rootElement: '#CDSGPW',
   modulePrefix: config.modulePrefix,
   podModulePrefix: config.podModulePrefix,
   Resolver
