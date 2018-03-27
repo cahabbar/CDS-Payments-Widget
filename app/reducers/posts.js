@@ -228,8 +228,40 @@ export default function posts(state, action) {
       //  jQuery('#cc-number')[0].setAttribute('data-cds', 'ccNumber')
       //  window.CDS.cdsProcess.call(jQuery('input[id = "cc-number"]')[0], "formatCardNumber")
       //}
+      // Ember.$.ajax('http://localhost:8001/', {
+      //   type: 'POST',
+      //   dataType: 'json',
+      //   data: JSON.stringify({
+      //     "user": {
+      //       "name": this.get('nameInput'),
+      //       "email": this.get('emailInput'), // you're getting this property from the controller now
+      //       "password": this.get('passwordInput'),
+      //       "password_confirmation": this.get('passwordConfirmationInput'),
+      //     },
+      //     "AZ":{
 
-      //console.log('\n\n\nmyAction', action.m[0], action.m[1], '\n\n\nmyAction')
+
+      //     }
+      //   }),
+      //   // context: this,
+      //   success: function(data) {
+      //     // var artist = App.Artist.createRecord(data);
+      //     // this.modelFor('artists').pushObject(artist);
+      //     // this.get('controller').set('newName', '');
+      //     // this.transitionTo('artists.songs', artist);
+      //   },
+      //   error: function() {
+      //     alert('Failed to save artist');
+      //   }
+      // });
+      console.log("Value of CDS.cdsProcess.cdsResponse "
+      + CDS.cdsProcess.cdsResponse.respCode + " "
+      + CDS.cdsProcess.cdsResponse.cardType + " "
+      + CDS.cdsProcess.cdsResponse.cipher);
+
+
+
+      console.log('\n\n\nmyAction', action.m[0], action.m[1], '\n\n\nmyAction')
       const stateToRet = Object.assign({}, state, ...{
         configs: {
           cardInfo: {

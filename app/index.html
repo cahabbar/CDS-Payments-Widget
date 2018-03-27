@@ -16,12 +16,17 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
     crossorigin="anonymous"></script> {{content-for "head-footer"}}
   </script>
-  <script src="https://s3.amazonaws.com/cds-tzn-test/resources/cds-process.min.js"> </script>
-  <script>
-    window.CDS_BAK = CDS;
-  </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <body>
+  <!-- <script src="https://qa-tznservice.buysub.com/gettznscript"> </script> -->
+  <!-- <script src="https://s3.amazonaws.com/cds-tzn-test/resources/cds-process.min.js"> </script>
+   <script>
+    // window.CDS_BAK = CDS;
+
+     CDS.cdsProcess.allowedCards = [ 'MC', 'VI', 'AX' , 'DI'];
+        CDS.cdsProcess.clientCode('BHG');
+  </script>  -->
+ 
+  
     <!--
     <input id="cc-number" type="text" class="cc-number" data-cds="ccNumber" required value="4012888888881881">
     <input id="cardType" type="text" placeholder="Card Type" data-cds="cardType" readonly>
@@ -32,6 +37,7 @@
     <script src="{{rootURL}}assets/vendor.js"></script>
     <script src="{{rootURL}}assets/cds-payments-widget.js"></script> {{content-for "body-footer"}}
 </head>
+<body>
 </body>
 
 </html>
