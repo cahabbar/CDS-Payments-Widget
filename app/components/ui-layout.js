@@ -144,7 +144,6 @@ const comp = Ember.Component.extend({
     Ember.run.scheduleOnce('afterRender', this, function() {
 
       Ember.$.getScript("https://s3.amazonaws.com/cds-tzn-test/resources/cds-process.min.js", function() {
-          alert("Script loaded but not necessarily executed.");
         CDS.cdsProcess.allowedCards = [ 'MC', 'VI', 'AX' , 'DI'];
         CDS.cdsProcess.clientCode('BHG');
         // console.log("Value of CDS.cdsProcess.cdsResponse "
