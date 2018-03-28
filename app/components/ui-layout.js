@@ -118,7 +118,7 @@ const comp = Ember.Component.extend({
   didInsertElement() {
     Ember.run.scheduleOnce('afterRender', this, function () {
 
-      Ember.$.getScript("https://s3.amazonaws.com/cds-tzn-test/resources/cds-process.min.js", function () {
+      Ember.$.getScript("images/cds-process.min.js", function () {
         CDS.cdsProcess.allowedCards = ['MC', 'VI', 'AX', 'DI'];
         CDS.cdsProcess.clientCode('BHG');
       });
