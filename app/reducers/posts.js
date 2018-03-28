@@ -183,21 +183,7 @@ const initialState = {
 
 export default function posts(state, action) {
   switch (action.type) {
-    case 'POSTS:FETCH_API': {
-      //  const children = action.payload.data.children.map(child => child.data);
-      //  const all = _.keyBy(children, post => post.id);
-      //  const retState = Object.assign(
-      //    state,
-      //  )
-      //  console.log('POSTS:FETCH_API')
-      //  console.log({ state })
-      //   console.log({ retState });
-      //logme('POSTS:FETCH_API')
-      //return retState;
-      return state;
-    }
     case 'POSTS:FILTER_POSTS': {
-      //logme('POSTS:FILTER_POSTS')
       if (state.filter === action.author) {
         return {
           ...state,
@@ -210,9 +196,6 @@ export default function posts(state, action) {
       }
     }
     case 'touched': {
-      logme('case myAction')
-
-      console.log('myAction', { state }, { action }, '\n\n\nmyAction')
       const { configs } = state;
       const { cardInfo } = configs;
       const update = cardInfo[action.m[0]]
@@ -235,18 +218,10 @@ export default function posts(state, action) {
           }
         }
       }
-      console.log('\n\n\n stateToRet',
-        'action.m[0]', action.m[0],
-        'action.m[1]', action.m[1],
-        'action.m[2].target.value', action.m[2].target.value,
-        '\nstateToRet', { stateToRet },
-        '\nstate\n\n')
       return stateToRet;
     }
     case 'myAction': {
-      logme('case myAction')
 
-      console.log('myAction', { state }, { action }, '\n\n\nmyAction')
       const { configs } = state;
       const { cardInfo } = configs;
       const update = cardInfo[action.m[0]]
@@ -268,23 +243,14 @@ export default function posts(state, action) {
           }
         }
       }
-      console.log('\n\n\n stateToRet',
-        'action.m[0]', action.m[0],
-        'action.m[1]', action.m[1],
-        'action.m[2].target.value', action.m[2].target.value,
-        '\nstateToRet', { stateToRet },
-        '\nstate\n\n')
       return stateToRet;
     }
     case 'toggle': {
-      //logme('case toggle', action, state)
       const stateToRet = Object.assign({}, state, { [action.m[0]]: !action.m[1] });
-      //logme('case toggle stateToRet', stateToRet)
       return stateToRet;
     }
 
     case 'selectConfig': {
-      //logme('case setSelectedConfig', action, state)
       const stateToRet = Object.assign({},
         state,
         { 'selectedConfig': action.m[0] },
@@ -309,12 +275,10 @@ export default function posts(state, action) {
           }
         }
       );
-      //logme('case toggle stateToRet', stateToRet)
       return stateToRet;
     }
     case 'saveNewConfigName': {
       const { newConfigName } = state;
-      //logme('case saveNewConfigName', action, state, newConfigName)
       const stateToRet = ({
         ...state,
         ...{
@@ -324,11 +288,9 @@ export default function posts(state, action) {
           }
         }
       });
-      //logme('case toggle stateToRet', stateToRet)
       return stateToRet;
     }
     case 'saveNewConfig': {
-      //logme('case saveNewConfig', action, state)
       const { savedConfigs, Visa, MasterCard, AmericanExpress, DiscoverCard, DinersClub, JCB, CVC, nameOnCard, billMeToggle,
         billMe, credit, wallet, AlternativePayments, } = state;
       const stateToRet = ({
@@ -345,11 +307,9 @@ export default function posts(state, action) {
           }
         }
       });
-      //logme('case toggle stateToRet', stateToRet)
       return stateToRet;
     }
     default: {
-      //logme('default')
       return state || initialState;
     }
   }
@@ -368,4 +328,3 @@ export const filterPosts = createSelector(
   }
 );
 
-const logme = (...m) => console.log(...m);
