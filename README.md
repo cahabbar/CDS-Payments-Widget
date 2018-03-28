@@ -1,6 +1,7 @@
 # cds-payments-widget
 
 ## Getting Started
+### Payments Widget
 To use CDSGPW you need four things: 
 - A div with the id of "CDSGPW":
 ```
@@ -21,6 +22,9 @@ To use CDSGPW you need four things:
 Latest assets with finger prints can be found here: [github docs](https://github.com/CDSGlobal/CDS-Payments-Widget/tree/master/docs)
 
 See Example : [Payments REPL](https://repl.it/@joshmccall221/Payments)
+
+### Browser Encryption Integration
+[Browser Encryption Integration](./BrowserEncryptionIntegrationSpec.pdf)
 
 ## Notes / Libraries
 [demo.cds-payments.surge.sh](http://demo.cds-payments.surge.sh/) 
