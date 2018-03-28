@@ -181,8 +181,8 @@ touched toggle setSelectedConfig saveNewConfig saveNewConfigName|}} {{#if widget
 </div>
 {{/if}}
 <!-- The drawer is always open in large screens. The header is always shown, even in small screens. -->
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-  <div class="mdl-layout__drawer" style={{configs.valid.demo}}>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header" style={{configs.valid.demo}}>
+  <div class="mdl-layout__drawer" >
     <span class="mdl-layout-title">Configuration</span>
     <select style="width:90%; margin: 5%" onchange={{action setSelectedConfig value="target.value" }}>
       {{#each-in savedConfigs as |key config|}}
