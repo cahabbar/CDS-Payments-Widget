@@ -131,29 +131,29 @@ const initialState = {
       Visa: {
         niceType: "Visa",
         type: 'vi',
-        image: "https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/visa.png",
+        image: "images/visa.png",
       },
       MasterCard: {
         niceType: "MasterCard",
         type: 'mc',
-        image: "https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/mastercard.png",
+        image: "images/mastercard.png",
       },
       AmericanExpress: {
         niceType: "AmericanExpress",
         type: '',
-        image: 'https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/americanexpress.png'
+        image: 'images/americanexpress.png'
       },
       DiscoverCard: {
         niceType: "DiscoverCard",
-        image: 'https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/discover.png'
+        image: 'images/discover.png'
       },
       DinersClub: {
         niceType: "DinersClub",
-        image: 'https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/dinersclub.png'
+        image: 'images/dinersclub.png'
       },
       JCB: {
         niceType: "JCB",
-        image: 'https://cdn.rawgit.com/McCallTech/CDS-Payments-Widget/master/src/images/credit_card.png'
+        image: 'images/credit_card.png'
       }
     },
     cardInfo: {
