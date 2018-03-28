@@ -124,9 +124,8 @@ const comp = Ember.Component.extend({
       });
     });
 
-    jQuery('#cc-number')[0].setAttribute('data-cds', 'ccNumber'),
+    jQuery('#cc-number')[0].setAttribute('data-cds', 'ccNumber');
       jQuery('#cipher')[0].setAttribute('data-cds', 'cipher');
-
 
   }
 
