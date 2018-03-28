@@ -54,24 +54,35 @@ const stateToComputed = state => {
     AmericanExpress && 'american-express',
     DiscoverCard && 'discover'
   ].filter(c => !!c)
-
+  const numberValidationNotValid = (!!numberValidation.card && !numberValidation.isValid);
+  const notValidOption = numberValidation.card && !(acceptedCards.indexOf(numberValidation.card.type) >= 0);
+  const numberTouched = !!cardCardNumber.touched;
+  const showNumberValidation =  numberTouched && (numberValidationNotValid || notValidOption);
+  console.log(
+    '\n\n\n this',
+    {numberTouched},
+    {numberValidationNotValid},
+    {notValidOption},
+    {showNumberValidation},
+    '\n\n\n',
+  )
   const valid = {
     numNoSpaces,
     numberValidation,
-    showNumberValidation: (!!numberValidation.card && !numberValidation.isValid) || numberValidation.card && !(acceptedCards.indexOf(numberValidation.card.type) >= 0),
+    showNumberValidation,
     numberLengths: numberValidation.card ? numberValidation.card.lengths.toString() : '',
     cvvLengths: numberValidation.card ? numberValidation.card.code.size : '',
     nameWarning: numberValidation.card && !cardCard.name.value,
-    expirationDateWarning: numberValidation.card && !expirationDate(expiration).isValid,
+    expirationDateWarning: cardCard.expiry.touched && (numberValidation.card && !expirationDate(expiration).isValid),
     validExpiration: expirationDate(expiration),
     cvvWarning: numberValidation.card && !validCvv(cvv).isValid,
     billMeDisabled: !!numberValidation.card,
     notAcceptedCardsString: numberValidation.card && !(acceptedCards.indexOf(numberValidation.card.type) >= 0),
-    demo:"display:none",
-    visaStyle: !numberValidation.card || (numberValidation.card && numberValidation.card.type === 'visa') ? 'padding:0;':'padding:0;opacity: 0.4; filter: alpha(opacity=40);',
-    masterStyle: !numberValidation.card || (numberValidation.card && numberValidation.card.type === 'master-card') ? 'padding:0;':'padding:0;opacity: 0.4; filter: alpha(opacity=40);',
-    americanStyle: !numberValidation.card || (numberValidation.card && numberValidation.card.type === 'american-express') ? 'padding:0;':'padding:0;opacity: 0.4; filter: alpha(opacity=40);',
-    discoverStyle: !numberValidation.card || (numberValidation.card && numberValidation.card.type === 'discover') ? 'padding:0;':'padding:0;opacity: 0.4; filter: alpha(opacity=40);',
+    demo: !"display:none",
+    visaStyle: !numberValidation.card || (numberValidation.card && numberValidation.card.type === 'visa') ? 'padding:0;' : 'padding:0;opacity: 0.4; filter: alpha(opacity=40);',
+    masterStyle: !numberValidation.card || (numberValidation.card && numberValidation.card.type === 'master-card') ? 'padding:0;' : 'padding:0;opacity: 0.4; filter: alpha(opacity=40);',
+    americanStyle: !numberValidation.card || (numberValidation.card && numberValidation.card.type === 'american-express') ? 'padding:0;' : 'padding:0;opacity: 0.4; filter: alpha(opacity=40);',
+    discoverStyle: !numberValidation.card || (numberValidation.card && numberValidation.card.type === 'discover') ? 'padding:0;' : 'padding:0;opacity: 0.4; filter: alpha(opacity=40);',
   };
   const configs = { ...filteredPostsBoolRes, valid };
   return {
@@ -103,6 +114,10 @@ const dispatchToActions = dispatch => {
       console.log('\n\nlogged myAction: ', m)
       dispatch({ type: 'myAction', m })
     },
+    touched: (...m) => {
+      console.log('\n\nlogged touched: ', m)
+      dispatch({ type: 'touched', m })
+    },
     toggle: (...m) => {
       console.log('\n\nlogged toggle: ', m)
       //dispatch({ type: 'toggle', m })
@@ -123,13 +138,13 @@ const dispatchToActions = dispatch => {
   }
 }
 
- const cdsCypher = () => {
+const cdsCypher = () => {
 
   // CDS.cdsProcess.allowedCards = [ 'MC', 'VI', 'AX' , 'DI'];
   //     CDS.cdsProcess.clientCode('BHG');
 
 
- };
+};
 
 const comp = Ember.Component.extend({
 
@@ -146,25 +161,25 @@ const comp = Ember.Component.extend({
   // },
   didInsertElement() {
     // Use run loop if you need to setup the DOM first
-    Ember.run.scheduleOnce('afterRender', this, function() {
+    Ember.run.scheduleOnce('afterRender', this, function () {
 
-      Ember.$.getScript("https://s3.amazonaws.com/cds-tzn-test/resources/cds-process.min.js", function() {
-        CDS.cdsProcess.allowedCards = [ 'MC', 'VI', 'AX' , 'DI'];
+      Ember.$.getScript("https://s3.amazonaws.com/cds-tzn-test/resources/cds-process.min.js", function () {
+        CDS.cdsProcess.allowedCards = ['MC', 'VI', 'AX', 'DI'];
         CDS.cdsProcess.clientCode('BHG');
         // console.log("Value of CDS.cdsProcess.cdsResponse "
         // + CDS.cdsProcess.cdsResponse.respCode + " "
         // + CDS.cdsProcess.cdsResponse.cardType + " "
         // + CDS.cdsProcess.cdsResponse.cipher);
- 
-        });
+
+      });
     });
 
     jQuery('#cc-number')[0].setAttribute('data-cds', 'ccNumber'),
-    jQuery('#cipher')[0].setAttribute('data-cds', 'cipher');
-  
+      jQuery('#cipher')[0].setAttribute('data-cds', 'cipher');
+
 
   }
- 
+
 });
 
 export default connect(stateToComputed, dispatchToActions)(comp);

@@ -209,7 +209,7 @@ export default function posts(state, action) {
         filter: action.author
       }
     }
-    case 'myAction': {
+    case 'touched': {
       logme('case myAction')
 
       console.log('myAction', { state }, { action }, '\n\n\nmyAction')
@@ -229,6 +229,39 @@ export default function posts(state, action) {
                   ...update,
                   value: action.m[2].target.value,
                   touched: true
+                }
+              }
+            }
+          }
+        }
+      }
+      console.log('\n\n\n stateToRet',
+        'action.m[0]', action.m[0],
+        'action.m[1]', action.m[1],
+        'action.m[2].target.value', action.m[2].target.value,
+        '\nstateToRet', { stateToRet },
+        '\nstate\n\n')
+      return stateToRet;
+    }
+    case 'myAction': {
+      logme('case myAction')
+
+      console.log('myAction', { state }, { action }, '\n\n\nmyAction')
+      const { configs } = state;
+      const { cardInfo } = configs;
+      const update = cardInfo[action.m[0]]
+
+      const stateToRet = {
+        ...state,
+        ...{
+          configs: {
+            ...configs,
+            cardInfo: {
+              ...cardInfo,
+              ...{
+                [action.m[0]]: {
+                  ...update,
+                  value: action.m[2].target.value,
                 }
               }
             }

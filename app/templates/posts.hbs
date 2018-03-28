@@ -1,6 +1,6 @@
 {{#ui-layout class="container" as | configs Visa MasterCard AmericanExpress DiscoverCard DinersClub JCB cardToggle CVC nameOnCard
 wallet billMeToggle billMe AlternativePayments savedConfigs selectedConfig newConfigName widgetToggle filter filterWith myAction
-toggle setSelectedConfig saveNewConfig saveNewConfigName|}} {{#if widgetToggle }}
+touched toggle setSelectedConfig saveNewConfig saveNewConfigName|}} {{#if widgetToggle }}
 <div class="demo-card-wide mdl-card mdl-shadow--0dp">
   <ul class="demo-list-item mdl-list" style="width:350px">
 
@@ -107,16 +107,21 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}} {{#if widgetToggle }
                       -->
               </div>
               <input id="cc-number" data-cds="ccNumber" class="mdl-textfield__input" type="text" placeholder={{configs.cardInfo.number.placeholder}}
-                name={{configs.cardInfo.number.name}} value={{configs.cardInfo.number.value}} 
-                onfocus={{action myAction configs.cardInfo.number.name configs.cardInfo.number.value}}
-                oninput={{action myAction configs.cardInfo.number.name configs.cardInfo.number.value}}
-                >
+                name={{configs.cardInfo.number.name}} value={{configs.cardInfo.number.value}} onblur={{action touched configs.cardInfo.number.name
+                configs.cardInfo.number.value}} oninput={{action myAction configs.cardInfo.number.name configs.cardInfo.number.value}}>
+
+              <!---->
+              {{log 'configs.valid.showNumberValidation' configs.valid.showNumberValidation}}
               {{#if configs.valid.showNumberValidation}}
               <div style="color:red; font-size: .8em">
                 This field is required.
-                <br/>{{configs.valid.numberValidation.card.niceType}} cards must be {{configs.valid.numberLengths}} long. {{#if
-                configs.valid.notAcceptedCardsString }}
-                <br/>{{configs.valid.numberValidation.card.niceType}} is not an accepted card. {{/if }}
+                <br/>{{configs.valid.numberValidation.card.niceType}} cards must be {{configs.valid.numberLengths}} long.
+                <!---->
+                {{#if configs.valid.notAcceptedCardsString }}
+                <br/>{{configs.valid.numberValidation.card.niceType}} is not an accepted card.
+                <!---->
+                {{/if }}
+
               </div>
               {{/if }}
               <!-- VSCode v. Handlebars-->
@@ -129,24 +134,18 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}} {{#if widgetToggle }
                 onfocus={{action myAction configs.cardInfo.name.name configs.cardInfo.name.value}}
                 oninput={{action myAction configs.cardInfo.name.name configs.cardInfo.name.value}}
               > -->
-              <!-- VSCode v. Handlebars-->
+              <!-- VSCode v. Handlebars
               {{#if configs.valid.nameWarning}}
               <div style="color:red; font-size: .8em">
                 This field is required.
-              </div>
+              </div>-->
               {{/if }}
               <!-- VSCode v. Handlebars-->
               {{/if }}
               <!-- VSCode v. Handlebars-->
-              <input 
-                class="mdl-textfield__input" 
-                type="text" 
-                placeholder={{configs.cardInfo.expiry.placeholder}}
-                name={{configs.cardInfo.expiry.name}}
-                value={{configs.cardInfo.expiry.value}}
-                oninput={{action myAction configs.cardInfo.expiry.name configs.cardInfo.expiry.value}}
-                onfocus={{action myAction configs.cardInfo.expiry.name configs.cardInfo.expiry.value}}
-              > 
+              <input class="mdl-textfield__input" type="text" placeholder={{configs.cardInfo.expiry.placeholder}} name={{configs.cardInfo.expiry.name}}
+                value={{configs.cardInfo.expiry.value}} oninput={{action myAction configs.cardInfo.expiry.name configs.cardInfo.expiry.value}}
+                onblur={{action touched configs.cardInfo.expiry.name configs.cardInfo.expiry.value}}>
               <!-- VSCode v. Handlebars-->
               {{#if configs.valid.expirationDateWarning}}
               <div style="color:red; font-size: .8em">
@@ -386,6 +385,7 @@ toggle setSelectedConfig saveNewConfig saveNewConfigName|}} {{#if widgetToggle }
   <main style="width:100%; height:1500px; margin-left:50px" class="mdl-layout__content">
     <div class="page-content">
     </div>
+
   </main>
 </div>
 {{/ui-layout}}
