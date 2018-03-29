@@ -246,35 +246,37 @@ export default function posts(state, action) {
       return stateToRet;
     }
     case 'toggle': {
-      const stateToRet = Object.assign({}, state, { [action.m[0]]: !action.m[1] });
-      return stateToRet;
+      return {
+        ...state,
+        ...{ [action.m[0]]: !action.m[1] }
+      };
     }
 
     case 'selectConfig': {
-      const stateToRet = Object.assign({},
-        state,
-        { 'selectedConfig': action.m[0] },
-        { Visa: state.savedConfigs[action.m[0]]['Visa'] },
-        { MasterCard: state.savedConfigs[action.m[0]]['MasterCard'] },
-        { AmericanExpress: state.savedConfigs[action.m[0]]['AmericanExpress'] },
-        { DiscoverCard: state.savedConfigs[action.m[0]]['DiscoverCard'] },
-        { DinersClub: state.savedConfigs[action.m[0]]['DinersClub'] },
-        { JCB: state.savedConfigs[action.m[0]]['JCB'] },
-        { CVC: state.savedConfigs[action.m[0]]['CVC'] },
-        { nameOnCard: state.savedConfigs[action.m[0]]['nameOnCard'] },
-        { billMeToggle: state.savedConfigs[action.m[0]]['billMeToggle'] },
-        { billMe: state.savedConfigs[action.m[0]]['billMe'] },
-        { credit: state.savedConfigs[action.m[0]]['credit'] },
-        { wallet: state.savedConfigs[action.m[0]]['wallet'] },
-        { AlternativePayments: state.savedConfigs[action.m[0]]['AlternativePayments'] },
-        { 'flippy': 'whippy' },
-        {
+      const stateToRet = {
+        ...state,
+        ...{ 'selectedConfig': action.m[0] },
+        ...{ Visa: state.savedConfigs[action.m[0]]['Visa'] },
+        ...{ MasterCard: state.savedConfigs[action.m[0]]['MasterCard'] },
+        ...{ AmericanExpress: state.savedConfigs[action.m[0]]['AmericanExpress'] },
+        ...{ DiscoverCard: state.savedConfigs[action.m[0]]['DiscoverCard'] },
+        ...{ DinersClub: state.savedConfigs[action.m[0]]['DinersClub'] },
+        ...{ JCB: state.savedConfigs[action.m[0]]['JCB'] },
+        ...{ CVC: state.savedConfigs[action.m[0]]['CVC'] },
+        ...{ nameOnCard: state.savedConfigs[action.m[0]]['nameOnCard'] },
+        ...{ billMeToggle: state.savedConfigs[action.m[0]]['billMeToggle'] },
+        ...{ billMe: state.savedConfigs[action.m[0]]['billMe'] },
+        ...{ credit: state.savedConfigs[action.m[0]]['credit'] },
+        ...{ wallet: state.savedConfigs[action.m[0]]['wallet'] },
+        ...{ AlternativePayments: state.savedConfigs[action.m[0]]['AlternativePayments'] },
+        ...{ 'flippy': 'whippy' },
+        ...{
           newConfigName: {
             name: action.m[0],
             value: action.m[0],
           }
         }
-      );
+      };
       return stateToRet;
     }
     case 'saveNewConfigName': {
