@@ -7,9 +7,9 @@ nvm i --lts
 nvm use --lts
 
 # blow away and start fresh
-rm -rf node_modules
-npm i
-npm i -g surge ember-cli
+#rm -rf node_modules
+#npm i
+#npm i -g surge ember-cli
 
 # blow away and start fresh
 rm -rf dist docs;

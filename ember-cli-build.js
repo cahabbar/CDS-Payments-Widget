@@ -6,22 +6,11 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
-    emberCliConcat: {
-      js: {
-        concat: true
-      },
-      css: {
-        concat: true
-      }
-    },
     babel: {
       plugins: [
         'transform-object-rest-spread',
       ]
     },
-    'ember-cli-babel': {
-      includePolyfill: true
-    }
   });
 
   // Use `app.import` to add additional libraries to the generated
@@ -74,8 +63,6 @@ module.exports = function (defaults) {
   app.import('node_modules/card-validator/src/luhn-10.js', {
     using: [{ transformation: 'cjs', as: 'src/luhn-10' }]
   });
-
-
 
   return app.toTree();
 };
