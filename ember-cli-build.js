@@ -14,9 +14,6 @@ module.exports = function (defaults) {
         concat: true
       }
     },
-    fingerprint: {
-      prepend: 'https://cdn.rawgit.com/CDSGlobal/CDS-Payments-Widget/master/docs/'
-    },
     babel: {
       plugins: [
         'transform-object-rest-spread',
@@ -40,13 +37,13 @@ module.exports = function (defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
-  app.import('vendor/cds-process.min.css');-
-  app.import('vendor/material.min.css');-
-  //app.import('vendor/jquery-3.3.1.slim.min.js');-
+  app.import('vendor/cds-process.min.css'); -
+    app.import('vendor/material.min.css'); -
+      //app.import('vendor/jquery-3.3.1.slim.min.js');-
 
-  app.import('node_modules/card-validator/index.js', {
-    using: [{ transformation: 'cjs', as: 'card-validator' }]
-  });
+      app.import('node_modules/card-validator/index.js', {
+        using: [{ transformation: 'cjs', as: 'card-validator' }]
+      });
   app.import('node_modules/card-validator/src/card-number.js', {
     using: [{ transformation: 'cjs', as: 'src/card-number' }]
   });
