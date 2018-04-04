@@ -23,6 +23,8 @@ git push;
 # serve things
 fuser -k 8080/tcp
 http-server ./docs & # run in background for fun
-surge --domain ember.cds-payments.surge.sh ./docs
+#surge --domain ember.cds-payments.surge.sh ./docs
 surge --domain demo.cds-payments.surge.sh ./docs
+aws s3 sync ./docs s3://payment-widget-ui-cloudfront --acl public-read --profile cdsg-highlander
+echo 'http://d2znaubcly5dbd.cloudfront.net/index.html'
 ember s
