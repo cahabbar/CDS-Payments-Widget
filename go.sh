@@ -9,7 +9,8 @@ nvm use --lts
 # blow away and start fresh
 rm -rf node_modules
 npm i
-npm i -g surge ember-cli
+#npm i -g surge ember-cli
+npm i -g ember-cli
 
 # blow away and start fresh
 rm -rf dist docs;
@@ -24,7 +25,7 @@ git push;
 fuser -k 8080/tcp
 http-server ./docs & # run in background for fun
 #surge --domain ember.cds-payments.surge.sh ./docs
-surge --domain demo.cds-payments.surge.sh ./docs
+#surge --domain demo.cds-payments.surge.sh ./docs
 aws s3 sync ./docs s3://payment-widget-ui-cloudfront --acl public-read --profile cdsg-highlander
 echo 'http://d2znaubcly5dbd.cloudfront.net/index.html'
-ember s
+#ember s

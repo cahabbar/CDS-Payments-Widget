@@ -108,14 +108,13 @@ touched toggle setSelectedConfig saveNewConfig saveNewConfigName|}} {{#if widget
               <!-- VSCode v. Handlebars-->
               {{#if nameOnCard}}
               <!-- VSCode v. Handlebars -->
-              <!--
-              <input class="mdl-textfield__input" type="text" 
+              <input class="mdl-textfield__input" type="text"
                 placeholder={{configs.cardInfo.name.placeholder }}
                 name={{configs.cardInfo.name.name}}
-                value={{configs.cardInfo.name.value}} 
+                value={{configs.cardInfo.name.value}}
                 onfocus={{action myAction configs.cardInfo.name.name configs.cardInfo.name.value}}
                 oninput={{action myAction configs.cardInfo.name.name configs.cardInfo.name.value}}
-              > -->
+              >
               <!-- VSCode v. Handlebars-->
               <!--
               {{#if configs.valid.nameWarning}}
@@ -144,16 +143,14 @@ touched toggle setSelectedConfig saveNewConfig saveNewConfigName|}} {{#if widget
               <div></div>
               {{#if CVC}}
               <!-- VSCode v. Handlebars -->
-              <!-- 
-              <input 
-                class="mdl-textfield__input" type="text" 
-                placeholder={{configs.cardInfo.cvc.placeholder}} 
+              <input
+                class="mdl-textfield__input" type="text"
+                placeholder={{configs.cardInfo.cvc.placeholder}}
                 name={{configs.cardInfo.cvc.name}}
                 value={{configs.cardInfo.cvc.value}}
                 oninput={{action myAction configs.cardInfo.cvc.name configs.cardInfo.cvc.value}}
                 onfocus={{action myAction configs.cardInfo.cvc.name configs.cardInfo.cvc.value}}
-              > 
-              -->
+              >
               <!-- VSCode v. Handlebars -->
               <!--
               {{#if configs.valid.cvvWarning}}
@@ -182,7 +179,7 @@ touched toggle setSelectedConfig saveNewConfig saveNewConfigName|}} {{#if widget
 {{/if}}
 <!-- The drawer is always open in large screens. The header is always shown, even in small screens. -->
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header" style={{configs.valid.demo}}>
-  <div class="mdl-layout__drawer" >
+  <div class="mdl-layout__drawer" style="width:500px">
     <span class="mdl-layout-title">Configuration</span>
     <select style="width:90%; margin: 5%" onchange={{action setSelectedConfig value="target.value" }}>
       {{#each-in savedConfigs as |key config|}}
