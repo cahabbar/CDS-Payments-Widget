@@ -28,23 +28,36 @@ source env.sh
     [ -z "$output" ]
 }
 
-@test "pro err" {
+@test "profileDomainUnknown" {
     AWS_PROFILE="blah"
     run profileDomain
     [ "$status" -eq 1 ]
     [ "$output" = "ERR: do not know domain names for AWS_PROFILE=$AWS_PROFILE" ]
 }
 
-@test "pro good" {
+@test "profileDomainProd" {
     AWS_PROFILE="cdsg-prod"
     run profileDomain
     [ "$status" -eq 0 ]
-    [ "$output" = "good" ]
+    [ -z "$output" ]
+    profileDomain
+    [ "cloud.buysub.com" = "$TF_VAR_zone_name_main" ]
+    [ "ba-cloud.buysub.com" = "$TF_VAR_zone_name_other" ]
+}
+
+@test "profileDomainNonprod" {
+    AWS_PROFILE="cdsg-nonprod"
+    run profileDomain
+    [ "$status" -eq 0 ]
+    [ -z "$output" ]
+    profileDomain
+    [ "qa-cloud.buysub.com" = "$TF_VAR_zone_name_main" ]
+    [ "test-cloud.buysub.com" = "$TF_VAR_zone_name_other" ]
 }
 
 @test "mainHappy" {
-    AWS_PROFILE="foo"
-    AWS_DEFAULT_REGION="bar"
+    AWS_PROFILE="cdsg-nonprod"
+    AWS_DEFAULT_REGION="us-west-2"
     run main
     [ "$status" -eq 0 ]
 }
