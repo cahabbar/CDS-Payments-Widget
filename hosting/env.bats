@@ -55,9 +55,25 @@ source env.sh
     [ "test-cloud.buysub.com" = "$TF_VAR_zone_name_other" ]
 }
 
-@test "mainHappy" {
+@test "exportsOne" {
+    AWS_PROFILE="foo"
+    AWS_DEFAULT_REGION="baz"
+    run exports
+    [ "$status" -eq 0 ]
+    [ -z "$output" ]
+    exports
+    [ "$TF_VAR_account_name" = "$AWS_PROFILE" ] 
+    [ "$TF_VAR_region" = "$AWS_DEFAULT_REGION" ]
+    [ "$TF_VAR_app_cf_dns_name" = "payments" ]
+    [ "$TF_VAR_application" = "paymentwidget" ]
+    [ "$TF_VAR_tf_state_bucket" = "$TF_VAR_account_name-terraform" ]
+    [ "$TF_VAR_app_bucket_name" = "$TF_VAR_account_name-$TF_VAR_application" ]
+    [ "$TF_VAR_logging_bucket_name" = "$TF_VAR_app_bucket_name-logs-cloudfront" ]
+}
+
+@test "useEnvHappy" {
     AWS_PROFILE="cdsg-nonprod"
     AWS_DEFAULT_REGION="us-west-2"
-    run main
+    run useEnv 
     [ "$status" -eq 0 ]
 }

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash -e
 
 . env.sh
+useEnv
 
 terraform init \
      -backend-config "bucket=$TF_VAR_tf_state_bucket" \
