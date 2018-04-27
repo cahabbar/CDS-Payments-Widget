@@ -3,8 +3,9 @@
 . env.sh
 useEnv
 
-terraform init \
-     -backend-config "bucket=$TF_VAR_tf_state_bucket" \
-     -backend-config "profile=$TF_VAR_account_name" \
-     -backend-config "region=$TF_VAR_region" \
-     -backend-config "key=$TF_VAR_application/terraform.tfstate"
+sed '{
+    s/FEATURE_DIR/${TF_VAR_application}/
+    s/TF_VAR_account_name/${TF_VAR_account_name}/
+    s/TF_VAR_region/${TF_VAR_region}/
+}' backend.tf-template > backend.tf
+terraform init

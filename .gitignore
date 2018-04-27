@@ -23,4 +23,5 @@ bower.json.ember-try
 package.json.ember-try
 
 # hosting
-.terraform
+hosting/.terraform
+hosting/backend.tf

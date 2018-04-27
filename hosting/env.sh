@@ -32,7 +32,6 @@ exports() {
     export TF_VAR_region="$AWS_DEFAULT_REGION"
     export TF_VAR_app_cf_dns_name="payments"
     export TF_VAR_application="paymentwidget"
-    export TF_VAR_tf_state_bucket="$TF_VAR_account_name-terraform"
     export TF_VAR_app_bucket_name="$TF_VAR_account_name-$TF_VAR_application"
     export TF_VAR_logging_bucket_name="$TF_VAR_app_bucket_name-logs-cloudfront"
 }

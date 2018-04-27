@@ -9,7 +9,6 @@ variable "region" {}
 variable "logging_bucket_name" {}
 variable "app_bucket_name" {}
 variable "application" {}
-variable "tf_state_bucket" {}
 variable "app_cf_dns_name" {}
 variable "zone_name_main" {}
 
