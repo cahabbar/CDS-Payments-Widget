@@ -54,6 +54,8 @@ module "app_cloudfront" {
   price_class            = "PriceClass_All"
   restriction_type       = "whitelist"
   origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
+  alias                  = "${var.app_cf_dns_name}.${var.zone_name_main}"
+  default_root_object    = "index.html"
 
   locations = [
     "US",
