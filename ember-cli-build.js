@@ -7,7 +7,7 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
     fingerprint: {
-      prepend: 'http://payments.qa-cloud.buysub.com'
+      prepend: 'https://payments.qa-cloud.buysub.com'
     },
     babel: {
       plugins: [
