@@ -34,51 +34,65 @@ source env.sh
     [ "$output" = "ERR: APP_ENV is required" ]
 }
 
-@test "requiredEnvAppEnvInvalid" {
+@test "profileDomainUnknown" {
+    AWS_PROFILE="blah"
     APP_ENV="foo"
-    run requiredEnvAppEnv
+    run profileDomain
+    echo "output = ${output}"
     [ "$status" -eq 1 ]
-    [ "$output" = "ERR: APP_ENV value $APP_ENV is invalid" ]
+    [ "$output" = "ERR: no domain names for AWS_PROFILE=$AWS_PROFILE and APP_ENV=$APP_ENV" ]
 }
 
-@test "requiredEnvAppEnvValidProd" {
+@test "profileDomainGoodProfileBadEnv" {
+    AWS_PROFILE="cdsg-nonprod"
+    APP_ENV="ba"
+    run profileDomain
+    [ "$status" -eq 1 ]
+    echo "output = ${output}"
+    [ "$output" = "ERR: no domain names for AWS_PROFILE=$AWS_PROFILE and APP_ENV=$APP_ENV" ]
+    [ -z "$TF_VAR_zone_name_main" ]
+    [ -z "$TF_VAR_zone_name_other" ]
+}
+
+@test "profileDomainProd" {
+    AWS_PROFILE="cdsg-prod"
     APP_ENV="prod"
-    run requiredEnvAppEnv
+    run profileDomain
+    echo "output = ${output}"
     [ "$status" -eq 0 ]
     [ -z "$output" ]
-    requiredEnvAppEnv
-    [ "$TF_VAR_zone_name" = "cloud.buysub.com" ]
+    profileDomain
+    [ "cloud.buysub.com" = "$TF_VAR_zone_name_main" ]
+    [ "ba-cloud.buysub.com" = "$TF_VAR_zone_name_other" ]
+    [ "prod" = "$TF_VAR_env_main" ]
+    [ "ba" = "$TF_VAR_env_other" ]
 }
 
-@test "requiredEnvAppEnvValidTest" {
+@test "profileDomainNonprod" {
+    AWS_PROFILE="cdsg-nonprod"
     APP_ENV="test"
-    run requiredEnvAppEnv
+    run profileDomain
+    echo "output = ${output}"
     [ "$status" -eq 0 ]
     [ -z "$output" ]
-    requiredEnvAppEnv
-    [ "$TF_VAR_zone_name" = "test-cloud.buysub.com" ]
-}
-
-@test "requiredEnvAppEnvValidTest" {
-    APP_ENV="qa"
-    run requiredEnvAppEnv
-    [ "$status" -eq 0 ]
-    [ -z "$output" ]
-    requiredEnvAppEnv
-    [ "$TF_VAR_zone_name" = "qa-cloud.buysub.com" ]
+    profileDomain
+    [ "qa-cloud.buysub.com" = "$TF_VAR_zone_name_main" ]
+    [ "test-cloud.buysub.com" = "$TF_VAR_zone_name_other" ]
+    [ "qa" = "$TF_VAR_env_main" ]
+    [ "test" = "$TF_VAR_env_other" ]
 }
 
 @test "exportsOne" {
     AWS_PROFILE="foo"
     AWS_DEFAULT_REGION="baz"
-    APP_ENV="ba"
+    APP_ENV="qux"
     run exports
+    echo "output = ${output}"
     [ "$status" -eq 0 ]
     [ -z "$output" ]
     exports
     [ "$TF_VAR_account_name" = "$AWS_PROFILE" ] 
     [ "$TF_VAR_region" = "$AWS_DEFAULT_REGION" ]
-    [ "$TF_VAR_app_env" = "$APP_ENV" ]
     [ "$TF_VAR_app_cf_dns_name" = "payments" ]
     [ "$TF_VAR_application" = "paymentwidget" ]
     [ "$TF_VAR_app_bucket_name" = "$TF_VAR_account_name-$TF_VAR_application" ]

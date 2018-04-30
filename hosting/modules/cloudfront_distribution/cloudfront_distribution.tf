@@ -36,6 +36,10 @@ variable "origin_path" {
   default = ""
 }
 
+variable "origin_env" {
+  default = ""
+}
+
 variable "app_bucket_name" {}
 variable "logging_bucket" {}
 variable "max_ttl" {}
@@ -76,7 +80,7 @@ resource "aws_cloudfront_distribution" "distribution" {
 
     max_ttl                = "${var.max_ttl}"
     min_ttl                = 0
-    target_origin_id       = "websiteS3Origin"
+    target_origin_id       = "websiteS3Origin${var.origin_env}"
     viewer_protocol_policy = "allow-all"
   }
 
@@ -85,7 +89,7 @@ resource "aws_cloudfront_distribution" "distribution" {
   logging_config {
     bucket          = "${var.logging_bucket}"
     include_cookies = true
-    prefix          = "websiteS3Origin"
+    prefix          = "websiteS3Origin${var.origin_env}"
   }
 
   aliases = ["${var.alias}"]
@@ -94,7 +98,7 @@ resource "aws_cloudfront_distribution" "distribution" {
 
   origin {
     domain_name = "${var.app_bucket_name}"
-    origin_id   = "websiteS3Origin"
+    origin_id   = "websiteS3Origin${var.origin_env}"
     origin_path = "${var.origin_path}"
 
     s3_origin_config {
