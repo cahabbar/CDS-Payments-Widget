@@ -32,6 +32,10 @@ variable "default_root_object" {
   default = ""
 }
 
+variable "origin_path" {
+  default = ""
+}
+
 variable "app_bucket_name" {}
 variable "logging_bucket" {}
 variable "max_ttl" {}
@@ -91,6 +95,7 @@ resource "aws_cloudfront_distribution" "distribution" {
   origin {
     domain_name = "${var.app_bucket_name}"
     origin_id   = "websiteS3Origin"
+    origin_path = "${var.origin_path}"
 
     s3_origin_config {
       origin_access_identity = "${var.origin_access_identity}"

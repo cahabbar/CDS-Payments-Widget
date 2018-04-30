@@ -10,10 +10,11 @@ variable "logging_bucket_name" {}
 variable "app_bucket_name" {}
 variable "application" {}
 variable "app_cf_dns_name" {}
-variable "zone_name_main" {}
+variable "app_env" {}
+variable "zone_name" {}
 
 data "aws_route53_zone" "cloud" {
-  name = "${var.zone_name_main}."
+  name = "${var.zone_name}."
 }
 
 data "aws_iam_account_alias" "current" {}
@@ -54,8 +55,9 @@ module "app_cloudfront" {
   price_class            = "PriceClass_All"
   restriction_type       = "whitelist"
   origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
-  alias                  = "${var.app_cf_dns_name}.${var.zone_name_main}"
+  alias                  = "${var.app_cf_dns_name}.${var.zone_name}"
   default_root_object    = "index.html"
+  origin_path            = "/${var.app_env}"
 
   locations = [
     "US",

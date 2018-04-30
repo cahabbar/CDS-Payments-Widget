@@ -28,42 +28,57 @@ source env.sh
     [ -z "$output" ]
 }
 
-@test "profileDomainUnknown" {
-    AWS_PROFILE="blah"
-    run profileDomain
+@test "requiredEnvAppEnvMissing" {
+    run requiredEnvAppEnv
     [ "$status" -eq 1 ]
-    [ "$output" = "ERR: do not know domain names for AWS_PROFILE=$AWS_PROFILE" ]
+    [ "$output" = "ERR: APP_ENV is required" ]
 }
 
-@test "profileDomainProd" {
-    AWS_PROFILE="cdsg-prod"
-    run profileDomain
-    [ "$status" -eq 0 ]
-    [ -z "$output" ]
-    profileDomain
-    [ "cloud.buysub.com" = "$TF_VAR_zone_name_main" ]
-    [ "ba-cloud.buysub.com" = "$TF_VAR_zone_name_other" ]
+@test "requiredEnvAppEnvInvalid" {
+    APP_ENV="foo"
+    run requiredEnvAppEnv
+    [ "$status" -eq 1 ]
+    [ "$output" = "ERR: APP_ENV value $APP_ENV is invalid" ]
 }
 
-@test "profileDomainNonprod" {
-    AWS_PROFILE="cdsg-nonprod"
-    run profileDomain
+@test "requiredEnvAppEnvValidProd" {
+    APP_ENV="prod"
+    run requiredEnvAppEnv
     [ "$status" -eq 0 ]
     [ -z "$output" ]
-    profileDomain
-    [ "qa-cloud.buysub.com" = "$TF_VAR_zone_name_main" ]
-    [ "test-cloud.buysub.com" = "$TF_VAR_zone_name_other" ]
+    requiredEnvAppEnv
+    [ "$TF_VAR_zone_name" = "cloud.buysub.com" ]
+}
+
+@test "requiredEnvAppEnvValidTest" {
+    APP_ENV="test"
+    run requiredEnvAppEnv
+    [ "$status" -eq 0 ]
+    [ -z "$output" ]
+    requiredEnvAppEnv
+    [ "$TF_VAR_zone_name" = "test-cloud.buysub.com" ]
+}
+
+@test "requiredEnvAppEnvValidTest" {
+    APP_ENV="qa"
+    run requiredEnvAppEnv
+    [ "$status" -eq 0 ]
+    [ -z "$output" ]
+    requiredEnvAppEnv
+    [ "$TF_VAR_zone_name" = "qa-cloud.buysub.com" ]
 }
 
 @test "exportsOne" {
     AWS_PROFILE="foo"
     AWS_DEFAULT_REGION="baz"
+    APP_ENV="ba"
     run exports
     [ "$status" -eq 0 ]
     [ -z "$output" ]
     exports
     [ "$TF_VAR_account_name" = "$AWS_PROFILE" ] 
     [ "$TF_VAR_region" = "$AWS_DEFAULT_REGION" ]
+    [ "$TF_VAR_app_env" = "$APP_ENV" ]
     [ "$TF_VAR_app_cf_dns_name" = "payments" ]
     [ "$TF_VAR_application" = "paymentwidget" ]
     [ "$TF_VAR_app_bucket_name" = "$TF_VAR_account_name-$TF_VAR_application" ]
@@ -73,6 +88,8 @@ source env.sh
 @test "useEnvHappy" {
     AWS_PROFILE="cdsg-nonprod"
     AWS_DEFAULT_REGION="us-west-2"
+    APP_ENV="qa"
     run useEnv 
+    echo "output = ${output}"
     [ "$status" -eq 0 ]
 }
