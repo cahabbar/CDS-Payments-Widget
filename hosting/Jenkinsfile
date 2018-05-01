@@ -9,12 +9,11 @@ pipeline {
     }
     stages {
         stage('Plan') {
-            dir("hosting") {
-                steps {
-                    sh "terraform --version"
-                    sh "./hosting/tf-init.sh"
-                    sh "./hosting/tf-plan.sh"
-                }
+            steps {
+                dir("hosting")
+                sh "terraform --version"
+                sh "./hosting/tf-init.sh"
+                sh "./hosting/tf-plan.sh"
             }
         }
         stage('Test') {
