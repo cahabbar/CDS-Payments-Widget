@@ -8,7 +8,8 @@ variable "cache_allowed_methods" {
     "OPTIONS",
     "PATCH",
     "POST",
-    "PUT"]
+    "PUT",
+  ]
 }
 
 variable "enabled" {
@@ -21,6 +22,22 @@ variable "locations" {
 
 variable "origin_protocol_policy" {
   default = "match-viewer"
+}
+
+variable "alias" {
+  default = ""
+}
+
+variable "default_root_object" {
+  default = ""
+}
+
+variable "origin_path" {
+  default = ""
+}
+
+variable "origin_env" {
+  default = ""
 }
 
 variable "app_bucket_name" {}
@@ -43,10 +60,14 @@ output "cloudfront_hosted_zone_id" {
 resource "aws_cloudfront_distribution" "distribution" {
   default_cache_behavior {
     allowed_methods = [
-      "${var.cache_allowed_methods}"]
+      "${var.cache_allowed_methods}",
+    ]
+
     cached_methods = [
       "GET",
-      "HEAD"]
+      "HEAD",
+    ]
+
     default_ttl = "${var.default_ttl}"
 
     forwarded_values = {
@@ -57,23 +78,28 @@ resource "aws_cloudfront_distribution" "distribution" {
       query_string = true
     }
 
-    max_ttl = "${var.max_ttl}"
-    min_ttl = 0
-    target_origin_id = "websiteS3Origin"
+    max_ttl                = "${var.max_ttl}"
+    min_ttl                = 0
+    target_origin_id       = "websiteS3Origin${var.origin_env}"
     viewer_protocol_policy = "allow-all"
   }
 
   enabled = "${var.enabled}"
 
   logging_config {
-    bucket = "${var.logging_bucket}"
+    bucket          = "${var.logging_bucket}"
     include_cookies = true
-    prefix = "websiteS3Origin"
+    prefix          = "websiteS3Origin${var.origin_env}"
   }
+
+  aliases = ["${var.alias}"]
+
+  default_root_object = "${var.default_root_object}"
 
   origin {
     domain_name = "${var.app_bucket_name}"
-    origin_id = "websiteS3Origin"
+    origin_id   = "websiteS3Origin${var.origin_env}"
+    origin_path = "${var.origin_path}"
 
     s3_origin_config {
       origin_access_identity = "${var.origin_access_identity}"

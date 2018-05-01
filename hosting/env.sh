@@ -3,29 +3,48 @@
 requiredEnvProfile() {
     if [ -z "$AWS_PROFILE" ]; then
         echo "ERR: AWS_PROFILE is required"
-        exit 1
+        return 1
     fi
 }
 
 requiredEnvRegion() {
     if [ -z "$AWS_DEFAULT_REGION" ]; then
         echo "ERR: AWS_DEFAULT_REGION is required"
-        exit 1
+        return 1
+    fi
+}
+
+requiredEnvAppEnv() {
+    BASE_ZONE="cloud.buysub.com"
+    if [ -z "$APP_ENV" ]; then
+        echo "ERR: APP_ENV is required"
+        return 1
     fi
 }
 
 profileDomain() {
-    if [ "cdsg-prod" = "$AWS_PROFILE" ]; then 
-        export TF_VAR_zone_name_main="cloud.buysub.com"
-        export TF_VAR_zone_name_other="ba-cloud.buysub.com"
-    elif [ "cdsg-nonprod" = "$AWS_PROFILE" ]; then 
-        export TF_VAR_zone_name_main="qa-cloud.buysub.com"
-        export TF_VAR_zone_name_other="test-cloud.buysub.com"
-    else
-        echo "ERR: do not know domain names for AWS_PROFILE=$AWS_PROFILE"
-        exit 1
+    if [ "cdsg-prod" = "$AWS_PROFILE" ]; then
+        if [ "prod" = "$APP_ENV" ] || [ "ba" = "$APP_ENV" ]; then
+            export TF_VAR_env_main="prod"
+            export TF_VAR_env_other="ba"
+            export TF_VAR_zone_name_main="cloud.buysub.com"
+            export TF_VAR_zone_name_other="ba-cloud.buysub.com"
+        fi
+    elif [ "cdsg-nonprod" = "$AWS_PROFILE" ]; then
+        if [ "qa" = "$APP_ENV" ] || [ "test" = "$APP_ENV" ]; then
+            export TF_VAR_env_main="qa"
+            export TF_VAR_env_other="test"
+            export TF_VAR_zone_name_main="qa-cloud.buysub.com"
+            export TF_VAR_zone_name_other="test-cloud.buysub.com"
+        fi
     fi
-}
+
+    if [[ -z "$TF_VAR_zone_name_main" && -z "$TF_VAR_zone_name_other" ]]; then
+        echo "ERR: no domain names for AWS_PROFILE=$AWS_PROFILE and APP_ENV=$APP_ENV"
+        return 1
+    fi
+ }
+
 
 exports() {
     export TF_VAR_account_name="$AWS_PROFILE"
@@ -37,8 +56,10 @@ exports() {
 }
 
 useEnv() {
+    set -e
     requiredEnvProfile
     requiredEnvRegion
+    requiredEnvAppEnv
     profileDomain
     exports
 }
