@@ -3,4 +3,4 @@
 . env.sh
 useEnv
 
-terraform apply
+terraform apply plan.out

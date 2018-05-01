@@ -25,3 +25,4 @@ package.json.ember-try
 # hosting
 hosting/.terraform
 hosting/backend.tf
+hosting/plan.out
