@@ -14,7 +14,8 @@ npm i -g ember-cli
 
 # blow away and start fresh
 rm -rf dist docs;
-ember build --environment=production;
+#ember build --environment=production;
+ember build
 mv dist docs;
 cp ./vendor/cds-process.min.js ./docs
 git add docs -f;
