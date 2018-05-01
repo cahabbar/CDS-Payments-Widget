@@ -12,34 +12,32 @@ def shellCommandOutput(command) {
 // Get the Terraform tool.
 def tfHome = tool name: 'Terraform', type: 'com.cloudbees.jenkins.plugins.customtools.CustomTool'
 
-wrap([$class: 'AnsiColorBuildWrapper', colorMapName: 'xterm']) {
-    pipeline {
-        agent any
+pipeline {
+agent any
 
 
-        environment {
-            AWS_PROFILE = shellCommandOutput("aws iam list-account-aliases | jq .AccountAliases[0]")
-            PATH = "${tfHome}:${env.PATH}"
-        }
-        parameters {
-            choice choices: ['us-east1'], description: '', name: 'AWS_REGION'
-        }
-        stages {
-            stage('Plan') {
-                steps {
-                    sh "terraform --version"
-                    sh "terraform --version"
-                }
+    environment {
+        AWS_PROFILE = shellCommandOutput("aws iam list-account-aliases | jq .AccountAliases[0]")
+        PATH = "${tfHome}:${env.PATH}"
+    }
+    parameters {
+        choice choices: ['us-east1'], description: '', name: 'AWS_REGION'
+    }
+    stages {
+        stage('Plan') {
+            steps {
+                sh "terraform --version"
+                sh "terraform --version"
             }
-            stage('Test') {
-                steps {
-                    echo 'Testing..'
-                }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
             }
-            stage('Deploy') {
-                steps {
-                    echo 'Deploying....'
-                }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
             }
         }
     }
