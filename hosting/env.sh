@@ -56,6 +56,7 @@ exports() {
 }
 
 useEnv() {
+    env | sort
     set -e
     set -x
     requiredEnvProfile
