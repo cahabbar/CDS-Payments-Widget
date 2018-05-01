@@ -56,6 +56,7 @@ exports() {
 }
 
 useEnv() {
+    env |grep ^A
     set -e
     requiredEnvProfile
     requiredEnvRegion
