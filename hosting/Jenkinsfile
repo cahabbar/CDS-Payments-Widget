@@ -1,24 +1,10 @@
-import java.util.UUID
-def shellCommandOutput(command) {
-    def uuid = UUID.randomUUID()
-    def filename = "cmd-${uuid}"
-    echo filename
-    sh ("${command} > ${filename}")
-    def result = readFile(filename).trim()
-    sh "rm ${filename}"
-    return result
-}
-
 // Get the Terraform tool.
 def tfHome = tool name: 'Terraform', type: 'com.cloudbees.jenkins.plugins.customtools.CustomTool'
 
 pipeline {
-agent any
-
-
+    agent any
     environment {
-        AWS_PROFILE = shellCommandOutput("aws iam list-account-aliases | jq .AccountAliases[0]")
-        PATH = "${tfHome}:${env.PATH}"
+        AWS_PROFILE = sh(script: 'aws iam list-account-aliases | jq .AccountAliases[0]', returnStdout: true)
     }
     parameters {
         choice choices: ['us-east1'], description: '', name: 'AWS_REGION'
@@ -27,7 +13,8 @@ agent any
         stage('Plan') {
             steps {
                 sh "terraform --version"
-                sh "terraform --version"
+                sh "./hosting/tf-init.sh"
+                sh "./hosting/tf-plan.sh"
             }
         }
         stage('Test') {

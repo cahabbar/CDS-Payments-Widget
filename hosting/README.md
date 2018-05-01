@@ -11,6 +11,5 @@ A `Jenkinsfile` in the root of the repo will be used for build/test/deploy of th
 
 Dependancies:
 - AWS CLI tools ( pre-installed on instance )
-- Manage Jenkins > Manage Plugins > install "Custom Tools" plugin and restart
-- Manage Jenkins > Global Tool Configuration > add terraform 0.11.5 https://releases.hashicorp.com/terraform/0.11.5/terraform_0.11.5_linux_amd64.zip ( guide https://objectpartners.com/2016/06/01/automating-terraform-projects-with-jenkins/ )
+- add terraform 0.11.5 https://releases.hashicorp.com/terraform/0.11.5/terraform_0.11.5_linux_amd64.zip - SSH into VM and install in /usr/local/bin
 - 
