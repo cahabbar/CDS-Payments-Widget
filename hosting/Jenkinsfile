@@ -18,7 +18,7 @@ pipeline {
 
     environment {
         AWS_PROFILE = shellCommandOutput("aws iam list-account-aliases | jq .AccountAliases[0]")
-        env.PATH = "${tfHome}:${env.PATH}"
+        PATH = "${tfHome}:${env.PATH}"
     }
     parameters {
         choice choices: ['us-east1'], description: '', name: 'AWS_REGION'
