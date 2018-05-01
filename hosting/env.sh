@@ -57,6 +57,7 @@ exports() {
 
 useEnv() {
     set -e
+    set -x
     requiredEnvProfile
     requiredEnvRegion
     requiredEnvAppEnv
