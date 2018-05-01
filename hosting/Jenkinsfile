@@ -9,15 +9,16 @@ def shellCommandOutput(command) {
     return result
 }
 
+// Get the Terraform tool.
+def tfHome = tool name: 'Terraform', type: 'com.cloudbees.jenkins.plugins.customtools.CustomTool'
+
 pipeline {
     agent any
 
-    // Get the Terraform tool.
-    def tfHome = tool name: 'Terraform', type: 'com.cloudbees.jenkins.plugins.customtools.CustomTool'
-    env.PATH = "${tfHome}:${env.PATH}"
 
     environment {
         AWS_PROFILE = shellCommandOutput("aws iam list-account-aliases | jq .AccountAliases[0]")
+        env.PATH = "${tfHome}:${env.PATH}"
     }
     parameters {
         choice choices: ['us-east1'], description: '', name: 'AWS_REGION'
