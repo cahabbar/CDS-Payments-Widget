@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        AWS_PROFILE = sh(script: 'aws iam list-account-aliases | jq .AccountAliases[0] | tr -d [\\"\\n]', returnStdout: true)
+        AWS_PROFILE = sh(script: 'aws iam list-account-aliases | jq .AccountAliases[0] | tr -d [\\"\\\\n]', returnStdout: true)
         APP_ENV = "test"
     }
     parameters {
