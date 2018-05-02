@@ -11,5 +11,5 @@ A `Jenkinsfile` in the root of the repo will be used for build/test/deploy of th
 
 Dependancies:
 - AWS CLI tools ( pre-installed on instance )
-- add terraform 0.11.5 https://releases.hashicorp.com/terraform/0.11.5/terraform_0.11.5_linux_amd64.zip - SSH into VM and install in /usr/local/bin
+- Terraform 0.11.5 ( pre-installed on instance )
 - 
