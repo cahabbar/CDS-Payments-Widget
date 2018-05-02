@@ -10,6 +10,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Build stuff...'
+                sh "./go.sh"
             }
         }
         stage('Test') {
@@ -17,7 +18,7 @@ pipeline {
                 echo 'Test stuff...'
             }
         }
-        stage('Apply') {
+        stage('Deploy') {
             steps {
                 echo 'Deploy...'
                 dir("hosting") {
