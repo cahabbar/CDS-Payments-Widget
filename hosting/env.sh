@@ -15,7 +15,6 @@ requiredEnvRegion() {
 }
 
 requiredEnvAppEnv() {
-    BASE_ZONE="cloud.buysub.com"
     if [ -z "$APP_ENV" ]; then
         echo "ERR: APP_ENV is required"
         return 1
