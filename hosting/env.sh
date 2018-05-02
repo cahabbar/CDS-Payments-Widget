@@ -21,7 +21,7 @@ requiredEnvAppEnv() {
     fi
 
     profileDomain
-    if [ "$APP_ENV" != "$TF_VAR_env_main" ]; then
+    if [ "$APP_ENV" != "$TF_VAR_env_main" ] && [ "$APP_ENV" != "$TF_VAR_env_other" ]; then
         echo "ERR: APP_ENV=$APP_ENV invalid for AWS_PROFILE=$AWS_PROFILE"
         return 1
     fi
