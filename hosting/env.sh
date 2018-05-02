@@ -60,7 +60,6 @@ useEnv() {
     set -e
     requiredEnvProfile
     requiredEnvRegion
-    #requiredEnvAppEnv
     profileDomain
     exports
 }
