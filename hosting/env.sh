@@ -23,23 +23,19 @@ requiredEnvAppEnv() {
 
 profileDomain() {
     if [ "cdsg-prod" = "$AWS_PROFILE" ]; then
-        if [ "prod" = "$APP_ENV" ] || [ "ba" = "$APP_ENV" ]; then
-            export TF_VAR_env_main="prod"
-            export TF_VAR_env_other="ba"
-            export TF_VAR_zone_name_main="cloud.buysub.com"
-            export TF_VAR_zone_name_other="ba-cloud.buysub.com"
-        fi
+        export TF_VAR_env_main="prod"
+        export TF_VAR_env_other="ba"
+        export TF_VAR_zone_name_main="cloud.buysub.com"
+        export TF_VAR_zone_name_other="ba-cloud.buysub.com"
     elif [ "cdsg-nonprod" = "$AWS_PROFILE" ]; then
-        if [ "qa" = "$APP_ENV" ] || [ "test" = "$APP_ENV" ]; then
-            export TF_VAR_env_main="qa"
-            export TF_VAR_env_other="test"
-            export TF_VAR_zone_name_main="qa-cloud.buysub.com"
-            export TF_VAR_zone_name_other="test-cloud.buysub.com"
-        fi
+        export TF_VAR_env_main="qa"
+        export TF_VAR_env_other="test"
+        export TF_VAR_zone_name_main="qa-cloud.buysub.com"
+        export TF_VAR_zone_name_other="test-cloud.buysub.com"
     fi
 
     if [[ -z "$TF_VAR_zone_name_main" && -z "$TF_VAR_zone_name_other" ]]; then
-        echo "ERR: no domain names for AWS_PROFILE=$AWS_PROFILE and APP_ENV=$APP_ENV"
+        echo "ERR: no domain names for AWS_PROFILE=$AWS_PROFILE"
         return 1
     fi
  }
@@ -59,7 +55,7 @@ useEnv() {
     set -e
     requiredEnvProfile
     requiredEnvRegion
-    requiredEnvAppEnv
+    #requiredEnvAppEnv
     profileDomain
     exports
 }
