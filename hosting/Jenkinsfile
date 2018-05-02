@@ -8,23 +8,29 @@ pipeline {
         choice(choices: 'us-east-1', description: 'What AWS region?', name: 'AWS_DEFAULT_REGION')
     }
     stages {
-        stage('Plan') {
+        stage('Init') {
             steps {
+                echo 'Initializing...'
                 dir("hosting") {
-                sh "terraform --version"
-                sh "./tf-init.sh"
-                sh "./tf-plan.sh"
+                  sh "terraform --version"
+                  sh "./tf-init.sh"
                 }
             }
         }
-        stage('Test') {
+        stage('Plan') {
             steps {
-                echo 'Testing..'
+                echo 'Planning...'
+                dir("hosting") {
+                  sh "./tf-plan.sh"
+                }
             }
         }
-        stage('Deploy') {
+        stage('Apply') {
             steps {
-                echo 'Deploying....'
+                echo 'Planning...'
+                dir("hosting") {
+                  sh "./tf-apply.sh"
+                }
             }
         }
     }
