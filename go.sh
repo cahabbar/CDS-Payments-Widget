@@ -1,5 +1,5 @@
 # Mac / Linux
-echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+#echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
 # blasted path is forever fail
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
