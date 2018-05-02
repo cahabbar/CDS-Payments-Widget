@@ -34,6 +34,46 @@ source env.sh
     [ "$output" = "ERR: APP_ENV is required" ]
 }
 
+@test "requiredEnvAppEnvProdMatch" {
+    AWS_PROFILE="cdsg-prod"
+    profileDomain
+    APP_ENV="prod"
+    run requiredEnvAppEnv
+    [ "$status" -eq 0 ]
+    [ -z "$output" ]
+    requiredEnvAppEnv
+    [ "$TF_VAR_env_main" = "$APP_ENV" ]
+}
+
+@test "requiredEnvAppEnvProdMismatch" {
+    AWS_PROFILE="cdsg-prod"
+    profileDomain
+    APP_ENV="test"
+    run requiredEnvAppEnv
+    [ "$status" -eq 1 ]
+    [ "$output" = "ERR: APP_ENV=$APP_ENV invalid for AWS_PROFILE=$AWS_PROFILE" ]
+}
+
+@test "requiredEnvAppEnvNonprodMatch" {
+    AWS_PROFILE="cdsg-nonprod"
+    profileDomain
+    APP_ENV="qa"
+    run requiredEnvAppEnv
+    [ "$status" -eq 0 ]
+    [ -z "$output" ]
+    requiredEnvAppEnv
+    [ "$TF_VAR_env_main" = "$APP_ENV" ]
+}
+
+@test "requiredEnvAppEnvNonprodMismatch" {
+    AWS_PROFILE="cdsg-nonprod"
+    profileDomain
+    APP_ENV="prod"
+    run requiredEnvAppEnv
+    [ "$status" -eq 1 ]
+    [ "$output" = "ERR: APP_ENV=$APP_ENV invalid for AWS_PROFILE=$AWS_PROFILE" ]
+}
+
 @test "profileDomainUnknown" {
     AWS_PROFILE="blah"
     run profileDomain

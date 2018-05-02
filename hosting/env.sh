@@ -19,6 +19,12 @@ requiredEnvAppEnv() {
         echo "ERR: APP_ENV is required"
         return 1
     fi
+
+    profileDomain
+    if [ "$APP_ENV" != "$TF_VAR_env_main" ]; then
+        echo "ERR: APP_ENV=$APP_ENV invalid for AWS_PROFILE=$AWS_PROFILE"
+        return 1
+    fi
 }
 
 profileDomain() {
@@ -38,8 +44,7 @@ profileDomain() {
         echo "ERR: no domain names for AWS_PROFILE=$AWS_PROFILE"
         return 1
     fi
- }
-
+}
 
 exports() {
     export TF_VAR_account_name="$AWS_PROFILE"
