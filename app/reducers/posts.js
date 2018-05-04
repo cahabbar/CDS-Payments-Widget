@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import reselect from 'reselect';
+import rest from 'ember-data/adapters/rest';
 
 const { createSelector } = reselect;
 
@@ -23,6 +24,7 @@ const initialState = {
   credit: true,
   wallet: false,
   AlternativePayments: false,
+  responseMessage:'',
   newConfigName: {
     name: 'newConfigName',
     value: 'Default Config'
@@ -52,8 +54,6 @@ const initialState = {
       DiscoverCard: false,
       DinersClub: false,
       JCB: false,
-      CVC: true,
-      nameOnCard: true,
       billMeToggle: false,
       billMe: false,
       credit: true,
@@ -68,8 +68,6 @@ const initialState = {
       DiscoverCard: true,
       DinersClub: false,
       JCB: false,
-      CVC: true,
-      nameOnCard: true,
       billMeToggle: false,
       billMe: false,
       credit: true,
@@ -84,8 +82,6 @@ const initialState = {
       DiscoverCard: true,
       DinersClub: false,
       JCB: false,
-      CVC: true,
-      nameOnCard: true,
       billMeToggle: true,
       billMe: false,
       credit: true,
@@ -100,8 +96,6 @@ const initialState = {
       DiscoverCard: false,
       DinersClub: false,
       JCB: false,
-      CVC: true,
-      nameOnCard: true,
       billMeToggle: true,
       billMe: false,
       credit: true,
@@ -116,8 +110,6 @@ const initialState = {
       DiscoverCard: true,
       DinersClub: false,
       JCB: false,
-      CVC: true,
-      nameOnCard: true,
       billMeToggle: true,
       billMe: false,
       credit: true,
@@ -125,6 +117,294 @@ const initialState = {
       AlternativePayments: false,
     },
 
+    "VISA, MasterCard, American Express, Discover, CVV": {
+      name: "VISA, MasterCard, American Express, Discover, CVV",
+      Visa: true,
+      MasterCard: true,
+      AmericanExpress: true,
+      DiscoverCard: true,
+      DinersClub: false,
+      JCB: false,
+      CVC: true,
+      billMeToggle: false,
+      billMe: false,
+      credit: true,
+      wallet: false,
+      AlternativePayments: false,
+      CVV: true,
+    },
+    "VISA, MasterCard, American Express, CVV": {
+      name: "VISA, MasterCard, American Express, CVV",
+      Visa: true,
+      MasterCard: true,
+      AmericanExpress: true,
+      DiscoverCard: false,
+      DinersClub: false,
+      JCB: false,
+      CVC: true,
+      billMeToggle: false,
+      billMe: false,
+      credit: true,
+      wallet: false,
+      AlternativePayments: false,
+      CVV: true,
+    },
+    "VISA, MasterCard, Discover, CVV": {
+      name: "VISA, MasterCard, Discover, CVV",
+      Visa: true,
+      MasterCard: true,
+      AmericanExpress: false,
+      DiscoverCard: true,
+      DinersClub: false,
+      JCB: false,
+      CVC: true,
+      billMeToggle: false,
+      billMe: false,
+      credit: true,
+      wallet: false,
+      AlternativePayments: false,
+      CVV: true,
+    },
+    "VISA, MasterCard, American Express, Discover, Bill-me, CVV": {
+      name: "VISA, MasterCard, American Express, Discover, Bill-me, CVV",
+      Visa: true,
+      MasterCard: true,
+      AmericanExpress: true,
+      DiscoverCard: true,
+      DinersClub: false,
+      JCB: false,
+      CVC: true,
+      billMeToggle: true,
+      billMe: false,
+      credit: true,
+      wallet: false,
+      AlternativePayments: false,
+      CVV: true,
+    },
+    "VISA, MasterCard, American Express, Bill-me, CVV": {
+      name: "VISA, MasterCard, American Express, Bill-me, CVV",
+      Visa: true,
+      MasterCard: true,
+      AmericanExpress: true,
+      DiscoverCard: false,
+      DinersClub: false,
+      JCB: false,
+      CVC: true,
+      billMeToggle: true,
+      billMe: false,
+      credit: true,
+      wallet: false,
+      AlternativePayments: false,
+      CVV: true,
+    },
+    "VISA, MasterCard, Discover, Bill-me, CVV": {
+      name: "VISA, MasterCard, Discover, Bill-me, CVV",
+      Visa: true,
+      MasterCard: true,
+      AmericanExpress: false,
+      DiscoverCard: true,
+      DinersClub: false,
+      JCB: false,
+      CVC: true,
+      billMeToggle: true,
+      billMe: false,
+      credit: true,
+      wallet: false,
+      AlternativePayments: false,
+      CVV: true,
+    },
+
+    "VISA, MasterCard, American Express, Discover, AVS": {
+      name: "VISA, MasterCard, American Express, Discover, AVS",
+      Visa: true,
+      MasterCard: true,
+      AmericanExpress: true,
+      DiscoverCard: true,
+      DinersClub: false,
+      JCB: false,
+      billMeToggle: false,
+      billMe: false,
+      credit: true,
+      wallet: false,
+      AlternativePayments: false,
+      AVS: true,
+    },
+    "VISA, MasterCard, American Express, AVS": {
+      name: "VISA, MasterCard, American Express, AVS",
+      Visa: true,
+      MasterCard: true,
+      AmericanExpress: true,
+      DiscoverCard: false,
+      DinersClub: false,
+      JCB: false,
+      billMeToggle: false,
+      billMe: false,
+      credit: true,
+      wallet: false,
+      AlternativePayments: false,
+      AVS: true,
+    },
+    "VISA, MasterCard, Discover, AVS": {
+      name: "VISA, MasterCard, Discover, AVS",
+      Visa: true,
+      MasterCard: true,
+      AmericanExpress: false,
+      DiscoverCard: true,
+      DinersClub: false,
+      JCB: false,
+      billMeToggle: false,
+      billMe: false,
+      credit: true,
+      wallet: false,
+      AlternativePayments: false,
+      AVS: true,
+    },
+    "VISA, MasterCard, American Express, Discover, Bill-me, AVS": {
+      name: "VISA, MasterCard, American Express, Discover, Bill-me, AVS",
+      Visa: true,
+      MasterCard: true,
+      AmericanExpress: true,
+      DiscoverCard: true,
+      DinersClub: false,
+      JCB: false,
+      billMeToggle: true,
+      billMe: false,
+      credit: true,
+      wallet: false,
+      AlternativePayments: false,
+      AVS: true,
+    },
+    "VISA, MasterCard, American Express, Bill-me, AVS": {
+      name: "VISA, MasterCard, American Express, Bill-me, AVS",
+      Visa: true,
+      MasterCard: true,
+      AmericanExpress: true,
+      DiscoverCard: false,
+      DinersClub: false,
+      JCB: false,
+      billMeToggle: true,
+      billMe: false,
+      credit: true,
+      wallet: false,
+      AlternativePayments: false,
+      AVS: true,
+    },
+    "VISA, MasterCard, Discover, Bill-me, AVS": {
+      name: "VISA, MasterCard, Discover, Bill-me, AVS",
+      Visa: true,
+      MasterCard: true,
+      AmericanExpress: false,
+      DiscoverCard: true,
+      DinersClub: false,
+      JCB: false,
+      billMeToggle: true,
+      billMe: false,
+      credit: true,
+      wallet: false,
+      AlternativePayments: false,
+      AVS: true,
+    },
+
+
+
+
+
+    "VISA, MasterCard, American Express, Discover, CVV, AVS": {
+      name: "VISA, MasterCard, American Express, Discover, CVV, AVS",
+      Visa: true,
+      MasterCard: true,
+      AmericanExpress: true,
+      DiscoverCard: true,
+      DinersClub: false,
+      JCB: false,
+      CVC: true,
+      billMeToggle: false,
+      billMe: false,
+      credit: true,
+      wallet: false,
+      AlternativePayments: false,
+      CVV: true,
+    },
+    "VISA, MasterCard, American Express, CVV, AVS": {
+      name: "VISA, MasterCard, American Express, CVV, AVS",
+      Visa: true,
+      MasterCard: true,
+      AmericanExpress: true,
+      DiscoverCard: false,
+      DinersClub: false,
+      JCB: false,
+      CVC: true,
+      billMeToggle: false,
+      billMe: false,
+      credit: true,
+      wallet: false,
+      AlternativePayments: false,
+      CVV: true,
+    },
+    "VISA, MasterCard, Discover, CVV, AVS": {
+      name: "VISA, MasterCard, Discover, CVV, AVS",
+      Visa: true,
+      MasterCard: true,
+      AmericanExpress: false,
+      DiscoverCard: true,
+      DinersClub: false,
+      JCB: false,
+      CVC: true,
+      billMeToggle: false,
+      billMe: false,
+      credit: true,
+      wallet: false,
+      AlternativePayments: false,
+      CVV: true,
+    },
+    "VISA, MasterCard, American Express, Discover, Bill-me, CVV, AVS": {
+      name: "VISA, MasterCard, American Express, Discover, Bill-me, CVV, AVS",
+      Visa: true,
+      MasterCard: true,
+      AmericanExpress: true,
+      DiscoverCard: true,
+      DinersClub: false,
+      JCB: false,
+      CVC: true,
+      billMeToggle: true,
+      billMe: false,
+      credit: true,
+      wallet: false,
+      AlternativePayments: false,
+      CVV: true,
+    },
+    "VISA, MasterCard, American Express, Bill-me, CVV, AVS": {
+      name: "VISA, MasterCard, American Express, Bill-me, CVV, AVS",
+      Visa: true,
+      MasterCard: true,
+      AmericanExpress: true,
+      DiscoverCard: false,
+      DinersClub: false,
+      JCB: false,
+      CVC: true,
+      billMeToggle: true,
+      billMe: false,
+      credit: true,
+      wallet: false,
+      AlternativePayments: false,
+      CVV: true,
+    },
+    "VISA, MasterCard, Discover, Bill-me, CVV, AVS": {
+      name: "VISA, MasterCard, Discover, Bill-me, CVV, AVS",
+      Visa: true,
+      MasterCard: true,
+      AmericanExpress: false,
+      DiscoverCard: true,
+      DinersClub: false,
+      JCB: false,
+      CVC: true,
+      billMeToggle: true,
+      billMe: false,
+      credit: true,
+      wallet: false,
+      AlternativePayments: false,
+      CVV: true,
+    },
   },
   configs: {
     cards: {
@@ -173,10 +453,13 @@ const initialState = {
         value: ''
       },
       cvc: {
-        placeholder: 'CVC',
+        placeholder: 'CVV',
         name: 'cvc',
         value: ''
       }
+    },
+    responseMessage:{
+      value: ''
     },
   }
 };
@@ -292,6 +575,137 @@ export default function posts(state, action) {
       });
       return stateToRet;
     }
+    case 'submiter': {
+
+      const { configs } = state;
+      const { cardInfo } = configs;
+      // responseCode = '',
+   
+      console.log("Value of CDS.cdsProcess.cdsResponse "
+        + CDS.cdsProcess.cdsResponse.respCode + " "
+        + CDS.cdsProcess.cdsResponse.cardType + " "
+        + CDS.cdsProcess.cdsResponse.cipher);
+      if (CDS.cdsProcess.cdsResponse.respCode == "100") {
+
+        var { configs } = state;
+
+
+       
+        const retObject = Ember.$.ajax({
+          // url: 'http://localhost:8000/authorize',
+          url: 'https://qa-cps.buysub.com:8000/authorize',
+          type: 'POST',
+          crossDomain: true,
+          // headers: {
+          //   'Access-Control-Allow-Origin': '*'
+          // },
+          contentType: 'application/json;charset=utf-8',
+          dataType: 'json',
+          data: JSON.stringify({
+            systemID: "CPS",
+            TokenizeAccountNumber: "1",
+            Amount: "100",
+            clientCompanyID: "MAG1",
+            merchantID: "020594",
+            apiPassword: "Apple016",
+            apiUserName: "CPSTest",
+            transactionType: "7",
+            pmType: "EN",
+            countryCode: "US",
+            actionCode: "AU",
+            MerchantOrderID: "TESTPWAU000010",
+            pmExpirationDate: cardInfo.expiry.value,
+            currencyCode: "840",
+            gatewayID: "TESTPWAU000001",
+            pmAccountNumber: CDS.cdsProcess.cdsResponse.cipher,
+            encryptionFlag: "CDS",
+            cid: cardInfo.cvc.value,
+            AZ: {
+              pmZip: "68123"
+            },
+
+          })
+        }).then((response) =>{
+              console.log("CPSRealTimeAPI response: "
+              + JSON.stringify(response));
+              console.log(" response state  "+state.configs.responseMessage.value);
+              const stateToRet = {
+            
+                ...state,
+                ...{
+                  configs: {
+                    ...configs,
+      
+                      ...{
+                        responseMessage: {
+                         
+                          value: `Card Information`,
+                        }
+                      }
+      
+                  }
+                }
+              }
+              return stateToRet;
+            
+         
+         
+          })
+          // .catch(function(error) {
+          //   console.log(error);
+          // })
+
+          // success: function (response) {
+
+          // //  configs.responseMessage = `responseCode: `,+ response.responseCode +' '+ 'avsResponse: '
+          // //             + response.avsResponse,
+      
+          //  // state = stateToRet
+          //   console.log("CPSRealTimeAPI response: "
+          //     + JSON.stringify(response));
+          //   console.log("responseCode: "
+          //     + response.responseCode);
+          //   console.log("avsResponse: "
+          //     + response.avsResponse);
+              
+          //   $("#responseMessage").empty();
+          //   $("#responseMessage").append($(response.avsResponse));
+          // },
+          // error: function (jqXHR, textStatus, errorThrown) {
+          //   alert("You can not send Cross Domain AJAX requests: " + errorThrown.value);
+          // }
+      // });
+      console.log("retObject response: "
+      + JSON.stringify(retObject));
+
+      return retObject;
+   
+    }else{
+     // console.log("state  "+ initialState.configs.touched);
+          const stateToRet = {
+            
+            ...state,
+            ...{
+              configs: {
+                ...configs,
+
+                  ...{
+                    responseMessage: {
+                     
+                      value: `Invalid Card Information`,
+                    }
+                  }
+
+              }
+            }
+          }
+          return stateToRet;
+   }
+
+      return {
+        ...state,
+      };
+    }
     case 'saveNewConfig': {
       const { savedConfigs, Visa, MasterCard, AmericanExpress, DiscoverCard, DinersClub, JCB, CVC, nameOnCard, billMeToggle,
         billMe, credit, wallet, AlternativePayments, } = state;
@@ -329,4 +743,3 @@ export const filterPosts = createSelector(
     });
   }
 );
-

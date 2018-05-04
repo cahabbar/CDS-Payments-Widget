@@ -1,6 +1,6 @@
 {{#ui-layout class="container" as | configs Visa MasterCard AmericanExpress DiscoverCard DinersClub JCB cardToggle CVC nameOnCard
 wallet billMeToggle billMe AlternativePayments savedConfigs selectedConfig newConfigName widgetToggle filter filterWith myAction
-touched toggle setSelectedConfig saveNewConfig saveNewConfigName|}} {{#if widgetToggle }}
+touched toggle submiter setSelectedConfig saveNewConfig saveNewConfigName|}} {{#if widgetToggle }}
 <div class="demo-card-wide mdl-card mdl-shadow--0dp">
   <ul class="demo-list-item mdl-list" style="width:350px">
 
@@ -87,7 +87,7 @@ touched toggle setSelectedConfig saveNewConfig saveNewConfigName|}} {{#if widget
             {{/if}}
           </div>
           <!---->
-          <form id='my-form' class='payment-info'>
+          <form id='my-form' class='payment-info' {{action submiter on='submit'}} >
             <div style="width:100%; padding-top:0" class="mdl-textfield mdl-js-textfield">
               <input id="cc-number" data-cds="ccNumber" class="mdl-textfield__input" type="text" placeholder={{configs.cardInfo.number.placeholder}}
                 name={{configs.cardInfo.number.name}} value={{configs.cardInfo.number.value}} onblur={{action touched configs.cardInfo.number.name
@@ -108,14 +108,13 @@ touched toggle setSelectedConfig saveNewConfig saveNewConfigName|}} {{#if widget
               <!-- VSCode v. Handlebars-->
               {{#if nameOnCard}}
               <!-- VSCode v. Handlebars -->
-              <!--
-              <input class="mdl-textfield__input" type="text" 
+              <input class="mdl-textfield__input" type="text"
                 placeholder={{configs.cardInfo.name.placeholder }}
                 name={{configs.cardInfo.name.name}}
-                value={{configs.cardInfo.name.value}} 
+                value={{configs.cardInfo.name.value}}
                 onfocus={{action myAction configs.cardInfo.name.name configs.cardInfo.name.value}}
                 oninput={{action myAction configs.cardInfo.name.name configs.cardInfo.name.value}}
-              > -->
+              >
               <!-- VSCode v. Handlebars-->
               <!--
               {{#if configs.valid.nameWarning}}
@@ -128,7 +127,7 @@ touched toggle setSelectedConfig saveNewConfig saveNewConfigName|}} {{#if widget
               <!-- VSCode v. Handlebars-->
               <input class="mdl-textfield__input" type="text" placeholder={{configs.cardInfo.expiry.placeholder}} name={{configs.cardInfo.expiry.name}}
                 value={{configs.cardInfo.expiry.value}} oninput={{action myAction configs.cardInfo.expiry.name configs.cardInfo.expiry.value}}
-                onblur={{action touched configs.cardInfo.expiry.name configs.cardInfo.expiry.value}}>
+                onblur={{action submiter configs.cardInfo.expiry.name configs.cardInfo.expiry.value}}>
               <!-- VSCode v. Handlebars-->
               {{#if configs.valid.expirationDateWarning}}
               <div style="color:red; font-size: .8em">
@@ -144,16 +143,14 @@ touched toggle setSelectedConfig saveNewConfig saveNewConfigName|}} {{#if widget
               <div></div>
               {{#if CVC}}
               <!-- VSCode v. Handlebars -->
-              <!-- 
-              <input 
-                class="mdl-textfield__input" type="text" 
-                placeholder={{configs.cardInfo.cvc.placeholder}} 
+              <input
+                class="mdl-textfield__input" type="text"
+                placeholder={{configs.cardInfo.cvc.placeholder}}
                 name={{configs.cardInfo.cvc.name}}
                 value={{configs.cardInfo.cvc.value}}
                 oninput={{action myAction configs.cardInfo.cvc.name configs.cardInfo.cvc.value}}
                 onfocus={{action myAction configs.cardInfo.cvc.name configs.cardInfo.cvc.value}}
-              > 
-              -->
+              >
               <!-- VSCode v. Handlebars -->
               <!--
               {{#if configs.valid.cvvWarning}}
@@ -172,7 +169,15 @@ touched toggle setSelectedConfig saveNewConfig saveNewConfigName|}} {{#if widget
               Bill Me Later
             </span>
             {{/if}}
+           {{!-- {{#if configs.responseMessage.value}} --}}
+              <div style="color:red; font-size: .8em">{{configs.responseMessage.value}}</div>
+              
+               <input id=".responseMessage"  class="mdl-textfield__input" type="text"    name=".responseMessage" value="">
+                
+            {{!-- {{/if}} --}}
+             <button type="submit" >Save</button>
           </form>
+         
         </div>
       </div>
     </li>
@@ -182,7 +187,7 @@ touched toggle setSelectedConfig saveNewConfig saveNewConfigName|}} {{#if widget
 {{/if}}
 <!-- The drawer is always open in large screens. The header is always shown, even in small screens. -->
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header" style={{configs.valid.demo}}>
-  <div class="mdl-layout__drawer" >
+  <div class="mdl-layout__drawer" style="width:500px">
     <span class="mdl-layout-title">Configuration</span>
     <select style="width:90%; margin: 5%" onchange={{action setSelectedConfig value="target.value" }}>
       {{#each-in savedConfigs as |key config|}}
