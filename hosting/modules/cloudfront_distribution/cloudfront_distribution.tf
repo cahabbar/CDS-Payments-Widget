@@ -71,6 +71,8 @@ resource "aws_cloudfront_distribution" "distribution" {
     default_ttl = "${var.default_ttl}"
 
     forwarded_values = {
+      headers = ["Origin"]
+
       cookies {
         forward = "none"
       }

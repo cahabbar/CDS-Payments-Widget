@@ -53,4 +53,20 @@ resource "aws_s3_bucket" "bucket" {
   tags {
     Name = "${var.bucket_name}"
   }
+
+  cors_rule {
+    allowed_headers = [
+      "Authorization",
+    ]
+
+    allowed_methods = [
+      "GET",
+    ]
+
+    allowed_origins = [
+      "*",
+    ]
+
+    max_age_seconds = 3000
+  }
 }
