@@ -108,7 +108,7 @@ const dispatchToActions = dispatch => {
       console.log('\n component')
       console.log("Value of CDS.cdsProcess.cdsResponse " + CDS.cdsProcess.cdsResponse.respCode + " " + CDS.cdsProcess.cdsResponse.cardType + " " + CDS.cdsProcess.cdsResponse.cipher);
 
-      if ("100" == "100") {
+      if (CDS.cdsProcess.cdsResponse.respCode == "100") {
 
         return fetch(//'http://foglesok:8080/ws/api/oneTimeAuthorization', {
           'https://ba-service.mycdsglobal.com/ws/api/oneTimeAuthorization/', {
@@ -133,10 +133,10 @@ const dispatchToActions = dispatch => {
                 actionCode: "auth",
                 clientTransactionId: "",  // emply
                 transactionType: "7", // 7
-                creditCardNumber: "3cd30269bd59fbb55bfb8fe8187b1ef81d0b0002b20a795700400d15452271cd7d31af4e5df9f14a01b2bfa903f0c51c97ca4242840cdb9ba8b204e415b3a45d3805d0f08c43fbf59f52e66b08e7e4351736faacd92c94b3f69d7666222728ba3e9985e58b5d16332d26ea4948a0c97c2b18ac4c45724d8cf22f69a6e60b5f1a",// CDS.cdsProcess.cdsResponse.cipher,
+                creditCardNumber:  CDS.cdsProcess.cdsResponse.cipher,
                 creditCardType: "EN",
                 creditCardCVV: m.cvc.value,
-                creditCardExpire: "1222",//m.expiry.value,
+                creditCardExpire: m.expiry.value,
                 amount: "0.98", // in the page
                 merchantOrderID: v1(),  // create it from the PW
                 encryptionFlag: "CDS",  //CDS
@@ -147,32 +147,10 @@ const dispatchToActions = dispatch => {
             }
             ),
           }).then(r => r.json()).then(payload => {
-            if (payload.status == 200) {
               dispatch({ type: 'submiter', payload: responseObjects })
-            }else if (payload.status == 401) {
-              dispatch({ type: 'submiter', payload: responseObjects })
-            }else {
-              dispatch({ type: 'submiter', payload: responseObjects })
-            }
+      
           }).catch(({ response , jqXHR, payload }) => {
-            dispatch({ type: 'submiter', payload:         {
-              "type": "oneTimeAuthorization",
-              "merchantOrderID": "123456789",
-              "creditCardType": "MC",
-              "creditCardExpire": "1128",
-              "amount": "098",
-              "creditCardExpireMonth": "11",
-              "creditCardExpireYear": "28",
-              "authorizationDate": "05022018",
-              "creditCardLastFour": "5454",
-              "authorizationCode": "tst770",
-              "cpsTransactionId": "10001238839",
-              "responseCode": "100",
-              "clientCompany": "AMS",
-              "transactionStatus": "CAPTURED",
-              "avsResponse": "12"
-          }
-  })
+            dispatch({ type: 'submiter', payload: 'false'   })
           });
 
       } else {

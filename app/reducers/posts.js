@@ -583,9 +583,14 @@ export default function posts(state, action) {
     case 'submiter': {
       const { configs } = state;
       console.log('\n reducer', { state }, { action }, '\n reducer')
-     
-      if("00" || "01" || "02" == action.payload.avsResponse){
-        const stateToRetF = {
+
+
+      switch (action.payload.avsResponse)
+      {
+         case "00":
+         case "01":
+         case "02": 
+         const stateToRet = {
           ...state,
           ...{
             configs: {
@@ -593,66 +598,6 @@ export default function posts(state, action) {
               ...{
                 responseMessage: {
                   value: action.payload.avsResponse,
-                },
-                authorizationDate: {
-                  value: action.payload.authorizationDate,
-                },
-                authorizationCode: {
-                  value: action.payload.authorizationCode,
-                }
-              }
-  
-            }
-          }
-        }
-        return stateToRetF;
-      }
-      // else if("102" == action.payload.avsResponse  ) {
-
-      //   Ember.$.ajax({
-      //     // url: 'http://localhost:8000/authorize',
-      //     url: 'https://qa-cps.buysub.com:8000/authreversal',
-      //     type: 'POST',
-      //     crossDomain: true,
-      //     // headers: {
-      //     //   'Access-Control-Allow-Origin': '*'
-      //     // },
-      //     //'Authorization', 'Basic ' + Base64.encode( 'cdspayments:testpayments' )
-      //     headers: new Headers({
-      //       //   'Authorization': 'Basic Y2RzcGF5bWVudHM6dGVzdHBheW1lbnRz',
-      //          'Content-Type': 'application/json',
-      //          'Accept': 'application/json'
-      //        }),
-      //     contentType: 'application/json;charset=utf-8',
-      //     dataType: 'json',
-      //     AppId: 'CPSTest',
-      //     Password: 'cds1001',
-      //     data: JSON.stringify({
-      //       actionCode:"AR",
-      //       apiUserName:"CPSTest",
-      //       apiPassword:"Apple016",
-      //       clientCompanyID:action.payload.clientCompany,
-      //       merchantOrderID:action.payload.merchantOrderID,
-      //       transactionID:action.payload.cpsTransactionId
-          
-      //    }),
-      //    })    
-      //   .then((response) =>{
-         
-      //         return state;
-      //     })              
-
-
-      // }
-      else{
-        const stateToRet = {
-          ...state,
-          ...{
-            configs: {
-              ...configs,
-              ...{
-                responseMessage: {
-                  value: action.payload,
                 }
               }
   
@@ -660,89 +605,45 @@ export default function posts(state, action) {
           }
         }
         return stateToRet;
-      }
-
-      // switch (action.payload.avsResponse)
-      // {
-      //    case "00":
-      //    case "01":
-      //    case "02": 
-      //    const stateToRet = {
-      //     ...state,
-      //     ...{
-      //       configs: {
-      //         ...configs,
-      //         ...{
-      //           responseMessage: {
-      //             value: action.payload.avsResponse,
-      //           }
-      //         }
-  
-      //       }
-      //     }
-      //   }
-      //   return stateToRet;
-      //        break;
-            //  const stateToRetF = {
-            //   ...state,
-            //   ...{
-            //     configs: {
-            //       ...configs,
-            //       ...{
-            //         responseMessage: {
-            //           value: action.payload.avsResponse,
-            //         },
-            //         authorizationDate: {
-            //           value: action.payload.authorizationDate,
-            //         },
-            //         authorizationCode: {
-            //           value: action.payload.authorizationCode,
-            //         }
-            //       }
+             break;
+             const stateToRetF = {
+              ...state,
+              ...{
+                configs: {
+                  ...configs,
+                  ...{
+                    responseMessage: {
+                      value: action.payload.avsResponse,
+                    },
+                    authorizationDate: {
+                      value: action.payload.authorizationDate,
+                    },
+                    authorizationCode: {
+                      value: action.payload.authorizationCode,
+                    }
+                  }
       
-            //     }
-            //   }
-            // }
-            // return stateToRetF;
-      //    default: 
-      //          const stateToRetF = {
-      //   ...state,
-      //   ...{
-      //     configs: {
-      //       ...configs,
-      //       ...{
-      //         responseMessage: {
-      //           value: action.payload.avsResponse,
-      //         },
-      //         authorizationDate: {
-      //           value: action.payload.authorizationDate,
-      //         },
-      //         authorizationCode: {
-      //           value: action.payload.authorizationCode,
-      //         }
-      //       }
+                }
+              }
+            }
+            return stateToRetF;
+         default: 
+               const stateToRetF = {
+       ...state,
+        ...{
+          configs: {
+            ...configs,
+            ...{
+              responseMessage: {
+                value: action.payload,
+              }
+            }
 
-      //     }
-      //   }
-      // }
-      // return stateToRetF;
-      // }
-
-      // const stateToRet = {
-      //   ...state,
-      //   ...{
-      //     configs: {
-      //       ...configs,
-      //       ...{
-      //         responseMessage: {
-      //           value: action.payload,
-      //         }
-      //       }
-
-      //     }
-      //   }
-      // }
-      // return stateToRet;
+          }
+        }
+      }
+      return stateToRetF;
+      }
     }
     case 'saveNewConfig': {
       const { savedConfigs, Visa, MasterCard, AmericanExpress, DiscoverCard, DinersClub, JCB, CVC, nameOnCard, billMeToggle,
