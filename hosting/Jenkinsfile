@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+    environment {
+        AWS_PROFILE = sh(script: 'aws iam list-account-aliases | jq .AccountAliases[0] | tr -d [\\"\\\\n]', returnStdout: true)
+    }
+    parameters {
+        choice(choices: 'us-east-1', description: 'What AWS region?', name: 'AWS_DEFAULT_REGION')
+    }
+    stages {
+        stage('Init') {
+            steps {
+                echo 'Initializing...'
+                dir("hosting") {
+                  sh "terraform --version"
+                  sh "./tf-init.sh"
+                }
+            }
+        }
+        stage('Plan') {
+            steps {
+                echo 'Planning...'
+                dir("hosting") {
+                  sh "./tf-plan.sh"
+                }
+            }
+        }
+        stage('Apply') {
+            steps {
+                echo 'Planning...'
+                dir("hosting") {
+                  sh "./tf-apply.sh"
+                }
+            }
+        }
+    }
+}

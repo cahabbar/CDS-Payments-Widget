@@ -108,9 +108,13 @@ touched toggle submiter setSelectedConfig saveNewConfig saveNewConfigName|}} {{#
               <!-- VSCode v. Handlebars-->
               {{#if nameOnCard}}
               <!-- VSCode v. Handlebars -->
-              <input class="mdl-textfield__input" type="text" placeholder={{configs.cardInfo.name.placeholder }} name={{configs.cardInfo.name.name}}
-                value={{configs.cardInfo.name.value}} onfocus={{action myAction configs.cardInfo.name.name configs.cardInfo.name.value}}
-                oninput={{action myAction configs.cardInfo.name.name configs.cardInfo.name.value}}>
+              <input class="mdl-textfield__input" type="text"
+                placeholder={{configs.cardInfo.name.placeholder }}
+                name={{configs.cardInfo.name.name}}
+                value={{configs.cardInfo.name.value}}
+                onfocus={{action myAction configs.cardInfo.name.name configs.cardInfo.name.value}}
+                oninput={{action myAction configs.cardInfo.name.name configs.cardInfo.name.value}}
+              >
               <!-- VSCode v. Handlebars-->
               <!--
               {{#if configs.valid.nameWarning}}
