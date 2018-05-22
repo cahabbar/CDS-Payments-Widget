@@ -584,65 +584,49 @@ export default function posts(state, action) {
       const { configs } = state;
       console.log('\n reducer', { state }, { action }, '\n reducer')
 
+      switch (action.payload.avsResponse) {
+        case "00":
+        case "01":
+        case "02":
 
-      switch (action.payload.avsResponse)
-      {
-         case "00":
-         case "01":
-         case "02": 
-         const stateToRet = {
-          ...state,
-          ...{
-            configs: {
-              ...configs,
-              ...{
-                responseMessage: {
-                  value: action.payload.avsResponse,
-                }
-              }
-  
-            }
-          }
-        }
-        return stateToRet;
-             break;
-             const stateToRetF = {
-              ...state,
-              ...{
-                configs: {
-                  ...configs,
-                  ...{
-                    responseMessage: {
-                      value: action.payload.avsResponse,
-                    },
-                    authorizationDate: {
-                      value: action.payload.authorizationDate,
-                    },
-                    authorizationCode: {
-                      value: action.payload.authorizationCode,
-                    }
-                  }
-      
-                }
-              }
-            }
-            return stateToRetF;
-         default: 
-               const stateToRetF = {
-       ...state,
-        ...{
-          configs: {
-            ...configs,
+          const stateToRetF = {
+            ...state,
             ...{
-              responseMessage: {
-                value: action.payload,
+              configs: {
+                ...configs,
+                ...{
+                  responseMessage: {
+                    value: action.payload.avsResponse,
+                  },
+                  authorizationDate: {
+                    value: action.payload.authorizationDate,
+                  },
+                  authorizationCode: {
+                    value: action.payload.authorizationCode,
+                  }
+                }
+
               }
             }
-
           }
-        }
-      }
-      return stateToRetF;
+          return stateToRetF;
+          break;
+        default:
+          const stateToRet = {
+            ...state,
+            ...{
+              configs: {
+                ...configs,
+                ...{
+                  responseMessage: {
+                    value: action.payload,
+                  }
+                }
+
+              }
+            }
+          }
+          return stateToRet;
       }
     }
     case 'saveNewConfig': {

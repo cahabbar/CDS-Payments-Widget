@@ -150,7 +150,7 @@ const dispatchToActions = dispatch => {
               dispatch({ type: 'submiter', payload: responseObjects })
       
           }).catch(({ response , jqXHR, payload }) => {
-            dispatch({ type: 'submiter', payload: 'false'   })
+            dispatch({ type: 'submiter', payload: 'false' })
           });
 
       } else {
