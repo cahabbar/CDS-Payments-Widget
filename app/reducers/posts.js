@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import reselect from 'reselect';
+import rest from 'ember-data/adapters/rest';
 
 const { createSelector } = reselect;
 
@@ -23,6 +24,7 @@ const initialState = {
   credit: true,
   wallet: false,
   AlternativePayments: false,
+  responseMessage: '',
   newConfigName: {
     name: 'newConfigName',
     value: 'Default Config'
@@ -455,6 +457,15 @@ const initialState = {
         value: ''
       }
     },
+    responseMessage: {
+      value: ''
+    },
+    authorizationDate: {
+      value: ''
+    },
+    authorizationCode: {
+      value: ''
+    }
   }
 };
 
@@ -568,6 +579,55 @@ export default function posts(state, action) {
         }
       });
       return stateToRet;
+    }
+    case 'submiter': {
+      const { configs } = state;
+      console.log('\n reducer', { state }, { action }, '\n reducer')
+
+      switch (action.payload.avsResponse) {
+        case "00":
+        case "01":
+        case "02":
+
+          const stateToRetF = {
+            ...state,
+            ...{
+              configs: {
+                ...configs,
+                ...{
+                  responseMessage: {
+                    value: action.payload.avsResponse,
+                  },
+                  authorizationDate: {
+                    value: action.payload.authorizationDate,
+                  },
+                  authorizationCode: {
+                    value: action.payload.authorizationCode,
+                  }
+                }
+
+              }
+            }
+          }
+          return stateToRetF;
+          break;
+        default:
+          const stateToRet = {
+            ...state,
+            ...{
+              configs: {
+                ...configs,
+                ...{
+                  responseMessage: {
+                    value: action.payload,
+                  }
+                }
+
+              }
+            }
+          }
+          return stateToRet;
+      }
     }
     case 'saveNewConfig': {
       const { savedConfigs, Visa, MasterCard, AmericanExpress, DiscoverCard, DinersClub, JCB, CVC, nameOnCard, billMeToggle,

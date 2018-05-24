@@ -4,8 +4,8 @@ import Ember from 'ember';
 import cardNumber from 'src/card-number';
 import expirationDate from 'src/expiration-date';
 import validCvv from 'src/cvv';
-
-
+import AjaxService from 'ember-ajax/services/ajax';
+import { v1, v4 } from "ember-uuid";
 
 const filteredPostsBool = state => filterPosts(state);
 
@@ -47,7 +47,7 @@ const stateToComputed = state => {
   const numberValidationNotValid = (!!numberValidation.card && !numberValidation.isValid);
   const notValidOption = numberValidation.card && !(acceptedCards.indexOf(numberValidation.card.type) >= 0);
   const numberTouched = !!cardCardNumber.touched;
-  const showNumberValidation =  numberTouched && (numberValidationNotValid || notValidOption);
+  const showNumberValidation = numberTouched && (numberValidationNotValid || notValidOption);
   const valid = {
     numNoSpaces,
     numberValidation,
@@ -101,6 +101,62 @@ const dispatchToActions = dispatch => {
     toggle: (...m) => {
       dispatch({ type: 'toggle', m })
     },
+    submiter: (m) => {
+      console.log('\n component')
+      console.log({ m })
+      console.log({ stateToComputed })
+      console.log('\n component')
+      console.log("Value of CDS.cdsProcess.cdsResponse " + CDS.cdsProcess.cdsResponse.respCode + " " + CDS.cdsProcess.cdsResponse.cardType + " " + CDS.cdsProcess.cdsResponse.cipher);
+
+      if (CDS.cdsProcess.cdsResponse.respCode == "100") {
+
+        return fetch(//'http://foglesok:8080/ws/api/oneTimeAuthorization', {
+          'https://ba-service.mycdsglobal.com/ws/api/oneTimeAuthorization/', {
+
+            method: 'POST',
+            //    crossDomain: true,
+            contentType: 'application/json',
+            dataType: 'json',
+            mode: 'cors',
+            headers: new Headers({
+           //   'Authorization': 'Basic Y2RzcGF5bWVudHM6dGVzdHBheW1lbnRz',
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            }),
+
+            withCredentials: false,
+
+            body: JSON.stringify({
+              prodIdAlias: "FDT", //is going to be in the page
+              serviceObject: {
+                type: "oneTimeAuthorization",
+                actionCode: "auth",
+                clientTransactionId: "",  // emply
+                transactionType: "7", // 7
+                creditCardNumber:  CDS.cdsProcess.cdsResponse.cipher,
+                creditCardType: "EN",
+                creditCardCVV: m.cvc.value,
+                creditCardExpire: m.expiry.value,
+                amount: "0.98", // in the page
+                merchantOrderID: v1(),  // create it from the PW
+                encryptionFlag: "CDS",  //CDS
+                AZ: {
+                  pmZip: "68123"
+                },
+              }
+            }
+            ),
+          }).then(r => r.json()).then(payload => {
+              dispatch({ type: 'submiter', payload: responseObjects })
+      
+          }).catch(({ response , jqXHR, payload }) => {
+            dispatch({ type: 'submiter', payload: 'false' })
+          });
+
+      } else {
+        dispatch({ type: 'submiter', payload: 'invalid credit card' })
+      }
+    },
     setSelectedConfig: (...m) => {
       dispatch({ type: 'selectConfig', m })
     },
@@ -125,7 +181,7 @@ const comp = Ember.Component.extend({
     });
 
     jQuery('#cc-number')[0].setAttribute('data-cds', 'ccNumber');
-      jQuery('#cipher')[0].setAttribute('data-cds', 'cipher');
+    jQuery('#cipher')[0].setAttribute('data-cds', 'cipher');
 
   }
 
