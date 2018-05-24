@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        AWS_PROFILE = sh(script: 'aws iam list-account-aliases | jq .AccountAliases[0] | tr -d [\\"\\\\n]', returnStdout: true)
+        AWS_PROFILE = sh(script: 'aws iam list-account-aliases | jq -jr .AccountAliases[0]', returnStdout: true)
     }
     parameters {
         choice(choices: 'us-east-1', description: 'What AWS region?', name: 'AWS_DEFAULT_REGION')
