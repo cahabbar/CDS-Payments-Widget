@@ -4,8 +4,9 @@ import Ember from 'ember';
 import cardNumber from 'src/card-number';
 import expirationDate from 'src/expiration-date';
 import validCvv from 'src/cvv';
-import AjaxService from 'ember-ajax/services/ajax';
-import { v1, v4 } from "ember-uuid";
+import { v4 } from "ember-uuid";
+//import awsmobile from '../aws-exports';
+
 
 const filteredPostsBool = state => filterPosts(state);
 
@@ -109,49 +110,59 @@ const dispatchToActions = dispatch => {
       console.log("Value of CDS.cdsProcess.cdsResponse " + CDS.cdsProcess.cdsResponse.respCode + " " + CDS.cdsProcess.cdsResponse.cardType + " " + CDS.cdsProcess.cdsResponse.cipher);
 
       if (CDS.cdsProcess.cdsResponse.respCode == "100") {
+        var amt = jQuery("input[data-cds-amount=Amount]").val();
+        var prodIdAlias = jQuery("input[data-cds-prodIdAlias=prodIdAlias]").val();
+        var postalCode = jQuery("input[data-cds-mpZip=ZipCode]").val();
 
-        return fetch(//'http://foglesok:8080/ws/api/oneTimeAuthorization', {
-          'https://ba-service.mycdsglobal.com/ws/api/oneTimeAuthorization/', {
+        const Auth = window['aws-amplify'].Auth;
+        const Amplify = window['aws-amplify'].default;
+        const API = window['aws-amplify'].API;
 
-            method: 'POST',
-            //    crossDomain: true,
-            contentType: 'application/json',
-            dataType: 'json',
-            mode: 'cors',
-            headers: new Headers({
-           //   'Authorization': 'Basic Y2RzcGF5bWVudHM6dGVzdHBheW1lbnRz',
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            }),
+        const ID_POOL_ID = 'us-east-1:7c27e6ef-0a4e-45ae-8087-ad9c9be11b7b';
 
-            withCredentials: false,
-
-            body: JSON.stringify({
-              prodIdAlias: "FDT", //is going to be in the page
-              serviceObject: {
-                type: "oneTimeAuthorization",
-                actionCode: "auth",
-                clientTransactionId: "",  // emply
-                transactionType: "7", // 7
-                creditCardNumber:  CDS.cdsProcess.cdsResponse.cipher,
-                creditCardType: "EN",
-                creditCardCVV: m.cvc.value,
-                creditCardExpire: m.expiry.value,
-                amount: "0.98", // in the page
-                merchantOrderID: v1(),  // create it from the PW
-                encryptionFlag: "CDS",  //CDS
-                AZ: {
-                  pmZip: "68123"
-                },
+        Amplify.configure({
+          Auth: {
+            identityPoolId: ID_POOL_ID,
+            region: 'us-east-1'
+          },
+          API: {
+            endpoints: [
+              {
+                name: "pwdev",
+                endpoint: "https://ys3cwup789.execute-api.us-east-1.amazonaws.com/dev"
               }
+            ]
+          }
+        })
+
+        return API.post("pwdev", "/pw", {
+          body: {
+            prodIdAlias: prodIdAlias, //is going to be in the page
+            oneTimeAuthorization: {
+              actionCode: "auth",
+              transactionType: "7", // 7
+              creditCardNumber:  CDS.cdsProcess.cdsResponse.cipher,
+              creditCardType: "EN",
+              creditCardCVV: m.cvc.value,
+              creditCardExpire: m.expiry.value,
+              amount: amt, // in the page
+              currencyCode: "840",
+              merchantOrderID: v4().substring(0, 8),  // create it from the PW
+              encryptionFlag: "CDS",  //CDS
+              address: {
+                postalCode: postalCode
+              },
             }
-            ),
-          }).then(r => r.json()).then(payload => {
-              dispatch({ type: 'submiter', payload: responseObjects })
-      
-          }).catch(({ response , jqXHR, payload }) => {
-            dispatch({ type: 'submiter', payload: 'false' })
+          }
+        }).then(payload => {
+          console.log('\n payload', { payload }, '\n payload')
+          dispatch({ type: 'submiter', payload: payload.oneTimeAuthorizations[0] })
+
+        }).catch(error => {
+            console.log(error);
+            dispatch({ type: 'submiter', payload: 'invalid credit card' })
           });
+
 
       } else {
         dispatch({ type: 'submiter', payload: 'invalid credit card' })
@@ -177,6 +188,7 @@ const comp = Ember.Component.extend({
       Ember.$.getScript("images/cds-process.min.js", function () {
         CDS.cdsProcess.allowedCards = ['MC', 'VI', 'AX', 'DI'];
         CDS.cdsProcess.clientCode('BHG');
+
       });
     });
 

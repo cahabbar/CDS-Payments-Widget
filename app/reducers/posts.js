@@ -457,13 +457,16 @@ const initialState = {
         value: ''
       }
     },
-    responseMessage: {
+    avsResponse: {
       value: ''
     },
     authorizationDate: {
       value: ''
     },
     authorizationCode: {
+      value: ''
+    },
+    responseMessage: {
       value: ''
     }
   }
@@ -584,50 +587,50 @@ export default function posts(state, action) {
       const { configs } = state;
       console.log('\n reducer', { state }, { action }, '\n reducer')
 
-      switch (action.payload.avsResponse) {
-        case "00":
-        case "01":
-        case "02":
-
-          const stateToRetF = {
-            ...state,
-            ...{
-              configs: {
-                ...configs,
-                ...{
-                  responseMessage: {
-                    value: action.payload.avsResponse,
-                  },
-                  authorizationDate: {
-                    value: action.payload.authorizationDate,
-                  },
-                  authorizationCode: {
-                    value: action.payload.authorizationCode,
-                  }
-                }
-
+      if (action.payload == 'invalid credit card') {
+        const stateToRet = {
+          ...state,
+          ...{
+            configs: {
+              ...configs,
+              ...{
+                responseMessage: {
+                  value: action.payload,
+                },
               }
+
             }
           }
-          return stateToRetF;
-          break;
-        default:
-          const stateToRet = {
-            ...state,
-            ...{
-              configs: {
-                ...configs,
-                ...{
-                  responseMessage: {
-                    value: action.payload,
-                  }
-                }
+        }
+        return stateToRet;
+      } else {
 
+        const stateToRetF = {
+          ...state,
+          ...{
+            configs: {
+              ...configs,
+              ...{
+                avsResponse: {
+                  value: action.payload.avsResponse,
+                },
+                authorizationDate: {
+                  value: action.payload.authorizationDate,
+                },
+                authorizationCode: {
+                  value: action.payload.authorizationCode,
+                }
               }
+
             }
           }
-          return stateToRet;
+        }
+        return stateToRetF;
+
+
       }
+
+
     }
     case 'saveNewConfig': {
       const { savedConfigs, Visa, MasterCard, AmericanExpress, DiscoverCard, DinersClub, JCB, CVC, nameOnCard, billMeToggle,

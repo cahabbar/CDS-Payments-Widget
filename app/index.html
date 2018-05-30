@@ -10,6 +10,7 @@
   <link integrity="" rel="stylesheet" href="{{rootURL}}assets/vendor.css">
   <script src="{{rootURL}}assets/vendor.js"></script>
   <script src="{{rootURL}}assets/cds-payments-widget.js"></script>
+  <script src="images/aws-amplify.js" ></script>
   <script>
     if (typeof Object.assign != 'function') {
       (function () {
@@ -36,17 +37,76 @@
       })();
      }
   </script>
+     <!-- <script> 
+      const API = window['aws-amplify'].API;
+      const Auth = window['aws-amplify'].Auth;
+      const Amplify = window['aws-amplify'].default;
+
+      const ID_POOL_ID = 'us-east-1:7c27e6ef-0a4e-45ae-8087-ad9c9be11b7b';
+
+
+     window['aws-amplify'].default = Amplify;
+
+      function signIn() {
+
+          Amplify.configure({
+              Auth: {
+                  identityPoolId: ID_POOL_ID,
+                  region: 'us-east-1'
+              },
+              API: {
+                  endpoints: [
+                      {
+                          name: "testapi",
+                          endpoint: "https://ys3cwup789.execute-api.us-east-1.amazonaws.com/dev"
+                      }
+                  ]
+              }
+          });
+
+          AWS.config.region = 'us-east-1';
+          // var username = document.getElementById('name-input').value;
+          // var pw = document.getElementById('pw-input').value;
+
+          // Auth.signIn(username, pw)
+          //     .then(user => console.log(user))
+          //     .catch(err => console.log(err));
+      }
+      
+      async function callApi() {
+          // Call API Gateway
+          var response = await API.post("testapi", "/pw", {})
+              .catch(error => {
+                  console.log(error);
+              });
+
+          document.getElementById('output-container').innerHTML = JSON.stringify(response);
+      }
+  </script> -->
   <!--VSCODE v. Handlebars-->
   {{content-for "head"}}
+<!-- 
+  <div>
+
+    <button id="signInButton" onclick="signIn()">Sign In</button>
+
+</div>
+<div>
+    <button id="demo-button" onclick="callApi()" >Call WSG</button>
+</div> -->
+
   <!--VSCODE v. Handlebars-->
   {{content-for "concat-css"}}
   <!--VSCODE v. Handlebars-->
   {{content-for "concat-js"}}
   <!--VSCODE v. Handlebars-->
   {{content-for "head-footer"}}
+
+
 </head>
 
 <body>
+   
   <div id="CDSGPW" data-card-options='12'></div>
 </body>
 

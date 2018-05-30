@@ -172,14 +172,18 @@ touched toggle submiter setSelectedConfig saveNewConfig saveNewConfigName|}} {{#
               Bill Me Later
             </span>
             {{/if}} 
-            {{#if configs.responseMessage.value}}
-            <div style="color:red; font-size: .8em">{{configs.responseMessage.value}}</div>
+            {{log "configs" configs}}
+            {{#if configs.avsResponse.value}}
+            <div style="color:red; font-size: .8em">{{configs.avsResponse.value}}</div> 
             {{/if}}
             {{#if configs.authorizationDate.value}}
             <div style="color:red; font-size: .8em">{{configs.authorizationDate.value}}</div>
             {{/if}}
             {{#if configs.authorizationCode.value}}
             <div style="color:red; font-size: .8em">{{configs.authorizationCode.value}}</div>
+            {{/if}}
+             {{#if configs.responseMessage.value}}
+            <div style="color:red; font-size: .8em">{{configs.responseMessage.value}}</div>
             {{/if}}
 
           </form>
