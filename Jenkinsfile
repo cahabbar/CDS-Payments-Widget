@@ -14,7 +14,7 @@ pipeline {
                 sh '''
                     unset AWS_PROFILE
                     WSG_APIGW_ID=`aws apigateway get-rest-apis | jq -r '.items[] | { id: .id, name: .name}'|grep -B2 -A1 "$APP_ENV-$APIGW_BASE_NAME"| jq -jr .id`
-                    WSG_APIGW_URL="https://$WSG_APIGW_ID.execute-api.$AWS_DEFAULT_REGION.amazonaws.com/$APP_ENV/"
+                    WSG_APIGW_URL="https://$WSG_APIGW_ID.execute-api.$AWS_DEFAULT_REGION.amazonaws.com/$APP_ENV"
 
                     echo "WSG_APIGW_URL=$WSG_APIGW_URL"
                     # we may need to run a sed command to sub in this value. or something
