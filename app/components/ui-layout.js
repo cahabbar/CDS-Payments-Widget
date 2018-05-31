@@ -128,14 +128,14 @@ const dispatchToActions = dispatch => {
           API: {
             endpoints: [
               {
-                name: "pwdev",
-                endpoint: "https://ys3cwup789.execute-api.us-east-1.amazonaws.com/dev"
+                name: "WSGAPI",
+                endpoint: "WSG_APIGW_URL"
               }
             ]
           }
         })
 
-        return API.post("pwdev", "/pw", {
+        return API.post("WSGAPI", "/pw", {
           body: {
             prodIdAlias: prodIdAlias, //is going to be in the page
             oneTimeAuthorization: {

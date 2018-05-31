@@ -11,3 +11,6 @@ WSG_APIGW_ID=`aws apigateway get-rest-apis | jq -r '.items[] | { id: .id, name: 
 WSG_APIGW_URL="https://$WSG_APIGW_ID.execute-api.$AWS_DEFAULT_REGION.amazonaws.com/$APP_ENV/"
 
 echo "WSG_APIGW_URL=$WSG_APIGW_URL"
+
+# if you need local dev, you'll want to subsitute this value in the file below
+#sed #WSG_APIGW_URL#$WSG_APIGW_URL# app/components/ui-layout.js
