@@ -48,6 +48,7 @@ variable "name" {}
 variable "price_class" {}
 variable "restriction_type" {}
 variable "origin_access_identity" {}
+variable "acm_certificate_arn" {}
 
 output "cloudfront_domain_name" {
   value = "${aws_cloudfront_distribution.distribution.domain_name}"
@@ -121,6 +122,6 @@ resource "aws_cloudfront_distribution" "distribution" {
   }
 
   viewer_certificate {
-    cloudfront_default_certificate = "true"
+    acm_certificate_arn = "${var.acm_certificate_arn}"
   }
 }

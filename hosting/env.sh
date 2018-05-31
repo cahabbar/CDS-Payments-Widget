@@ -33,11 +33,15 @@ profileDomain() {
         export TF_VAR_env_other="ba"
         export TF_VAR_zone_name_main="cloud.buysub.com"
         export TF_VAR_zone_name_other="ba-cloud.buysub.com"
+        export TF_VAR_acm_cert_arn_main=""
+        export TF_VAR_acm_cert_arn_other=""
     elif [ "cdsg-nonprod" = "$AWS_PROFILE" ]; then
         export TF_VAR_env_main="qa"
         export TF_VAR_env_other="test"
         export TF_VAR_zone_name_main="qa-cloud.buysub.com"
         export TF_VAR_zone_name_other="test-cloud.buysub.com"
+        export TF_VAR_acm_cert_arn_main="arn:aws:acm:us-east-1:590449824367:certificate/001ac5b1-9851-46a1-a9ff-52d8b8705a6b"
+        export TF_VAR_acm_cert_arn_other="arn:aws:acm:us-east-1:590449824367:certificate/333f41f7-2058-4ab3-87d0-8ebb84a944f0"
     fi
 
     if [[ -z "$TF_VAR_zone_name_main" && -z "$TF_VAR_zone_name_other" ]]; then

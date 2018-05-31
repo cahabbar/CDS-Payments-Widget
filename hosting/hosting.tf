@@ -14,6 +14,8 @@ variable "env_main" {}
 variable "env_other" {}
 variable "zone_name_main" {}
 variable "zone_name_other" {}
+variable "acm_cert_arn_main" {}
+variable "acm_cert_arn_other" {}
 
 data "aws_iam_account_alias" "current" {}
 
@@ -68,6 +70,7 @@ module "app_cloudfront_main" {
   max_ttl             = 300
   default_ttl         = 0
   default_root_object = "index.html"
+  acm_certificate_arn = "${var.acm_cert_arn_main}"
   source              = "modules/cloudfront_distribution"
 }
 
@@ -102,6 +105,7 @@ module "app_cloudfront_other" {
   max_ttl             = 300
   default_ttl         = 0
   default_root_object = "index.html"
+  acm_certificate_arn = "${var.acm_cert_arn_other}"
   source              = "modules/cloudfront_distribution"
 }
 
