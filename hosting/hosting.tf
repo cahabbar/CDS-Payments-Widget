@@ -65,9 +65,10 @@ module "app_cloudfront_main" {
     "US",
   ]
 
-  max_ttl     = 300
-  default_ttl = 0
-  source      = "modules/cloudfront_distribution"
+  max_ttl             = 300
+  default_ttl         = 0
+  default_root_object = "index.html"
+  source              = "modules/cloudfront_distribution"
 }
 
 module "route53_record_app_main" {
@@ -98,9 +99,10 @@ module "app_cloudfront_other" {
     "US",
   ]
 
-  max_ttl     = 300
-  default_ttl = 0
-  source      = "modules/cloudfront_distribution"
+  max_ttl             = 300
+  default_ttl         = 0
+  default_root_object = "index.html"
+  source              = "modules/cloudfront_distribution"
 }
 
 module "route53_record_app_other" {

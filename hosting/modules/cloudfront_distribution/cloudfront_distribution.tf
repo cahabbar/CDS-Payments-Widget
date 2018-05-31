@@ -83,7 +83,7 @@ resource "aws_cloudfront_distribution" "distribution" {
     max_ttl                = "${var.max_ttl}"
     min_ttl                = 0
     target_origin_id       = "websiteS3Origin${var.origin_env}"
-    viewer_protocol_policy = "allow-all"
+    viewer_protocol_policy = "redirect-to-https"
   }
 
   enabled = "${var.enabled}"
