@@ -590,7 +590,7 @@ export default function posts(state, action) {
       const { configs } = state;
       console.log('\n reducer', { state }, { action }, '\n reducer')
 
-      if (action.payload == 'invalid credit card') {
+      if (action.payload == 'invalid credit card' || !("avsResponse" in action.payload)) {
         const stateToRet = {
           ...state,
           ...{
@@ -598,7 +598,7 @@ export default function posts(state, action) {
               ...configs,
               ...{
                 responseMessage: {
-                  value: action.payload,
+                  value: 'invalid credit card',
                 },
               }
 
@@ -624,16 +624,11 @@ export default function posts(state, action) {
                   value: action.payload.authorizationCode,
                 }
               }
-
             }
           }
         }
         return stateToRetF;
-
-
       }
-
-
     }
     case 'saveNewConfig': {
       const { savedConfigs, Visa, MasterCard, AmericanExpress, DiscoverCard, DinersClub, JCB, CVC, nameOnCard, billMeToggle,

@@ -111,14 +111,14 @@ const dispatchToActions = dispatch => {
 
       if (CDS.cdsProcess.cdsResponse.respCode == "100") {
         var amt = jQuery("input[data-cds-amount=Amount]").val();
-        var prodIdAlias = jQuery("input[data-cds-prodIdAlias=prodIdAlias]").val();
+        var prodIdAlias = jQuery('#CDSGPW')[0].getAttribute('data-authorization');
         var postalCode = jQuery("input[data-cds-mpZip=ZipCode]").val();
 
         const Auth = window['aws-amplify'].Auth;
         const Amplify = window['aws-amplify'].default;
         const API = window['aws-amplify'].API;
 
-        const ID_POOL_ID = 'us-east-1:7c27e6ef-0a4e-45ae-8087-ad9c9be11b7b';
+        const ID_POOL_ID = 'us-east-1:9ab94c28-c592-4765-b2e3-bc9b5fc4798b';
 
         Amplify.configure({
           Auth: {
@@ -137,7 +137,7 @@ const dispatchToActions = dispatch => {
 
         return API.post("WSGAPI", "/pw", {
           body: {
-            prodIdAlias: prodIdAlias, //is going to be in the page
+            prodIdAlias: "WS1", //is going to be in the page
             oneTimeAuthorization: {
               actionCode: "auth",
               transactionType: "7", // 7
