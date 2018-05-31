@@ -18,7 +18,7 @@ pipeline {
 
                     echo "WSG_APIGW_URL=$WSG_APIGW_URL"
                     # we may need to run a sed command to sub in this value. or something
-                    sed #WSG_APIGW_URL#$WSG_APIGW_URL# app/components/ui-layout.js
+                    sed -i '#WSG_APIGW_URL#$WSG_APIGW_URL#g' app/components/ui-layout.js
                     ./go.sh
                 '''
             }
