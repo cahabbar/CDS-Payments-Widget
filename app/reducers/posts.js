@@ -560,6 +560,8 @@ export default function posts(state, action) {
         ...{ credit: state.savedConfigs[action.m[0]]['credit'] },
         ...{ wallet: state.savedConfigs[action.m[0]]['wallet'] },
         ...{ AlternativePayments: state.savedConfigs[action.m[0]]['AlternativePayments'] },
+        ...{ Authorization: jQuery('#CDSGPW')[0].getAttribute('data-authorization')},
+        ...{ Verification: jQuery('#CDSGPW')[0].getAttribute('data-verification')},
         ...{ 'flippy': 'whippy' },
         ...{
           newConfigName: {
@@ -568,6 +570,7 @@ export default function posts(state, action) {
           }
         }
       };
+      console.log({stateToRet})
       return stateToRet;
     }
     case 'saveNewConfigName': {
