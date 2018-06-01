@@ -590,7 +590,7 @@ export default function posts(state, action) {
       const { configs } = state;
       console.log('\n reducer', { state }, { action }, '\n reducer')
 
-      if (action.payload == 'invalid credit card' || !("avsResponse" in action.payload)) {
+      if (!action.payload.hasOwnProperty("avsResponse") ) {
         const stateToRet = {
           ...state,
           ...{
@@ -598,8 +598,17 @@ export default function posts(state, action) {
               ...configs,
               ...{
                 responseMessage: {
-                  value: 'invalid credit card',
+                  value: action.payload,
                 },
+                avsResponse: {
+                  value: '',
+                },
+                authorizationDate: {
+                  value: '',
+                },
+                authorizationCode: {
+                  value: '',
+                }
               }
 
             }
@@ -622,7 +631,10 @@ export default function posts(state, action) {
                 },
                 authorizationCode: {
                   value: action.payload.authorizationCode,
-                }
+                },
+                responseMessage: {
+                  value: ''
+                },
               }
             }
           }

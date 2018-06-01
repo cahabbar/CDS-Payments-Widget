@@ -110,9 +110,9 @@ const dispatchToActions = dispatch => {
 
       if (CDS.cdsProcess.cdsResponse.respCode == "100") {
 
-        var amt = jQuery("input[data-cds-amount=Amount]").val();
+        var amt = jQuery('#CDSGPW')[0].getAttribute('data-cds-amount');
         var prodIdAlias = jQuery('#CDSGPW')[0].getAttribute('data-prodIdAlias');
-        var postalCode = jQuery("input[data-cds-mpZip=ZipCode]").val();
+        var zipCode = jQuery('#CDSGPW')[0].getAttribute('data-cds-mpZipCode');
        // console.log( prodIdAlias )
         const Auth = window['aws-amplify'].Auth;
         const Amplify = window['aws-amplify'].default;
@@ -150,7 +150,7 @@ const dispatchToActions = dispatch => {
               merchantOrderID: v4().substring(0, 8),  // create it from the PW
               encryptionFlag: "CDS",  //CDS
               address: {
-                postalCode: "68123"
+                postalCode: zipCode
               },
             }
           }
