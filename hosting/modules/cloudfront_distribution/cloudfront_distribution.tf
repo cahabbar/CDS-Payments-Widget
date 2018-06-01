@@ -48,6 +48,7 @@ variable "name" {}
 variable "price_class" {}
 variable "restriction_type" {}
 variable "origin_access_identity" {}
+variable "acm_certificate_arn" {}
 
 output "cloudfront_domain_name" {
   value = "${aws_cloudfront_distribution.distribution.domain_name}"
@@ -83,7 +84,7 @@ resource "aws_cloudfront_distribution" "distribution" {
     max_ttl                = "${var.max_ttl}"
     min_ttl                = 0
     target_origin_id       = "websiteS3Origin${var.origin_env}"
-    viewer_protocol_policy = "allow-all"
+    viewer_protocol_policy = "redirect-to-https"
   }
 
   enabled = "${var.enabled}"
@@ -121,6 +122,7 @@ resource "aws_cloudfront_distribution" "distribution" {
   }
 
   viewer_certificate {
-    cloudfront_default_certificate = "true"
+    acm_certificate_arn = "${var.acm_certificate_arn}"
+    ssl_support_method  = "sni-only"
   }
 }
