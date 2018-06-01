@@ -5,7 +5,6 @@ import cardNumber from 'src/card-number';
 import expirationDate from 'src/expiration-date';
 import validCvv from 'src/cvv';
 import { v4 } from "ember-uuid";
-//import awsmobile from '../aws-exports';
 
 
 const filteredPostsBool = state => filterPosts(state);
@@ -110,10 +109,11 @@ const dispatchToActions = dispatch => {
       console.log("Value of CDS.cdsProcess.cdsResponse " + CDS.cdsProcess.cdsResponse.respCode + " " + CDS.cdsProcess.cdsResponse.cardType + " " + CDS.cdsProcess.cdsResponse.cipher);
 
       if (CDS.cdsProcess.cdsResponse.respCode == "100") {
-        var amt = jQuery("input[data-cds-amount=Amount]").val();
-        var prodIdAlias = jQuery('#CDSGPW')[0].getAttribute('data-authorization');
-        var postalCode = jQuery("input[data-cds-mpZip=ZipCode]").val();
 
+        var amt = jQuery("input[data-cds-amount=Amount]").val();
+        var prodIdAlias = jQuery('#CDSGPW')[0].getAttribute('data-prodIdAlias');
+        var postalCode = jQuery("input[data-cds-mpZip=ZipCode]").val();
+       // console.log( prodIdAlias )
         const Auth = window['aws-amplify'].Auth;
         const Amplify = window['aws-amplify'].default;
         const API = window['aws-amplify'].API;
@@ -137,7 +137,7 @@ const dispatchToActions = dispatch => {
 
         return API.post("WSGAPI", "/pw", {
           body: {
-            prodIdAlias: "WS1", //is going to be in the page
+            prodIdAlias: prodIdAlias, //is going to be in the page
             oneTimeAuthorization: {
               actionCode: "auth",
               transactionType: "7", // 7
@@ -150,7 +150,7 @@ const dispatchToActions = dispatch => {
               merchantOrderID: v4().substring(0, 8),  // create it from the PW
               encryptionFlag: "CDS",  //CDS
               address: {
-                postalCode: postalCode
+                postalCode: "68123"
               },
             }
           }
@@ -160,7 +160,7 @@ const dispatchToActions = dispatch => {
 
         }).catch(error => {
             console.log(error);
-            dispatch({ type: 'submiter', payload: 'invalid credit card' })
+            dispatch({ type: 'submiter', payload: 'Invalid Params' })
           });
 
 
